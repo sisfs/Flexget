@@ -6,7 +6,7 @@ Original Available from: (https://github.com/jawilson/dotfiles)
 Forked by: [Matt Tallant](mailto:m.tallant+github@gmail.com)  
 This Fork is available at: (https://github.com/sisfs/dotfiles)
 
-I'm using the [secrets](http://flexget.com/wiki/Plugins/secrets) plugin to hide my private credentials for various plugns. If you want to do this as well, you will need to create a ``secretfile.yml`` file in the same directory as your ``config.yml``.
+I'm using the [secrets](http://flexget.com/wiki/Plugins/secrets) plugin to hide my private credentials for various plugins. If you want to do this as well, you will need to create a ``secretfile.yml`` file in the same directory as your ``config.yml``.
 
 ## Rar-unpacking
 
