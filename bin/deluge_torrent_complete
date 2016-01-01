@@ -9,7 +9,7 @@ DOWNLOAD_PATH='/mnt/media/check'
 STAGING_PATH='/mnt/media/staging'
 XBMC_HOST='Carina.singularity.net'
 PLEX_HOST='192.168.1.18'
-X_PLEX_TOKEN='Ycxi6de3WwBAVEqUBddd'
+X_PLEX_TOKEN='xxxxxxxxxxxxxxxxxxxx'
 # If you're using a local checkout of Flexget, use flexget_vanilla.
 # Otherwise use the one in your system
 FLEXGET_COMMAND='/usr/local/bin/flexget --logfile '\
