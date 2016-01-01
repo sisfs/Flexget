@@ -56,6 +56,8 @@ torrent_path=(sys.argv[3] if (sys.argv[3][-1] == '/') else sys.argv[3]+'/')
 pmsupdate_path=(sys.argv[3].strip("/") if (sys.argv[3][-1] == '/') else sys.argv[3])
 log.debug("%s called with torrent_id='%s', torrent_name='%s', torrent_path='%s'." % (sys.argv[0],
     torrent_id, torrent_name, torrent_path))
+log.info("%s called with torrent_id='%s', torrent_name='%s', torrent_path='%s'." % (sys.argv[0],
+    torrent_id, torrent_name, torrent_path))
 
 def chain():
     log.debug("Updating Plex Library")
