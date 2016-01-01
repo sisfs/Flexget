@@ -4,17 +4,17 @@ import os
 import logging, logging.handlers
 import subprocess
 
-LOG_FILE='/home/jawilson/.flexget/torrent_complete.log'
-DOWNLOAD_PATH='/media/raid/deluge/downloads/completed'
-STAGING_PATH='/media/raid/videos/staging'
+LOG_FILE='/home/deluge/.flexget/torrent_complete.log'
+DOWNLOAD_PATH='/mnt/media/check'
+STAGING_PATH='/mnt/media/staging'
 XBMC_HOST='Carina.singularity.net'
-PLEX_HOST='Faraday.singularity.net'
-X_PLEX_TOKEN='xxxxxxxxxxxxxxxxxxxx'
+PLEX_HOST='192.168.1.18'
+X_PLEX_TOKEN='Ycxi6de3WwBAVEqUBddd'
 # If you're using a local checkout of Flexget, use flexget_vanilla.
 # Otherwise use the one in your system
-FLEXGET_COMMAND='/home/jawilson/src/flexget/bin/flexget --logfile '\
-        '/home/jawilson/.flexget/flexget-sorting.log'
-FLEXGET_SORTING_CONFIG='/home/jawilson/.flexget/sorting.yml'
+FLEXGET_COMMAND='/usr/local/bin/flexget --logfile '\
+        '/home/deluge/.flexget/flexget-sorting.log'
+FLEXGET_SORTING_CONFIG='/home/deluge/.flexget/sorting.yml'
 FLEXGET_TASK_PREFIX='Sort_Unpacked_'
 
 # Staging subdirectory for each task in sorting.yml
@@ -53,13 +53,14 @@ if len(sys.argv) != 4:
 torrent_id=sys.argv[1]
 torrent_name=sys.argv[2]
 torrent_path=(sys.argv[3] if (sys.argv[3][-1] == '/') else sys.argv[3]+'/')
-
+pmsupdate_path=(sys.argv[3].strip("/") if (sys.argv[3][-1] == '/') else sys.argv[3])
 log.debug("%s called with torrent_id='%s', torrent_name='%s', torrent_path='%s'." % (sys.argv[0],
     torrent_id, torrent_name, torrent_path))
 
 def chain():
     log.debug("Updating Plex Library")
-    cmd = '/usr/bin/curl http://'+PLEX_HOST+':32400/library/sections/2/refresh?X-Plex-Token='+X_PLEX_TOKEN
+    # cmd = '/usr/bin/curl http://'+PLEX_HOST+':32400/library/sections/2/refresh?X-Plex-Token='+X_PLEX_TOKEN
+    cmd = 'ssh -i ~/.ssh/id_rsa plex@192.168.1.18 "/usr/local/bin/bash /usr/local/bin/pms.script2 '+pmsupdate_path+'"'
     ret = subprocess.call(cmd, shell=True)
     if ret != 0:
         log.warning('Update Plex command returned non-zero value %d.' % ret)
