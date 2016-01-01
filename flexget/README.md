@@ -1,9 +1,10 @@
 # [Flexget](http://www.flexget.com) Configuration Files
 
 Created by: [Jeff Wilson](mailto:jeff@jeffalwilson.com)  
+Original Available from: (https://github.com/jawilson/dotfiles)
+
 Modified by: [Matt Tallant](mailto:m.tallant+github@gmail.com)
-Original Available from: https://github.com/jawilson/dotfiles
-Fork available from: https://github.com/sisfs/dotfiles
+This Fork is available at: (https://github.com/sisfs/dotfiles)
 
 I'm using the [secrets](http://flexget.com/wiki/Plugins/secrets) plugin to hide my private credentials for various plugns. If you want to do this as well, you will need to create a ``secretfile.yml`` file in the same directory as your ``config.yml``.
 
@@ -19,4 +20,4 @@ Here's the gist of how it works:
   6. ``deluge_torrent_complete`` unpacks the first .rar file it finds in the torrent to a 'staging' location
   7. ``deluge_torrent_complete`` calls flexget with a completely separate config, ``sorting.yml`` ([also available in this repository](https://github.com/jawilson/dotfiles/blob/master/flexget/sorting.yml))
   8. The ``sorting.yml`` config checks for files in the 'staging' location from step #6 and renames and moves the files to their appropriate final location
-  9. ``deluge_torrent_complete`` tells my [XBMC](http://xbmc.org) server to [update the library](http://wiki.xbmc.org/index.php?title=HOW-TO:Remotely_update_library) (scan for new files)
+  9. ``deluge_torrent_complete`` tells my [Plex Media Server](https://plex.tv/) to [update the library](http://http://forums.plex.tv/discussion/comment/372419/#Comment_372419) (scan for new files)
