@@ -141,10 +141,10 @@ templates:
     set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
       queuetotop: yes
       movedone: >
-        /mnt/media/shows/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
+        /mnt/media/shows/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
       # Rename the "content file" to something nice, use leading slash to force file to top level
       content_filename: >
-        /{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}-{{ series_id }}{% if tvdb_ep_name|default(False) %}-{{ tvdb_ep_name|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}{% endif %}-{{ quality|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}
+        /{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}-{{ series_id }}{% if tvdb_ep_name|default(False) %}-{{ tvdb_ep_name|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}{% endif %}-{{ quality|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}
       label: tv
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method,
     # it changes 'movedone' based on the regexp in the key
@@ -176,7 +176,6 @@ templates:
       - rss: { url: 'http://www.torlock.com/movies/rss.xml', silent: yes }     # TorLock (Movies)
       - rss: { url: 'http://torrentz.eu/feed_verified?q=movies', silent: yes } # Torrentz (Verified Movies)
       - rss: 'https://kat.cr/usearch/verified%3A1%20category%3Amovies/?rss=1' # Kickass (Movies)
-      # - rss: { url: 'https://rss.thepiratebay.se/207', silent: yes }           # The Pirate Bay (Highres - Movies)
     # Some feeds might include TV Shows, ignore them
     if:
       - "has_field('category')":
@@ -197,20 +196,20 @@ templates:
       proper_movies: 171
     # Impose reasonable size constraints
     content_size:
-      max: 20000
-      min: 300
+      max: 4000
+      min: 600
     imdb_lookup: yes
     # Check for already downloaded or currently downloading movies
-    exists_movie: ##
+    exists_movie: 
       - /mnt/media/movies/
       - /mnt/media/staging/movies/
       - /mnt/media/check/
     # Download propers, since they will have the same content_filename,
     # lower/non-propers will be overwritten
     proper_movies: yes
-    set: # See similar note above
+    set: 
       # Give folders/files nice names ##
-      movedone: "/mnt/media/movies/{{ imdb_name|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ imdb_year }}"
+      movedone: "/mnt/media/movies/{{ imdb_name|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ imdb_year }}"
       # Rename the "content file" to something nice, use leading slash to force file to top level ##
       content_filename: |
         /{{ imdb_name|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}-{{ imdb_year }}-{{ quality|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}
@@ -222,8 +221,8 @@ templates:
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method, it changes
     # 'movedone' based on the regexp in the key
     content_sort:
-      '*.rar': '/mnt/media/check/' ##
-
+      '*.rar': '/mnt/media/staging/movies'
+      
 
   # Keep all the discover settings in one place
   movies-discover:
@@ -241,9 +240,6 @@ templates:
         - kat:
             category: movies
             verified: yes
-        #- piratebay:
-        #    category: "highres movies"
-        #    sort_by: seeds
       what: [ filler: yes ] # Always produce entries
 
 
@@ -299,12 +295,10 @@ tasks:
             identified_by: ep
           from:
             trakt_list:
-              # username: '{{ secrets.trakt.username }}'
-              # password: '{{ secrets.trakt.password }}'
               account: '{{ secrets.trakt.username }}'
               list: Following TV
               type: shows
-              strip_dates: yes # I had changed this to no when having issues with odd series downloading; I dont think it fixed it
+              strip_dates: yes 
     exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
 
 
@@ -325,12 +319,10 @@ tasks:
             identified_by: ep
           from:
             trakt_list:
-              # username: '{{ secrets.trakt.username }}'
-              # password: '{{ secrets.trakt.password }}'
               account: '{{ secrets.trakt.username }}'
               list: Following TV
               type: shows
-              strip_dates: yes # I had changed this to no when having issues with odd series downloading; I dont think it fixed it
+              strip_dates: yes
 
 
   My-TV-Shows-Find-Next-Following:
@@ -340,8 +332,6 @@ tasks:
       interval: 2 hours
       what:
         - trakt_emit:
-            # username: '{{ secrets.trakt.username }}'
-            # password: '{{ secrets.trakt.password }}'
             account: '{{ secrets.trakt.username }}'
             list: Following TV
             context: collected
@@ -376,12 +366,10 @@ tasks:
             identified_by: ep
           from:
             trakt_list:
-              # username: '{{ secrets.trakt.username }}'
-              # password: '{{ secrets.trakt.password }}'
               account: '{{ secrets.trakt.username }}'
               list: Following TV
               type: shows
-              strip_dates: yes # I had changed this to no when having issues with odd series downloading; I dont think it fixed it
+              strip_dates: yes
 
 
   # manual task to freshen up the series begin dates for download run with:
@@ -390,8 +378,6 @@ tasks:
     manual: yes
     template: no_global
     trakt_emit:
-      # username:  '{{ secrets.trakt.username }}'
-      # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
       list: Following TV
       context: collected  # You can set this to 'watched' depending on the state of your trakt info
@@ -419,9 +405,9 @@ tasks:
         - talk show: {from: tvdb_genres}
         - game show: {from: tvdb_genres}
         - reality: {from: tvdb_genres}
-        #- crime: {from: tvdb_genres}
-        - children: {from: tvdb_genres}
-        #- home and garden: {from: tvdb_genres}
+        # - crime: {from: tvdb_genres}
+        # - children: {from: tvdb_genres}
+        # - home and garden: {from: tvdb_genres}
     if:
       # Block these genres only if they are the ONLY genre listed in
       # tvdb_genres. For example, this will not block a show that's both
@@ -432,10 +418,10 @@ tasks:
     # Accept all series permieres
     series_premiere:
       timeframe: 1 days
-      quality: 720p|480p|1080p h264 ac3|aac|mp3
+      quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## maybe i'll get more premiere results now
     # Add to deluge, but don't queue to top (My_TV_Shows are more important)
     # and put in a different location
-    set: # see above ##
+    set: 
       movedone: >
         /mnt/media/premieres/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season {{ series_season|pad(2) }}/{% endif %}
       queuetotop: no
