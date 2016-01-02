@@ -6,11 +6,31 @@ Original Available from: (https://github.com/jawilson/dotfiles)
 Forked by: [Matt Tallant](mailto:m.tallant+github@gmail.com)  
 This Fork is available at: (https://github.com/sisfs/dotfiles)
 
+I am really only interested in the FlexGet config portion of this dotfiles fork and have removed a lot of the other files...
+
+
+## Installation Instructions ##
+
+    git clone git://github.com/sisfs/dotfiles ~/.dotfiles
+    cd ~/.dotfiles
+    
+### You can set up links to files from here instead of overwriting your .flexget directory before you're prepared. ###
+
+    mv ~/.flexget/config.yml ~/.flexget/old-config.yml
+    ln ~/.dotfiles/config.yml ~/.flexget/config.yml 
+
+
+## Secrets Plugin ##
+
 I'm using the [secrets](http://flexget.com/wiki/Plugins/secrets) plugin to hide my private credentials for various plugins. If you want to do this as well, you will need to create a ``secretfile.yml`` file in the same directory as your ``config.yml``.
+
 
 ## Rar-unpacking
 
-My entire setup results in a single video file (``.mkv``, ``.mp4``, etc) in the final destination with a nice name regardless if it's packed in a rar or not.
+I am still working out some issues with this portion of the config. you may want to return to [Jeff's Fork](https://github.com/jawilson/dotfiles/tree/master/flexget) for this part =)
+
+This entire setup should result in a single video file (``.mkv``, ``.mp4``, etc) in the final destination with a nice name regardless if it's packed in a rar or not.
+
 Here's the gist of how it works:
   1. Flexget accepts the torrent regardless if it's a rar-pack or not
   2. My custom ``content_sort`` plugin ([available in this repository](https://github.com/sisfs/dotfiles/blob/master/flexget/plugins/content_sort.py)) changes the ``move_done`` value if the torrent contains a ``.rar``
