@@ -1,3 +1,13 @@
+*.sqlite*
+*-lock
+*.log*
+*.pyc
 *.swp
 *.bak
 secretfile.yml
+received/
+temp/
+userstatic/
+private/
+received/
+.webassets-cache/
