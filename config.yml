@@ -3,20 +3,20 @@
 # originally Created by: Jeff Wilson <jeff@jeffalwilson.com>
 # His work is available from: https://github.com/jawilson/dotfiles/tree/master/flexget
 #
+# This fork was created by: Matt Tallant <m.tallant+github@gmail.com>
+# Available at: https://github.com/sisfs/dotfiles/tree/adding-my-changes
+#
 # Many Changes have been made from Jeff's work. Still, if it werent for his vision I would have had no idea where to start.
-
-# I am currently running flexget and deluge on a windows system. All of my media is stored on a NAS4Free server with Plex running in one of its Jails. 
-# I will soon start identifying which pieces need changed out when i move FlexGet and Deluge to a jail on the same NAS4Free Server.
-
-
-# this is the beginning of the config file for the Deluge/FlexGet server running on my NAS4Free Server.
-# I need to make a ton of changes to move from a windows based system to a FreeBSD system.
-# more to come
+#
+# All of my media is stored on a NAS4Free server with Plex Media Server and Deluge/Flexget running in separate Jails. 
+# User plex and user deluge both share the same uid which fixes a ton of permission problems that I originally had.
 
 
-# Use the secrets plugin to separately store credentials, etc
+# Use the secrets plugin to separately store credentials, etc... want to find out whether or not i can store directories in secretfile.
+# I need to figure out whether or not you can daisy chain secrets files... if so one config can service many users without shared passwords =)
 secrets: secretfile.yml
 
+# this web config is here for when it becomes a usable feature
 web_server:
   bind: 0.0.0.0
   port: 5050
@@ -43,8 +43,8 @@ templates:
             keep_subs: no
             port: 58846
     # Make sure there's 50GB free before adding more downloads
-    free_space:
-      path: /mnt/media/ ##
+    free_space: 
+      path: /mnt/media/ 
       space: 50000
     # Make sure all filenames are Windows safe (for samba)
     pathscrub: windows
@@ -101,17 +101,11 @@ templates:
   # We keep all of the RSS feeds that list tv-related torrents here
   # as well as where to check existing shows.
   tv-global:
-    # This is a TON of feeds, you probably don't need so many, but why not?
     inputs:
       # - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: 'http://www.torlock.com/television/rss.xml', silent: yes }                    # TorLock (TV)
       - rss: { url: 'http://torrentz.eu/feed_verified?q=tv', silent: yes }                        # Torrentz (Verified only, TV)
       - rss: { url: 'https://kat.cr/usearch/verified%3A1%20category%3Atv/?rss=1', silent: yes }   # Kickass (TV)
-      # the next 4 entries seemed broken but I am willing to do more testing.
-      # - rss: { url: 'http://ezrss.it/feed/', silent: yes, ascii: yes }                            # EZRSS
-      # - rss: { url: 'http://showrss.karmorra.info/feeds/all.rss', silent: yes, ascii: yes }       # Karmorra (All)
-      # - rss: { url: 'http://rss.bt-chat.com/?group=3', silent: yes }                              # BT-Chat (EZTV)
-      # - rss: { url: 'https://rss.thepiratebay.se/208', silent: yes }                              # The Pirate Bay (Highres - TV shows)
     if:
       - "has_field('category')":
           regexp:
@@ -120,17 +114,17 @@ templates:
     archive: [tv]
     # Impose reasonable size constraints
     content_size:
-      max: 5000
-      min: 20
+      max: 2000
+      min: 128
     # Prevent from downloading shows that were aquired manually
     # or are currently downloading
     exists_series: # change from UNC paths when i move deluge and flexget to the server. ##
-      - '/mnt/media/shows/'
+      - '/mnt/media/check/'
       - '/mnt/media/NewAdditions/'
+      - '/mnt/media/shows/'
       - '/mnt/media/premieres/'
       - '/mnt/media/staging/shows/'
       - '/mnt/media/staging/premieres/'
-      - '/mnt/media/check/'
     thexem:
       source: scene
       destination: tvdb
@@ -144,7 +138,7 @@ templates:
       url: "{% if trakt_series_url is defined and trakt_season is defined and trakt_episode is defined %}{{ trakt_series_url }}/season/{{ trakt_season }}/episode/{{ trakt_episode }}{% endif %}"
     # Add accepted entries to Deluge and make sure they end up in the correct
     # folder with a nice name
-    set: # had to change a ton in this area. deluge didnt like network drive letters so i hade to use UNC paths; wanted dots instead of spaces; wanted 2 digit season numbers on folders. Need to  figure out how to remove Apostrophes reliably.
+    set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
       queuetotop: yes
       movedone: >
         /mnt/media/shows/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
@@ -272,13 +266,9 @@ templates:
         - emit_movie_queue: yes
       from: [ filler: yes ] # Always produce entries
     trakt_remove: # Remove from Trakt list when we accept an item
-      # username: '{{ secrets.trakt.username }}'
-      # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
       list: Movie Queue
     trakt_add: # Add accepted item to my Trakt watchlist
-      # username: '{{ secrets.trakt.username }}'
-      # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
       list: watchlist
     set:
