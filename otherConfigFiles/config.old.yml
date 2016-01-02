@@ -1,0 +1,41 @@
+secrets: secretfile.yml
+
+tasks:
+  Get_TV:
+    priority: 1
+    configure_series:
+      from:
+        trakt_list:
+          username: '{{ secrets.trakt.username }}'
+          password: '{{ secrets.trakt.password }}'
+          list: Following TV
+          type: shows
+          strip_dates: yes
+      settings:
+        # timeframe: 12 hours
+        target: webdl 720p
+        quality: hdtv|webdl|webrip 720p+
+        identified_by: ep
+    discover:
+      what:
+        - emit_series:
+            from_start: yes
+      from:
+        - rarbg:
+            category: HDTV
+            sorted_by: seeders
+        - kat:
+            category: tv   # movies/tv
+            verified: yes
+        - isohunt: tv      # movies/audio/tv
+        - torrentz: verified
+      interval: 1 hour
+    set:
+      path: L:\media\shows\ #/media/torrent/flexget/downloads/tvshows
+    deluge:
+      movedone: L:\media\shows\{{ Series Name }}\Season {{ Season }\
+      content_filename: \{{ Series Name }}.{{ ep_id }}.{{ Title }}
+    trakt_add:
+      username: '{{ secrets.trakt.username }}'
+      password: '{{ secrets.trakt.password }}'
+      list: collection

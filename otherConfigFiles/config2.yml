@@ -1,0 +1,136 @@
+secrets: secretfile.yml
+
+tasks:
+  # task to pull movies from trakt.tv watchlist and add to the movie queue
+  trakt_movie_queue_fill:
+    priority: 1 # run before the movie search task
+    trakt_list:
+      username: '{{ secrets.trakt.username }}'
+      password: '{{ secrets.trakt.password }}'
+      list: watchlist
+      type: movies
+    accept_all: yes
+    movie_queue: add
+  
+  # task to pull episodes from trakt.tv watchlist and add to the movie queue
+  trakt_episode_queue_fill:
+    priority: 2 # run after movies but before movie search
+    configure_series:
+      from:
+        trakt_list:
+          username: '{{ secrets.trakt.username }}'
+          password: '{{ secrets.trakt.password }}'
+          list: watchlist
+          type: shows
+          strip_dates: yes
+      settings:
+        # timeframe: 12 hours
+        target: webdl 720p
+        quality: hdtv|webdl|webrip 720p+
+        identified_by: ep
+    discover:
+      what:
+        - emit_series:
+            from_start: yes
+      from:
+        #- rarbg:
+            #category: HDTV
+            #sorted_by: seeders
+        #- kat:
+            #category: movies                                    # movies/tv
+            #verified: yes
+        - isohunt: movies                                     # movies/audio/tv
+        - torrentz: verified
+      interval: 1 hour
+    ###configure_series:
+      #from:
+        #trakt_list:
+          #username: '{{ secrets.trakt.username }}'
+          #list: watchlist
+          #type: episodes
+      #settings:
+        #quality: 720p-1080p
+    accept_all: yes
+    movie_queue: add
+  
+  # task that automatically generates an rss feed based on entries from the movie_queue
+  movies search:
+    priority: 10 # run after the movie queue fill task
+    discover:
+      what:
+        - emit_movie_queue: yes
+      from:
+        - isohunt: movies
+        - torrentz: verified
+      interval: 7 days
+    torrent_alive: 5 # Will reject results with less than 10 seeds
+    quality: dvdrip+ # Make sure no screeners or cams are downloaded
+    movie_queue: accept
+    # Remove from Trakt list when we accept an item
+    #trakt_remove:
+      #username: '{{ secrets.trakt.username }}'
+      #password: '{{ secrets.trakt.password }}'
+      #list: watchlist
+    # Add accepted item to my Trakt watchlist
+    #trakt_add:
+      #username: '{{ secrets.trakt.username }}'
+      #password: '{{ secrets.trakt.password }}'
+      #list: collection
+    deluge:
+      #username: '{{ secrets.utorrent.usr }}'
+      #password: '{{ secrets.utorrent.pwd }}'
+      path: c:\utorrent\interim\ # Either c:\stuff, or c:\stuff\here must be added to your allowed download folders for this example path to work.# task that finds and downloads tv series based on trakt list
+      movedone: L:\media\New Additions\
+  # update shows at trakt.tv so that it can actually track =)
+  #Update-TV:
+    #priority: 15 #
+    #find:
+      # Regex to match all video with these extensions in your collection
+      #regexp: '.*\.(avi|mkv|mp4)$'
+      #recursive: yes
+      #path:
+        # All the paths where you store TV episodes
+        #- L:\media\new additions\
+        #- L:\media\shows\
+    #metainfo_series: yes
+    #accept_all: yes
+    #trakt_remove:
+      #username: '{{ secrets.trakt.username }}'
+      #password: '{{ secrets.trakt.password }}'
+      #list: watchlist
+    #trakt_add:
+      #username: '{{ secrets.trakt.username }}'
+      #password: '{{ secrets.trakt.password }}'
+      #list: collection
+
+  # update movies at trakt.tv so that it can actually track =)
+  #Update-Movies:
+    # For movies we use listdir instead of find since movies are (often) 
+    # stored in directories and their names are generally much 
+    # better than filenames.
+    # You can use find plugin like with series if you need to.
+    #priority: 20 #
+    #listdir:
+      #- L:\media\new additions\
+      #- L:\media\movies\
+    #accept_all: yes
+    #imdb_lookup: yes
+    #trakt_remove:
+      #username: '{{ secrets.trakt.username }}'
+      #password: '{{ secrets.trakt.password }}'
+      #list: watchlist
+    #trakt_add:
+      #username: '{{ secrets.trakt.username }}'
+      #password: '{{ secrets.trakt.password }}'
+      #list: collection
+
+schedules:
+  #- tasks: [Update-Movies, Update-TV]
+    #schedule:
+      #hour: 2
+  - tasks: [trakt_movie_queue_fill, trakt_episode_queue_fill, 'movies search']
+    schedule:
+      hour: "*/2"
+#  exists_series:
+#   path: 'L:media\shows\{{series_name}}'
+#    allow_different_qualities: better

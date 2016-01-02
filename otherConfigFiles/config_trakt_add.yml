@@ -1,0 +1,41 @@
+secrets: secretfile.yml
+
+tasks:
+
+  Update-TV:
+    find:
+      # Regex to match all video with these extensions in your collection
+      regexp: '.*\.(avi|mkv|mp4)$'
+      recursive: yes
+      path:
+        # All the paths where you store TV episodes
+        - L:\media\shows\
+    metainfo_series: yes
+    accept_all: yes
+    trakt_remove:
+      username: '{{ secrets.trakt.username }}'
+      password: '{{ secrets.trakt.password }}'
+      list: watchlist
+    trakt_add:
+      username: '{{ secrets.trakt.username }}'
+      password: '{{ secrets.trakt.password }}'
+      list: collection
+
+
+  Update-Movies:
+    # For movies we use listdir instead of find since movies are (often) 
+    # stored in directories and their names are generally much 
+    # better than filenames.
+    # You can use find plugin like with series if you need to.
+    listdir:
+      - L:\media\movies\
+    accept_all: yes
+    imdb_lookup: yes
+    trakt_remove:
+      username: '{{ secrets.trakt.username }}'
+      password: '{{ secrets.trakt.password }}'
+      list: watchlist
+    trakt_add:
+      username: '{{ secrets.trakt.username }}'
+      password: '{{ secrets.trakt.password }}'
+      list: collection

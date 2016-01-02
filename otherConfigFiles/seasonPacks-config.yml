@@ -1,0 +1,77 @@
+#Make sure to run as --discover-now --no-cache
+secrets: secretfile.yml
+templates:
+  global:
+    torrent_alive: 5 #number of seeders needed to accept
+    retry_failed:
+      retry_time: 5 minutes # Base time in between retries
+      retry_time_multiplier: 1 # Amount retry time will be multiplied by after each successive failure
+      max_retries: 15 # Number of times the entry will be retried
+  transmit-series:
+    deluge:
+      username: '{{ secrets.deluge.username }}'
+      password: '{{ secrets.deluge.password }}'
+      main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
+      keep_subs: no
+      port: 58846
+      path: '\\192.168.1.3\Large\media\new additions\'
+tasks:
+  get_series_packs:
+    priority: 2
+    content_size:
+      min: 3072
+    regexp:
+      reject:
+        - \.[sS]\d\d[eE]\d\d\.
+        - \.FiX\.
+        - FASTSUB #French
+        - VOSTFR #French
+        - Subtitulado #Spanish
+        - Special-Wicked #Special trailer episodes from Once Upon a Time
+        - Magazine #No magazines on Arrow, thank you.
+        - NLsubs
+    content_filter:
+      reject:
+        - '*.avi' #Uhgg Jak!
+    verify_ssl_certificates: no
+    configure_series:
+      from:
+        trakt_list:
+          username: '{{ secrets.trakt.username }}'
+          password: '{{ secrets.trakt.password }}'
+          list: Following TV
+          type: shows
+          strip_dates: yes
+      settings:
+        quality: 480p-720p <=hdtv
+        identified_by: sequence
+        sequence_regexp: \b[S][0]?(\d+)\b
+        exact: yes
+    manipulate:
+      - title:
+          replace:
+            regexp: '(?<=\.[Ss]\d\d)[eE]01(?=\.)' # Remove E01 from each episode and turn it into a "Season entry"
+            format: ''
+      - title:
+          replace:
+            regexp: '.*([eE]0[^1]).*|.*[eE]([1-9]\d).*' # Remove any entry that is not the first episode of a season
+            format: ''
+    discover:
+      what:
+        - emit_series:
+            from_start: yes
+            backfill: yes
+      from:
+        # - sceneaccess:
+            # username: '{{ secrets.sceneaccess.username }}'
+            # password: '{{ secrets.sceneaccess.password }}'
+            # gravity_multiplier: 200
+            # category:
+              # archive:
+                # - TV/Packs
+        - flexget_archive: [tv]
+        - torrentz: verified
+        - kat:
+            category: tv
+            verified: yes
+    template: transmit-series

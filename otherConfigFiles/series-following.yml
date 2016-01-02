@@ -1,0 +1,67 @@
+﻿series:
+  # - Aqua Teen Hunger Force Forever:
+      # alternate_name:
+          # - Aqua Unit Patrol Squad 1
+          # - Aqua Something You Know Whatever
+          # - Aqua TV Show Show
+          # - Aqua Teen Hunger Force
+          # - ATHF
+      # set:
+        # tvdb_id: 77120
+        # tvdb_series_name: "Aqua Teen Hunger Force"
+  - Archer:
+      alternate_name: [Archer (2009)]
+      set:
+        tvdb_series_name: "Archer (2009)"
+  # - Last Man Standing (2011):
+      # alternate_name: [Last Man Standing (US)]
+      # name_regexp: ^last.man.standing(.us)?(.2011)?
+  # - Last Week Tonight with John Oliver:
+      # identified_by: ep
+      # set:
+        # tvdb_id: 278518
+  # - "It's Always Sunny in Philadelphia":
+      # begin: S07E01
+  - MythBusters:
+      begin: S11E01
+  # - South Park:
+      # begin: S15E01
+  # - "The Venture Bros.":
+      # name_regexp: ^the.venture.bro(ther)?s\.?
+  # - The Simpsons:
+      # begin: S23E01
+  # - Tosh.0:
+      # begin: S03E07
+  - Supernatural:
+      begin: S11E01
+  - Blue Bloods:
+      begin: S06E01
+  - Walking Dead:
+      begin: S06E01
+  - Once Upon a Time:
+      begin: S05E01
+  - NCIS:
+      begin: S13E01
+  - Bones:
+      begin: S11E01
+  - Continuum:
+      begin: S04E01
+  - Arrow: 
+      begin: S03E01
+  - The Flash (2014):
+      begin: S02E01
+  - Doctor Who (2005):
+      begin: S09E05
+  - Castle:
+      begin: S08E01
+  - The Big Bang Theory:
+      begin: S09E01
+  - The 100: 
+      begin: S03E01
+  - The X-Files:
+      begin: S10E01
+  - Under the Dome:
+      begin: S04E01
+  - House:
+      begin: S09E01
+  

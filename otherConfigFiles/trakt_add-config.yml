@@ -1,0 +1,25 @@
+secrets: secretfile.yml
+
+tasks:
+  Movie-Queue:
+    # priority: 100 # Always run before My-Movies task
+    # template: no_global # None of the global templates make sense here
+    trakt_list:
+      # username: '{{ secrets.trakt.username }}'
+      # password: '{{ secrets.trakt.password }}'
+      account: '{{ secrets.trakt.username }}'
+      list: collection
+      type: movies
+    no_entries_ok: yes
+    accept_all: yes
+    movie_queue: add  
+    trakt_remove:
+      # username: '{{ secrets.trakt.username }}'
+      # password: '{{ secrets.trakt.password }}'
+      account: '{{ secrets.trakt.username }}'
+      list: collection
+    trakt_add:
+      # username: '{{ secrets.trakt.username }}'
+      # password: '{{ secrets.trakt.password }}'
+      account: '{{ secrets.trakt.username }}'
+      list: Movie Queue

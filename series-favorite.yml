@@ -1,0 +1,8 @@
+# might need the following code in the future to fix mismatched shows (i.e. The Librarians v. The Librarians US v. The Librarians (2015)
+#if:
+ # - "series_name == 'Ascension'":
+  #    manipulate:
+   #     - title:
+    #        replace:
+     #         regexp: 'part.(\d+)'
+      #        format: 'S01E0\1'
