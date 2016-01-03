@@ -1,7 +1,7 @@
 [submodule "tools/dotfiles"]
 	path = tools/dotfiles
 	url = https://github.com/jbernard/dotfiles
-[submodule "possSubms/gmusicapi-scripts"]
+[submodule "possSubs/gmusicapi-scripts"]
 	path = possSubs/gmusicapi-scripts
 	url = https://github.com/thebigmunch/gmusicapi-scripts
 [submodule "possSubs/gmusicapi"]
@@ -13,3 +13,6 @@
 [submodule "possSubs/docopt"]
 	path = possSubs/docopt
 	url = https://github.com/docopt/docopt.git
+[submodule "possSubs/Plex-Trakt-Scrobbler"]
+	path = possSubs/Plex-Trakt-Scrobbler
+	url = https://github.com/trakt/Plex-Trakt-Scrobbler.git
