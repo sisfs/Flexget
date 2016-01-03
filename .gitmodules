@@ -1,3 +1,6 @@
 [submodule "tools/dotfiles"]
 	path = tools/dotfiles
 	url = https://github.com/jbernard/dotfiles
+[submodule "possibleSubmodules/gmusicapi-scripts"]
+	path = possibleSubmodules/gmusicapi-scripts
+	url = https://github.com/thebigmunch/gmusicapi-scripts
