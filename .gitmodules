@@ -4,3 +4,12 @@
 [submodule "possibleSubmodules/gmusicapi-scripts"]
 	path = possibleSubmodules/gmusicapi-scripts
 	url = https://github.com/thebigmunch/gmusicapi-scripts
+[submodule "possibleSubmodules/gmusicapi"]
+	path = possibleSubmodules/gmusicapi
+	url = https://github.com/simon-weber/gmusicapi.git
+[submodule "possibleSubmodules/gmusicapi-wrapper"]
+	path = possibleSubmodules/gmusicapi-wrapper
+	url = https://github.com/thebigmunch/gmusicapi-wrapper.git
+[submodule "possibleSubmodules/docopt"]
+	path = possibleSubmodules/docopt
+	url = https://github.com/docopt/docopt.git
