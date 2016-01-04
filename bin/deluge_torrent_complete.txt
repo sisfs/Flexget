@@ -1,0 +1,16 @@
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 2: import: command not found
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 3: import: command not found
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 4: import: command not found
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 5: import: command not found
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 6: $'\r': command not found
+: No such file or directoryeluge_torrent_complete: line 16: /home/deluge/.flexget/flexget-sorting.log
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 19: $'\r': command not found
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 24: /movies/:: No such file or directory
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 25: /tv_shows/:: No such file or directory
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 26: /tv_premieres/:: No such file or directory
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 27: $'}\r': command not found
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 28: $'\r': command not found
+/home/deluge/.flexget/bin/deluge_torrent_complete: line 29: syntax error near unexpected token `('
+'home/deluge/.flexget/bin/deluge_torrent_complete: line 29: `log = logging.getLogger("torrent_complete")
+
+
