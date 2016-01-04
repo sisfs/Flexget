@@ -1,0 +1,1 @@
+find . -name "*1080*" ! -name "*.mp4" -exec HandBrakeCLI -i "{}" -o "{}".ccpreset.mp4 -Z chromecast \;
