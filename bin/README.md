@@ -10,7 +10,9 @@ My situation my be different from yours but, in my case execute is called as fol
 
 ## Issues
 
-I am having trouble currently knowing that the plugin is working on those torrents not containing .rar files.
+## Currently the deluge execute plugin is not actually running the script. I can run it from CLI (with errors) but deluge does not seem to be calling it at all. I have also added a deluge_torrent_added bash script that doesnt seem to be getting called either.
 
-To combat this I am trying to get the Python script to add logging when it works right but this is my first foray into python =(
+I am wondering if this issue is based on my running under FreeBSD or possibly missing a dependency somewhere that is not apparent to me.  
+I tried to connect to the deluge git repo to check for dependencies but cannot connect.  
+  
 ### More to Follow!
