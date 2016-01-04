@@ -1,0 +1,27 @@
+#!/usr/local/bin/bash
+directory=$1
+section=`echo "$directory" | cut -d/ -f4`
+export LD_LIBRARY_PATH="/usr/local/share/plexmediaserver-plexpass"
+export LANG="en_US.UTF-8"
+export PLEX_MEDIA_SERVER_MAX_PLUGIN_PROCS="6"
+export PLEX_MEDIA_SERVER_TMPDIR="/tmp"
+export PLEX_MEDIA_SERVER_HOME="/usr/local/share/plexmediaserver-plexpass"
+export PYTHONHOME="/usr/local/share/plexmediaserver-plexpass/Resources/Python"
+export PLEX_MEDIA_SERVER_APPLICATION_SUPPORT_DIR="/usr/local/plexdata-plexpass"
+case "$section" in
+	movies)
+		sec=1 ;;
+	shows)
+		sec=2 ;;
+	music)
+		sec=3 ;;
+	premieres)
+		sec=4 ;;
+	*)
+		echo ${section}
+		exit 1
+esac
+echo ${directory}
+echo ${section}
+echo ${sec}
+"/usr/local/share/plexmediaserver-plexpass/Plex Media Scanner" --scan --refresh --section ${sec} --directory ${directory}
