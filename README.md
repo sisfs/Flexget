@@ -12,7 +12,7 @@ This Fork is available at: (https://github.com/sarethan/dotfiles)
 I am really only interested in the FlexGet config portion of this dotfiles fork and have removed a lot of the other files...
 
 
-## Installation Instructions ##
+####w# Installation Instructions ######
 
     git clone git://github.com/sarethan/dotfiles/tree/transVM ~/.dotfiles
     cd ~/.dotfiles
