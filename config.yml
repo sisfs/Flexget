@@ -44,7 +44,7 @@ templates:
             port: 58846
     # Make sure there's 50GB free before adding more downloads
     free_space: 
-      path: /media/Entertainment 
+      path: /media/Entertainment/ 
       space: 50000
     # Make sure all filenames are Windows safe (for samba)
     pathscrub: windows
