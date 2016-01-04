@@ -41,3 +41,7 @@ Here's the gist of how it works:
   7. ``deluge_torrent_complete`` calls flexget with a completely separate config, ``sorting.yml`` ([also available in this repository](https://github.com/sisfs/dotfiles/blob/master/flexget/sorting.yml))
   8. The ``sorting.yml`` config checks for files in the 'staging' location from step #6 and renames and moves the files to their appropriate final location
   9. ``deluge_torrent_complete`` tells my [Plex Media Server](https://plex.tv/) to [update the library](http://forums.plex.tv/discussion/comment/372419/#Comment_372419) (scan for new files)
+  10. 
+  
+
+
