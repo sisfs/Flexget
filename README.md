@@ -7,12 +7,12 @@ Forked by: [Matt Tallant](mailto:m.tallant+github@gmail.com)
 This Fork is available at: (https://github.com/sisfs/dotfiles)
 
 Forked by: [Russ King](mailto:russelltking@gmail.com)  
-This Fork is available at: (https://github.com/sarethan/dotfiles)
+This Fork is available at: (https://github.com/sarethan/Flexget)
 
 I am really only interested in the FlexGet config portion of this dotfiles fork and have removed a lot of the other files...
 
 
-####w# Installation Instructions ######
+### Installation Instructions ###
 
     git clone git://github.com/sarethan/dotfiles/tree/transVM ~/.dotfiles
     cd ~/.dotfiles
