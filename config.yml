@@ -119,8 +119,10 @@ templates:
     # Prevent from downloading shows that were aquired manually
     # or are currently downloading
     exists_series: # change from UNC paths when i move deluge and flexget to the server. ##
-      - '/media/Entertainment/TV Shows'
-      - '/media/Entertainment/Transit/Torrents/'
+      - '{{ secrets.directories.tvshow_dir }}'
+      - '{{ secrets.directories.incomplete_dir }}'
+      - '{{ secrets.directories.download_dir }}'
+      - '{{ secrets.directories.completed_dir }}'
     thexem:
       source: scene
       destination: tvdb
@@ -197,8 +199,10 @@ templates:
     imdb_lookup: yes
     # Check for already downloaded or currently downloading movies
     exists_movie: 
-      - /media/Movies/
-      - /media/Entertainment/Transit/Torrents/
+      - '{{ secrets.directories.exist_movies_dir }}'
+      - '{{ secrets.directories.download_dir }}'
+      - '{{ secrets.directories.completed_dir }}'
+      - '{{ secrets.directories.incomplete_dir }}'
     # Download propers, since they will have the same content_filename,
     # lower/non-propers will be overwritten
     proper_movies: yes
