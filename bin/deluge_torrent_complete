@@ -1,4 +1,4 @@
-#!/usr/bin/python -O
+#!/usr/local/bin/python2.7 -O
 import sys
 import os
 import logging, logging.handlers
