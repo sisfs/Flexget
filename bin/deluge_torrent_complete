@@ -5,10 +5,10 @@ import logging, logging.handlers
 import subprocess
 
 LOG_FILE='/home/deluge/.flexget/torrent_complete.log'
-DOWNLOAD_PATH='/mnt/media/check'
+DOWNLOAD_PATH='/media/Entertainment/Transit/Torrents/check'
 STAGING_PATH='/mnt/media/staging'
 XBMC_HOST='Carina.singularity.net'
-PLEX_HOST='192.168.1.18'
+PLEX_HOST='192.168.1.6'
 X_PLEX_TOKEN='xxxxxxxxxxxxxxxxxxxx'
 # If you're using a local checkout of Flexget, use flexget_vanilla.
 # Otherwise use the one in your system
@@ -22,8 +22,7 @@ FLEXGET_TASK_PREFIX='Sort_Unpacked_'
 # value: suffix of the task in the sorting config to run (FLEXGET_TASK_PREFIX+value)
 FLEXGET_PATH_TASK={
     '/movies/': 'Movies',
-    '/tv_shows/': 'TV_Shows',
-    '/tv_premieres/': 'TV_Premieres',
+    '/tv_shows/': 'TV Shows',
     }
 
 log = logging.getLogger("torrent_complete")
@@ -62,7 +61,7 @@ log.warning("%s called with torrent_id='%s', torrent_name='%s', torrent_path='%s
 def chain():
     log.debug("Updating Plex Library")
     # cmd = '/usr/bin/curl http://'+PLEX_HOST+':32400/library/sections/2/refresh?X-Plex-Token='+X_PLEX_TOKEN
-    cmd = 'ssh -i ~/.ssh/id_rsa plex@192.168.1.18 "/usr/local/bin/bash /usr/local/bin/pms.script2 '+pmsupdate_path+'"'
+    cmd = 'ssh -i ~/.ssh/id_rsa plex@192.168.1.6 "/usr/local/bin/bash /usr/local/bin/pms.script2 '+pmsupdate_path+'"'
     ret = subprocess.call(cmd, shell=True)
     if ret != 0:
         log.warning('Update Plex command returned non-zero value %d.' % ret)
