@@ -3,3 +3,4 @@ Torrent Details:  2 3 1
 Torrent Details: 
 Torrent Details:  1 1 1
 Torrent Details:  The.Man.with.the.Iron.Fists-2012-720p.webrip.h264.ac3.mkv /mnt/media/check 0d876cfaae421b9b9bd7e77d2bbb2b838d8e08ef
+Torrent Details:  The.Man.with.the.Iron.Fists-2012-720p.webrip.h264.ac3.mkv /mnt/media/check/staging/The.Man.with.the.Iron.Fists-2012-720p.webrip.h264.ac3/ 0d876cfaae421b9b9bd7e77d2bbb2b838d8e08ef
