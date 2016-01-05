@@ -52,6 +52,7 @@ if len(sys.argv) != 4:
     log.info('see http://dev.deluge-torrent.org/wiki/Plugins/Execute for more information')
     sys.exit(-1)
 
+# need to determine what if statement to put her so that the right value is assigned to pmsupdate_path and then passed to pms.script2
 torrent_id=sys.argv[1]
 torrent_name=sys.argv[2]
 torrent_path=(sys.argv[3] if (sys.argv[3][-1] == '/') else sys.argv[3]+'/')
