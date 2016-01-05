@@ -14,7 +14,7 @@ I am really only interested in the FlexGet config portion of this dotfiles fork 
 
 ### Installation Instructions ###
 
-    git clone git://github.com/sarethan/flexget/tree/transVM ~/.flexfiles
+    git clone https://github.com/sarethan/Flexget.git ~/.flexfiles
     cd ~/.flexfiles
     
 ### You can set up links to files from here instead of overwriting your .flexget directory before you're prepared. ###
