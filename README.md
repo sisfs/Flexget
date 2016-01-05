@@ -14,13 +14,13 @@ I am really only interested in the FlexGet config portion of this dotfiles fork 
 
 ### Installation Instructions ###
 
-    git clone git://github.com/sarethan/dotfiles/tree/transVM ~/.dotfiles
-    cd ~/.dotfiles
+    git clone git://github.com/sarethan/flexget/tree/transVM ~/.flexfiles
+    cd ~/.flexfiles
     
 ### You can set up links to files from here instead of overwriting your .flexget directory before you're prepared. ###
 
     mv ~/.flexget/config.yml ~/.flexget/old-config.yml
-    ln ~/.dotfiles/config.yml ~/.flexget/config.yml 
+    ln ~/.flexfiles/config.yml ~/.flexget/config.yml 
 
 
 ## Secrets Plugin ##
