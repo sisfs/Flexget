@@ -304,7 +304,6 @@ tasks:
 
   # All of the TV-related tasks pull in the tv-global template, this gives
   # all of the necessary rss sources and a few extra configs
-
   # There are 3 My-TV Shows tasks, the first, tries to get the most wanted qualities
   My-TV-Shows:
     priority: 10
@@ -372,19 +371,6 @@ tasks:
               strip_dates: yes
 
 
-  # manual task to freshen up the series begin dates for download run with:
-  # flexget execute --tasks my-tv-shows-set-begin
-  my-tv-shows-set-begin:          
-    manual: yes
-    template: no_global
-    trakt_emit:
-      account: '{{ secrets.trakt.username }}'
-      list: Following TV
-      context: collected  # You can set this to 'watched' depending on the state of your trakt info
-      position: next
-    accept_all: yes
-    set_series_begin: yes
-              
   # Jeff: I'm always up for new shows, but some I genres I just can't stand. This
   # task grabs all of the premieres except for some genres
   Series-Premieres:
@@ -432,7 +418,7 @@ tasks:
       '*.rar': '/mnt/media/check/'
 
   
-  # If a premier was grabbed, keep on tracking it until the directory is (re)moved
+  # If a premiere was grabbed, keep on tracking it until the directory is (re)moved
   Series-Premieres-Track:
     priority: 50
     template:
@@ -464,16 +450,13 @@ tasks:
       - seen_info_hash
       - seen_movies
     accept_all: yes
-    filesystem: ##
+    filesystem: 
       - /mnt/media/movies/
     imdb_lookup: yes
     tmdb_lookup: yes
-
     require_field: [movie_name, movie_year]
     movie_queue: accept
     trakt_remove:
-      # username: '{{ secrets.trakt.username }}'
-      # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
       list: Movie Queue
 
@@ -483,8 +466,6 @@ tasks:
     priority: 100 # Always run before My-Movies task
     template: no_global # None of the global templates make sense here
     trakt_list:
-      # username: '{{ secrets.trakt.username }}'
-      # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
       list: Movie Queue
       type: movies
@@ -493,7 +474,7 @@ tasks:
     movie_queue: add
 
 
-  # The next two tasks download the queue from the previous task effectively implementing
+  # The next three tasks download the queue from the previous task effectively implementing
   # a 1 week timeframe for 720p movies, 1 week for 480p, then falls back to 1080p.
   # My TV is only 720p capable so the 1080p movies are awfully large for no reason.
   # Quality settings are based on ensuring that my media is playable by both my Chromecast and Sony Bluray Player.
@@ -526,36 +507,38 @@ tasks:
       min_seeds: 5
     delay: 14 days # Wait 14 days before trying to download 1080p
 
+  
+  # manual task to freshen up the series begin dates for download run with:
+  my-tv-shows-set-begin:          
+    # flexget execute --tasks my-tv-shows-set-begin
+    manual: yes
+    template: no_global
+    trakt_emit:
+      account: '{{ secrets.trakt.username }}'
+      list: Following TV
+      context: collected  # You can set this to 'watched' depending on the state of your trakt info
+      position: next
+    accept_all: yes
+    set_series_begin: yes
 
-  # These task implement the movies-auto template
-  # Auto-Movies-720p:
-    # priority: 130
-    # quality: 720p h264 ac3|aac|mp3 
-    # template:
-      # - movies-global
-      # - movies-auto
-    # set:
-      # label: movies-auto
 
-  # Auto-Movies-480p:
-    # priority: 135
-    # quality: 480p h264 ac3|aac|mp3
-    # template:
-      # - movies-global
-      # - movies-auto
-    # set:
-      # label: movies-auto
-    # delay: 7 days # Wait 7 days before trying to download 480p
-
-  # Auto-Movies-1080p:
-    # priority: 140
-    # quality: 1080p h264 ac3|aac|mp3
-    # template:
-      # - movies-global
-      # - movies-auto
-    # set:
-      # label: movies-auto
-    # delay: 14 days # Wait 14 days before trying to download 1080p
+  Trakt_Move:
+    # flexget execute --tasks trakt_move --cli-config "movefrom=[Movie Queue|Following TV|Collection], movetype=[movies|shows|episodes], moveto=[Movie Queue|Following TV|Collection]"
+    manual: yes 
+    template: no_global # None of the global templates make sense here
+    trakt_list:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+    no_entries_ok: yes  
+      type: $movetype
+    accept_all: yes
+    movie_queue: add  
+    trakt_remove:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+    trakt_add:
+      account: '{{ secrets.trakt.username }}'
+      list: $moveto
 
 
 schedules:
@@ -563,83 +546,27 @@ schedules:
   # Series
   #
   - tasks: [ 'My-TV-Shows-Find-Next-*' ]
-    # interval:
-      # hours: 2
     schedule:
-      # minute: X
       hour: 3,4,5,6,7
-      # day: X
-      # day_of_week: X
-      # week: X
-      # month: X
-      # year: X  
   - tasks: [ 'My-TV-Shows', 'Series-Premieres-Track' ]
-    # schedule:
-      # minute: 3,18,33,48
     schedule:
-      # minute: X
-      hour: 2,18
-      # day: X
-      # day_of_week: X
-      # week: X
-      # month: X
-      # year: X  
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
-    # interval:
-      # days: 3
     schedule:
-      # minute: X
       hour: 8
-      # day: X
       day_of_week: sun
-      # week: X
-      # month: X
-      # year: X  
   - tasks: [ 'Series-Premieres' ]
-    # interval:
-      # hours: 2
     schedule:
-      # minute: X
       hour: 0
-      # day: X
-      # day_of_week: X
-      # week: X
-      # month: X
-      # year: X  
 
   #
   # Movies
   #
   - tasks: [ 'Movie-Queue', 'My-Movies-*' ]
-    # interval:
-      # hours: 1
     schedule:
       minute: 30
       hour: 3,4,5,6,7
-      # day: X
-      # day_of_week: X
-      # week: X
-      # month: X
-      # year: X
-  # - tasks: [ 'Auto-Movies-*' ]
-    # interval:
-      # hours: 2
-    ## schedule:
-      ## minute: 45
-      ## hour: 3,4,5,6,7
-      ## day: X
-      ## day_of_week: X
-      ## week: X
-      ## month: X
-      ## year: X
   - tasks: [ 'Clean-Movie-Queue' ]
-    # interval:
-      # weeks: 1
     schedule:
-      # minute: 
       hour: 9
-      # day: X
       day_of_week: sun
-      # week: X
-      # month: X
-      # year: X
+
