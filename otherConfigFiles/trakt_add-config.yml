@@ -8,18 +8,17 @@ tasks:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
-      list: collection
-      type: movies
-    no_entries_ok: yes
+      list: '{{ secrets.moving.movefrom }}'
+      type: '{{ secrets.moving.movetype }}'
     accept_all: yes
     movie_queue: add  
     trakt_remove:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
-      list: collection
+      list: '{{ secrets.moving.movefrom }}'
     trakt_add:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
       account: '{{ secrets.trakt.username }}'
-      list: Movie Queue
+      list: '{{ secrets.moving.moveto }}'
