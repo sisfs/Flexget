@@ -641,3 +641,26 @@ schedules:
       # week: X
       # month: X
       # year: X
+  - tasks:
+  Movie-Queue:
+    # priority: 100 # Always run before My-Movies task
+    # template: no_global # None of the global templates make sense here
+    trakt_list:
+      # username: '{{ secrets.trakt.username }}'
+      # password: '{{ secrets.trakt.password }}'
+      account: '{{ secrets.trakt.username }}'
+      list: '{{ secrets.moving.movefrom }}'
+    no_entries_ok: yes  
+      type: '{{ secrets.moving.movetype }}'
+    accept_all: yes
+    movie_queue: add  
+    trakt_remove:
+      # username: '{{ secrets.trakt.username }}'
+      # password: '{{ secrets.trakt.password }}'
+      account: '{{ secrets.trakt.username }}'
+      list: '{{ secrets.moving.movefrom }}'
+    trakt_add:
+      # username: '{{ secrets.trakt.username }}'
+      # password: '{{ secrets.trakt.password }}'
+      account: '{{ secrets.trakt.username }}'
+      list: '{{ secrets.moving.moveto }}'
