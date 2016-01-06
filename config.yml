@@ -443,7 +443,7 @@ tasks:
         identified_by: ep
       from:
         filesystem:
-          - 'litural test'
+          - '{{ secrets.directories.prem_dir }}'
     set: # see above
       movedone: >
         {{ secrets.trakt.premieres_dir }}{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
