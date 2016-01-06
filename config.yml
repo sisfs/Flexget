@@ -555,6 +555,24 @@ tasks:
       # label: movies-auto
     # delay: 14 days # Wait 14 days before trying to download 1080p
 
+    Trakt_Move:
+      # flexget execute --tasks trakt_move --cli-config "movefrom=[list show/movie is in...Movie Queue|Following TV|Collection], movetype=[movies|shows|episodes], moveto=[Movie Queue|Following TV|Collection]"
+      manual: yes #
+      template: no_global # None of the global templates make sense here
+      trakt_list:
+        account: '{{ secrets.trakt.username }}'
+        list: $movefrom
+      no_entries_ok: yes  
+        type: $movetype
+      accept_all: yes
+      movie_queue: add  
+      trakt_remove:
+        account: '{{ secrets.trakt.username }}'
+        list: $movefrom
+      trakt_add:
+        account: '{{ secrets.trakt.username }}'
+        list: $moveto
+
 
 schedules:
   #
@@ -641,26 +659,3 @@ schedules:
       # week: X
       # month: X
       # year: X
-  - tasks:
-	  Movie-Queue:
-		# priority: 100 # Always run before My-Movies task
-		# template: no_global # None of the global templates make sense here
-		trakt_list:
-		  # username: '{{ secrets.trakt.username }}'
-		  # password: '{{ secrets.trakt.password }}'
-		  account: '{{ secrets.trakt.username }}'
-		  list: '{{ secrets.moving.movefrom }}'
-		no_entries_ok: yes  
-		  type: '{{ secrets.moving.movetype }}'
-		accept_all: yes
-		movie_queue: add  
-		trakt_remove:
-		  # username: '{{ secrets.trakt.username }}'
-		  # password: '{{ secrets.trakt.password }}'
-		  account: '{{ secrets.trakt.username }}'
-		  list: '{{ secrets.moving.movefrom }}'
-		trakt_add:
-		  # username: '{{ secrets.trakt.username }}'
-		  # password: '{{ secrets.trakt.password }}'
-		  account: '{{ secrets.trakt.username }}'
-		  list: '{{ secrets.moving.moveto }}'
