@@ -442,7 +442,7 @@ tasks:
         quality: 720p|480p|1080p h264 ac3|aac|mp3
         identified_by: ep
       from:
-        filesystem: ##
+        filesystem:
           - '{{ secrets.trakt.prem_dir }}'
     set: # see above
       movedone: >
