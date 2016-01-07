@@ -123,8 +123,8 @@ templates:
       - '/mnt/media/NewAdditions/'
       - '/mnt/media/shows/'
       - '/mnt/media/premieres/'
-      - '/mnt/media/staging/shows/'
-      - '/mnt/media/staging/premieres/'
+      - '/mnt/media/check/staging/shows/'
+      - '/mnt/media/check/staging/premieres/'
     thexem:
       source: scene
       destination: tvdb
@@ -149,7 +149,7 @@ templates:
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method,
     # it changes 'movedone' based on the regexp in the key
     content_sort:
-      '*.rar': '/mnt/media/staging/shows/' ##
+      '*.rar': '/mnt/media/check/staging/shows/' ##
 
 
   tv-shows-find:
@@ -202,7 +202,7 @@ templates:
     # Check for already downloaded or currently downloading movies
     exists_movie: 
       - /mnt/media/movies/
-      - /mnt/media/staging/movies/
+      - /mnt/media/check/staging/movies/
       - /mnt/media/check/
     # Download propers, since they will have the same content_filename,
     # lower/non-propers will be overwritten
@@ -221,7 +221,7 @@ templates:
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method, it changes
     # 'movedone' based on the regexp in the key
     content_sort:
-      '*.rar': '/mnt/media/staging/movies'
+      '*.rar': '/mnt/media/check/staging/movies'
       
 
   # Keep all the discover settings in one place
@@ -521,16 +521,16 @@ tasks:
     accept_all: yes
     set_series_begin: yes
 
-
-  Trakt_Move:
-    # flexget execute --tasks trakt_move --cli-config "movefrom=[Movie Queue|Following TV|Collection], movetype=[movies|shows|episodes], moveto=[Movie Queue|Following TV|Collection]"
+  # manual task to move shows from one trakt list to another.
+  Trakt_Move_Shows:
+    # flexget execute --tasks trakt_move_shows --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
     manual: yes 
     template: no_global # None of the global templates make sense here
     trakt_list:
       account: '{{ secrets.trakt.username }}'
       list: $movefrom
+      type: shows
     no_entries_ok: yes  
-      type: $movetype
     accept_all: yes
     movie_queue: add  
     trakt_remove:
@@ -540,6 +540,24 @@ tasks:
       account: '{{ secrets.trakt.username }}'
       list: $moveto
 
+  # manual task to move shows from one trakt list to another.
+  Trakt_Move_Movies:
+    # flexget execute --tasks trakt_move_movies --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
+    manual: yes 
+    template: no_global # None of the global templates make sense here
+    trakt_list:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+      type: movies
+    no_entries_ok: yes  
+    accept_all: yes
+    movie_queue: add  
+    trakt_remove:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+    trakt_add:
+      account: '{{ secrets.trakt.username }}'
+      list: $moveto
 
 schedules:
   #
@@ -550,6 +568,7 @@ schedules:
       hour: 3,4,5,6,7
   - tasks: [ 'My-TV-Shows', 'Series-Premieres-Track' ]
     schedule:
+      hour: 2,18
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
     schedule:
       hour: 8
