@@ -555,23 +555,43 @@ tasks:
       # label: movies-auto
     # delay: 14 days # Wait 14 days before trying to download 1080p
 
-    Trakt_Move:
-      # flexget execute --tasks trakt_move --cli-config "movefrom=[list show/movie is in...Movie Queue|Following TV|Collection], movetype=[movies|shows|episodes], moveto=[Movie Queue|Following TV|Collection]"
-      manual: yes #
-      template: no_global # None of the global templates make sense here
-      trakt_list:
-        account: '{{ secrets.trakt.username }}'
-        list: $movefrom
-      no_entries_ok: yes  
-        type: $movetype
-      accept_all: yes
-      movie_queue: add  
-      trakt_remove:
-        account: '{{ secrets.trakt.username }}'
-        list: $movefrom
-      trakt_add:
-        account: '{{ secrets.trakt.username }}'
-        list: $moveto
+    # manual task to move shows from one trakt list to another.
+  Trakt_Move_Shows:
+    # flexget execute --tasks trakt_move_shows --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
+    manual: yes 
+    template: no_global # None of the global templates make sense here
+    trakt_list:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+      type: shows
+    no_entries_ok: yes  
+    accept_all: yes
+    movie_queue: add  
+    trakt_remove:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+    trakt_add:
+      account: '{{ secrets.trakt.username }}'
+      list: $moveto
+
+  # manual task to move shows from one trakt list to another.
+  Trakt_Move_Movies:
+    # flexget execute --tasks trakt_move_movies --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
+    manual: yes 
+    template: no_global # None of the global templates make sense here
+    trakt_list:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+      type: movies
+    no_entries_ok: yes  
+    accept_all: yes
+    movie_queue: add  
+    trakt_remove:
+      account: '{{ secrets.trakt.username }}'
+      list: $movefrom
+    trakt_add:
+      account: '{{ secrets.trakt.username }}'
+      list: $moveto
 
 
 schedules:
