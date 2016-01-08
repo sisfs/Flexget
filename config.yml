@@ -312,9 +312,11 @@ tasks:
     sequence:
       - configure_series:
           settings:
-            target: 720p+ dvdscr+
-            timeframe: 3 days
-            quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
+            qualities: 
+              - 480p h264
+              - 720p h624
+              - 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
+            timeframe: 1 days
             tracking: backfill
             identified_by: ep
           from:
@@ -338,9 +340,11 @@ tasks:
             position: next
       from: [filler: yes]
     all_series:
-      target: 720p+ dvdscr+
-      timeframe: 3 days
-      quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
+      qualities: 
+        - 480p h264
+        - 720p h264
+        - 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
+      timeframe: 1 days
       tracking: backfill
 
 
@@ -357,9 +361,11 @@ tasks:
     sequence:
       - configure_series:
           settings:
-            target: 720p+ dvdscr+
-            timeframe: 3 days
-            quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing 
+            timeframe: 1 days
+            qualities: 
+              - 480p h264 
+              - 720p h264 
+              - 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing 
             tracking: backfill
             propers: no
             upgrade: no
