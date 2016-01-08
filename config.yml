@@ -105,7 +105,8 @@ templates:
       # - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       #- rss: { url: 'http://www.torlock.com/television/rss.xml', silent: yes }                    # TorLock (TV)
       #- rss: { url: 'http://torrentz.eu/feed_verified?q=tv', silent: yes }                        # Torrentz (Verified only, TV)
-      - rss: { url: 'https://kat.cr/usearch/verified%3A1%20category%3Atv/?rss=1', silent: yes }   # Kickass (TV)
+      - rss: { url: '{{ secrets.RssFeeds.TVshows.kat1 }}', silent: yes }   # Kickass (TV)
+      - rss: { url: '{{ secrets.RssFeeds.TVshows.kat2 }}', silent: yes }   # Kickass (TV)
     if:
       - "has_field('category')":
           regexp:
@@ -114,7 +115,7 @@ templates:
     archive: [tv]
     # Impose reasonable size constraints
     content_size:
-      max: 2000
+      max: 900
       min: 128
     # Prevent from downloading shows that were aquired manually
     # or are currently downloading
@@ -171,9 +172,10 @@ templates:
   movies-global:
     inputs:
     #  - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
-      - rss: { url: 'http://www.torlock.com/movies/rss.xml', silent: yes }     # TorLock (Movies)
-      - rss: { url: 'http://torrentz.eu/feed_verified?q=movies', silent: yes } # Torrentz (Verified Movies)
-      - rss: 'https://kat.cr/usearch/verified%3A1%20category%3Amovies/?rss=1' # Kickass (Movies)
+      - rss: { url: '{{ secrets.RssFeeds.Movies.torlock }}', silent: yes }     # TorLock (Movies)
+      - rss: { url: '{{ secrets.RssFeeds.Movies.toorentz }}', silent: yes } # Torrentz (Verified Movies)
+      - rss: '{{ secrets.RssFeeds.Movies.kat1 }}' # Kickass (Movies)
+      - rss: '{{ secrets.RssFeeds.Movies.kat2 }}' # Kickass (Movies)
     # Some feeds might include TV Shows, ignore them
     if:
       - "has_field('category')":
