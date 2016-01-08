@@ -1,0 +1,5 @@
+qualities: 
+  - 480p h264
+  - 720p h264
+  - 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
+timeframe: 15 hours
