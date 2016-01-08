@@ -445,9 +445,11 @@ tasks:
       - tv-global
     configure_series:
       settings:
-        target: 720p+ hdtv+
-        timeframe: 3 days
-        quality: 720p|480p|1080p h264 ac3|aac|mp3
+        qualities: 
+          - 720p h264
+          - 480p h264
+          - 1080p h264 #ac3|aac|mp3
+        timeframe: 1 days
         identified_by: ep
       from:
         filesystem:
