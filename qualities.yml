@@ -1,4 +1,4 @@
-# remove quality, target, timeframe and replace with include: qualitySettings.inlude
+# remove quality, target, timeframe and replace with include: qualities.yml
 qualities:
   - 720p h264 aac
   - 720p h264 ac3
