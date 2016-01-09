@@ -311,11 +311,17 @@ tasks:
     sequence:
       - configure_series:
           settings:
-            target: 720p+ dvdscr+
-            timeframe: 3 days
-            quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
+            qualities:
+              - 720p h264 aac
+              - 720p h264 ac3
+              - 480p h264 aac
+              - 480p h264 ac3
+              - 1080p h264 aac
+              - 1080p h264 ac3
+            timeframe: 20 hours
             tracking: backfill
-            identified_by: ep
+            # identified_by: ep
+            upgrade: yes
           from:
             trakt_list:
               account: '{{ secrets.trakt.username }}'
@@ -337,12 +343,19 @@ tasks:
             position: next
       from: [filler: yes]
     all_series:
-      target: 720p+ dvdscr+
-      timeframe: 3 days
-      quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
+      qualities:
+        - 720p h264 aac
+        - 720p h264 ac3
+        - 480p h264 aac
+        - 480p h264 ac3
+        - 1080p h264 aac
+        - 1080p h264 ac3
+      timeframe: 20 hours
       tracking: backfill
+      upgrade: yes
+      # identified_by: ep
 
-
+      
   My-TV-Shows-Find-Missing:
     template:
       - tv-global
@@ -356,13 +369,18 @@ tasks:
     sequence:
       - configure_series:
           settings:
-            target: 720p+ dvdscr+
-            timeframe: 3 days
-            quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing 
+            qualities:
+              - 720p h264 aac
+              - 720p h264 ac3
+              - 480p h264 aac
+              - 480p h264 ac3
+              - 1080p h264 aac
+              - 1080p h264 ac3
+            timeframe: 20 hours
             tracking: backfill
             propers: no
-            upgrade: no
-            identified_by: ep
+            upgrade: yes
+            # identified_by: ep
           from:
             trakt_list:
               account: '{{ secrets.trakt.username }}'
@@ -370,7 +388,7 @@ tasks:
               type: shows
               strip_dates: yes
 
-
+              
   # Jeff: I'm always up for new shows, but some I genres I just can't stand. This
   # task grabs all of the premieres except for some genres
   Series-Premieres:
@@ -403,8 +421,16 @@ tasks:
       - tvdb_first_air_date and tvdb_first_air_date < now - timedelta(days=60): reject
     # Accept all series permieres
     series_premiere:
-      timeframe: 1 days
-      quality: 720p|480p|1080p h264 # ac3|aac|mp3 ## maybe i'll get more premiere results now
+      qualities:
+        - 720p h264 aac
+        - 720p h264 ac3
+        - 480p h264 aac
+        - 480p h264 ac3
+        - 1080p h264 aac
+        - 1080p h264 ac3
+      timeframe: 20 hours
+      # identified_by: ep
+      upgrade: yes
     # Add to deluge, but don't queue to top (My_TV_Shows are more important)
     # and put in a different location
     set: 
@@ -425,10 +451,16 @@ tasks:
       - tv-global
     configure_series:
       settings:
-        target: 720p+ hdtv+
-        timeframe: 3 days
-        quality: 720p|480p|1080p h264 ac3|aac|mp3
-        identified_by: ep
+        qualities:
+          - 720p h264 aac
+          - 720p h264 ac3
+          - 480p h264 aac
+          - 480p h264 ac3
+          - 1080p h264 aac
+          - 1080p h264 ac3
+        timeframe: 20 hours
+        # identified_by: ep
+        upgrade: yes
       from:
         filesystem: 
           - '{{ secrets.dirs.prems }}'
