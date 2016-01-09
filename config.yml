@@ -591,32 +591,37 @@ tasks:
       account: '{{ secrets.trakt.username }}'
       list: $moveto
 
+# essentially i want each task to run every 2 hours.
+# and a new task to start every 30 min on the 15s and 45s
 schedules:
   #
   # Series
   #
   - tasks: [ 'My-TV-Shows-Find-Next-*' ]
     schedule:
-      hour: 3,4,5,6,7
+      minute: 15
+      hour: 0-22/2
   - tasks: [ 'My-TV-Shows', 'Series-Premieres-Track' ]
     schedule:
-      hour: 2,18
+      minute: 15
+      hour: 1-23/2
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
     schedule:
       hour: 8
       day_of_week: sun
   - tasks: [ 'Series-Premieres' ]
     schedule:
-      hour: 0
+      minute: 45
+      hour: 0-22/2 
 
   #
   # Movies
   #
   - tasks: [ 'Movie-Queue', 'My-Movies-*' ]
     schedule:
-      minute: 30
-      hour: 3,4,5,6,7
+      minute: 45
+      hour: 1-23/2
   - tasks: [ 'Clean-Movie-Queue' ]
     schedule:
-      hour: 9
+      hour: 17
       day_of_week: sun
