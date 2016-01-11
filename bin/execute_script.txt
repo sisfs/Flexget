@@ -27,3 +27,48 @@ Torrent Details:  The.Next.Three.Days.2010.720p.BluRay.H264.AAC-RARBG /mnt/media
 Torrent Details:  Mona.Lisa.Smile.2003.720p.BluRay.H264.AAC-RARBG /mnt/media/check 779295d568581a9d6f4198e9dd6437808525b772
 Torrent Details:  10.Things.I.Hate.About.You.1999.720p.BluRay.H264.AAC-RARBG /mnt/media/check e26ec78633442c6b2dcac538dabc8ee955262ccf
 Torrent Details:  The.Big.Bang.Theory.S09E12.1080p.HDTV.X264-DIMENSION[rarbg] /mnt/media/check 90b0f1b0ca5c52ed34fee26075c576d7a24ef150
+Torrent Details:  The.Blacklist.S03E09.PROPER.720p.HDTV.x264-BATV[rarbg] /mnt/media/check 525c7c1cf564ffc0d43d5ceb59481907127bd256
+Torrent Details:  Life.in.Pieces.S01E12.1080p.HDTV.x264-BRISK[rarbg] /mnt/media/check eec1a0ef7b8acbdf8fbad455fb5f109758d09d26
+Torrent Details:  NCIS.S13E12.1080p.WEB-DL.DD5.1.H264-BTN[rarbg] /mnt/media/check acc64cd6ef626fa14303183e66c0c56593730cbe
+Torrent Details:  Grey's Anatomy S12E01 720P HDTV HEVC x265 RMTeam /mnt/media/check a2e6cfa7d2c4dc4a66ac8e9cb8b54cd1b46380c5
+Torrent Details:  Grey's.Anatomy.S12E04.720p.HDTV.2CH.x265.HEVC-PSA /mnt/media/check 3065efb0a28842ebcc6086b4cbcb7c0626096704
+Torrent Details:  greys.anatomy.s12e05.1080p.web.dl.hevc.x265.rmteam.mkv /mnt/media/check cacf9b5ab6ebcc2da262b04c5ad2798711bd2b5d
+Torrent Details:  Black.Sails.S02E10.720p.HDTV.x264-IMMERSE.mkv /mnt/media/check e9729b47c38388d8ff6b461244d8132cac9e9932
+Torrent Details:  Band.Of.Brothers.S01E01.HDTV.Subtitulado.Esp.SC.avi /mnt/media/check c1af163fe70abafac12358314a7797a9794ce18b
+Torrent Details:  Black.Sails.S02E03.720p.HDTV.x264-KILLERS.mkv /mnt/media/check c2ddfdf7c2d7cc73792329e2124418f126a22fc8
+Torrent Details:  Fxier.Upper.S03E01.Searching.For.Small.Town.Charm.HDTVx264-JIVE.mp4 /mnt/media/check 97134e1aa6353e74d55259ace936a9db9ff04bcb
+Torrent Details:  The.Blacklist.S03E01.HDTV.x264-KILLERS[rarbg] /mnt/media/check 088ff6c30d809017472004e1ea5a41001939cbf1
+Torrent Details:  Blue.Bloods.S05E19.HDTV.x264-LOL.mp4 /mnt/media/check 99c0d4130eca9ba65f07b285e70f20be09890b25
+Torrent Details:  Grey's.Anatomy.S12E02.Walking.Tall.720p.WEB-DL.2CH.x265.HEVC-PSA.mkv /mnt/media/check 3b08024d4a359c500d9eaf68940632794a98f07f
+Torrent Details:  Chopped.S25E13.Mac and Cheese.mp4 /mnt/media/check ad76cd4b3a4ab2310c36234590e342cb6f5ddbe2
+Torrent Details:  The.Returned.US.S01E07.HDTV.x264-KILLERS.mp4 /mnt/media/check 034da0c15e2c7414a9b0e8af1a9658a2869a91ff
+Torrent Details:  Property Brothers at Home on the Ranch S01E01 PDTV x264-JIVE.mp4 /mnt/media/check fbe6dbd88966fa06c3b5230e19925123c7cb7d7e
+Torrent Details:  Chopped.S25E12.Cooking with Bass.mp4 /mnt/media/check 9d96327689afcbe46c571bcdd25cf5e155df6a6f
+Torrent Details:  Blue.Bloods.S05E13.HDTV.x264-LOL.mp4 /mnt/media/check 969da6efd9e8cbe30a05aed52c717f14fff85082
+Torrent Details:  The Big Bang Theory S08E19 720p HDTV x264 AAC - Ozlem /mnt/media/check 4daa57eaf007bae8eb4683b39c5379df8ede0929
+Torrent Details:  Bunkd.S01E10.Counselors.Night.Off.1080p.DSNY.WEBRip.AAC2.0.x264-TVSmash.mkv /mnt/media/check b5c826d6d4b75d38fc8ebaa650f19f4c731173d2
+Torrent Details:  NCIS.S13E07.1080p.WEB-DL.DD5.1.H.264-BTN[rarbg] /mnt/media/check 79f6cf0902a6c5c947b2cd4586b1cc2d83b2792e
+Torrent Details:  Bunkd.S01E05.The.Ones.That.Got.Away.1080p.DSNY.WEBRip.AAC2.0.x264-TVSmash.mkv /mnt/media/check 4e07f0f709f49bf527ef542da755065e03a0646e
+Torrent Details:  Sons Of Anarchy S01E01 - Pilot - Ehhhh.mkv /mnt/media/check 3c1e9ff2ec623d6ce959651f93376a5cbc49f89f
+Torrent Details:  Chopped.S25E09.Bizarre Battle.mp4 /mnt/media/check 5b1880e9799831e9f82b73a21988c1d76d3af665
+Torrent Details:  Bunkd.S01E09.Secret.Santa.1080p.DSNY.WEBRip.AAC2.0.x264-TVSmash.mkv /mnt/media/check c44e313631459832ce5ef387a95254d9dd954c55
+Torrent Details:  MacGyver.S01E01.Pilot.1985.BDRip.Nordic-philipo.mkv /mnt/media/check bc274dcceceae2098b9e3e96b580a2d829dda0d9
+Torrent Details:  Bunkd.S01E08.Waka.Waka.Waka.1080p.DSNY.WEBRip.AAC2.0.x264-TVSmash.mkv /mnt/media/check 71c9c877d7097f9431dd62479a397074331b7746
+Torrent Details:  Blue.Bloods.S05E11.HDTV.x264-LOL.mp4 /mnt/media/check 1ebc997e37f12adbc3a897df3b5ade4cbf0f2a19
+Torrent Details:  marvels.jessica.jones.s01e13.1080p.webrip.hevc.x265.mkv /mnt/media/check 62e06b9576cf984d050aa35b8d01e250f66ea9bf
+Torrent Details:  marvels.daredevil.s01e02.mux.eng.720p.webrip.hevc.x265.rmteam.mkv /mnt/media/check 7da329a67f2d1aaf035411e0ab6fd8b2ac5a6903
+Torrent Details:  Grey's Anatomy S09E01 HDTV x264 + Subtitles [GlowGaze] /mnt/media/check df409db1a2768c80dde714f9d90f790141d3a168
+Torrent Details:  American.Diner.Revival.S02E01.Rock.n.Roll.Railcar.WS.DSR.x264-[NY2].mp4 /mnt/media/check e391150244f11fd71de150f12e1ab751179c71eb
+Torrent Details:  The.Blacklist.3x06.HDTV.XviD.[www.DivxTotaL.com].avi /mnt/media/check 9e4df2a034603328843648bd5a93d24ad6fa8a94
+Torrent Details:  Girl.Meets.World.S02E01.Girl.Meets.Gravity.1080p.WEBRip-ULTOR /mnt/media/check 8484d14630b678c4c5e1c1ead35ec121ba63d587
+Torrent Details:  Chopped.S26E01.A Chopped Halloween.mp4 /mnt/media/check 8a9a67eb58f9a1d4f3adccd35c18c602ce613fbf
+Torrent Details:  Supergirl S01E09 720p HDTV x264 AC3-RiPRG /mnt/media/check ff77c44734055d61ee6f33c9d4951b737b2f2648
+Torrent Details:  BlackLove.S01E01.Sexy.In.The.City.WS.DSR.x264-[NY2] /mnt/media/check 6887de7c083116ddb9db5b60b9acbb12440a20f7
+Torrent Details:  Botched.S02E12.The.Serial.Filler.WS.DSR.x264-[NY2].mp4 /mnt/media/check 39032e46baed8b0250314c10feef68b9bff01578
+Torrent Details:  Million.Dollar.Listing.San.Francisco.S01E01.The.New.Gold.Rush.WS.DSR.x264-[NY2].mp4 /mnt/media/check 3a4afeb2879ba0ad49c2656f074e17cdabc32095
+Torrent Details:  The Returned US S01E05 HDTV XviD-FUM[ettv] /mnt/media/check 88aabbf9624b2d55951d447a97492bda971dc53f
+Torrent Details:  K.C.Undercover.S01E22.All.Howls.Eve.iT1080p-DCMagic.mp4 /mnt/media/check 16919a957ce4f9757ce772c6a7bf8bb553a4543a
+Torrent Details:  Chopped.S26E02.Chopped Catwalk.mp4 /mnt/media/check 57e213481468246f4e0c90814369d01e905a34b2
+Torrent Details:  Jessie.2011.S01E01.720p.HDTV.x264-W4F[brassetv] /mnt/media/check 771f89631f55eb2c56e4549ab00c56a159716085
+Torrent Details:  Fixer.Upper.S03E02.School.Spirit.PDTV.x264-JIVE /mnt/media/check 4f2243793bd0ce33512eae543f771d389873a759
+Torrent Details:  The.Big.Bang.Theory.S08E20.The.Fortification.Implementation.720p.WEB-DL.x264.AAC /mnt/media/check 964bdeb9f206d99cf12c0078bc02bcd5b8c08911
