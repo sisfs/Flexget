@@ -72,3 +72,10 @@ Torrent Details:  Chopped.S26E02.Chopped Catwalk.mp4 /mnt/media/check 57e2134814
 Torrent Details:  Jessie.2011.S01E01.720p.HDTV.x264-W4F[brassetv] /mnt/media/check 771f89631f55eb2c56e4549ab00c56a159716085
 Torrent Details:  Fixer.Upper.S03E02.School.Spirit.PDTV.x264-JIVE /mnt/media/check 4f2243793bd0ce33512eae543f771d389873a759
 Torrent Details:  The.Big.Bang.Theory.S08E20.The.Fortification.Implementation.720p.WEB-DL.x264.AAC /mnt/media/check 964bdeb9f206d99cf12c0078bc02bcd5b8c08911
+Torrent Added:  Fixer.Upper.S03E03.Small.Town.Search.for.Space.PDTVx264-JIVE.mp4 /mnt/media/check f465e7f1cd6b500ab97403c4a179ff589cf5eef1
+Torrent Added:  blue.bloods.s06e11.720p.hdtv.hevc.x265.rmteam.mkv /mnt/media/check db1effcc04ccfc818eabc96c37d7cb6825aeff6b
+Torrent Added:  Girl Meets World S02E02 Girl Meets the New World 480p HDTV x264 /mnt/media/check df5252248c77ebc89efe84a906991549df7474f3
+Torrent Added:  Castle.S07E13.720p.WEB-DL.DD5.1.H.264-ECI[rarbg] /mnt/media/check e9c398c8e26cda44f9072461540eece6ba09a0c1
+Torrent Complete:  Fixer.Upper-S03E03-Small.Town.Search.for.Space-sdtv.h264.mp4 /mnt/media/shows/Fixer.Upper/Season.03 f465e7f1cd6b500ab97403c4a179ff589cf5eef1
+Torrent Complete:  Blue.Bloods-S06E11-Back.in.the.Day-720p.hdtv.h265.mkv /mnt/media/shows/Blue.Bloods/Season.06 db1effcc04ccfc818eabc96c37d7cb6825aeff6b
+Torrent Complete:  Girl.Meets.World-S02E02-Girl.Meets.the.New.World-480p.hdtv.h264.mp4 /mnt/media/shows/Girl.Meets.World/Season.02 df5252248c77ebc89efe84a906991549df7474f3
