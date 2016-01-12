@@ -323,29 +323,13 @@ tasks:
             # identified_by: ep
             upgrade: yes
           from:
-            inputs:
-            - trakt_list:
-                account: '{{ secrets.trakt.acct1 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes
-            - trakt_list:
-                account: '{{ secrets.trakt.acct2 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes
-            - trakt_list:
-                account: '{{ secrets.trakt.acct3 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes
-            - trakt_list:
-                account: '{{ secrets.trakt.acct4 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes
-            
-            
+            trakt_list:
+              account: '{{ secrets.trakt.username }}'
+              list: Following TV
+              type: shows
+              strip_dates: yes
+
+
   My-TV-Shows-Find-Next-Following:
     template: [tv-global, tv-shows-find]
     disable: inputs
@@ -513,27 +497,10 @@ tasks:
   Movie-Queue:
     priority: 100 # Always run before My-Movies task
     template: no_global # None of the global templates make sense here
-    inputs:
-    - trakt_list:
-        account: '{{ secrets.trakt.acct1 }}'
-        list: Movie Queue
-        type: movies
-    - trakt_list:
-        account: '{{ secrets.trakt.acct2 }}'
-        list: Movie Queue
-        type: movies
-    - trakt_list:
-        account: '{{ secrets.trakt.acct3 }}'
-        list: Movie Queue
-        type: movies
-    - trakt_list:
-        account: '{{ secrets.trakt.acct4 }}'
-        list: Movie Queue
-        type: movies
-  # trakt_list
-    # account: '{{ secrets.trakt.username }}'
-    # list: Movie Queue
-    # type: movies
+    trakt_list:
+      account: '{{ secrets.trakt.username }}'
+      list: Movie Queue
+      type: movies
     no_entries_ok: yes
     accept_all: yes
     movie_queue: add
@@ -588,40 +555,40 @@ tasks:
 
   # manual task to move shows from one trakt list to another.
   Trakt_Move_Shows:
-    # flexget execute --tasks trakt_move_shows --cli-config "traktAcct=[your account name], movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
+    # flexget execute --tasks trakt_move_shows --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
     manual: yes 
     template: no_global # None of the global templates make sense here
     trakt_list:
-      account: $traktAcct
+      account: '{{ secrets.trakt.username }}'
       list: $movefrom
       type: shows
     no_entries_ok: yes  
     accept_all: yes
     movie_queue: add  
     trakt_remove:
-      account: $traktAcct
+      account: '{{ secrets.trakt.username }}'
       list: $movefrom
     trakt_add:
-      account: $traktAcct
+      account: '{{ secrets.trakt.username }}'
       list: $moveto
 
   # manual task to move shows from one trakt list to another.
   Trakt_Move_Movies:
-    # flexget execute --tasks trakt_move_movies --cli-config "traktAcct=[your account name], movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
+    # flexget execute --tasks trakt_move_movies --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
     manual: yes 
     template: no_global # None of the global templates make sense here
     trakt_list:
-      account: $traktAcct
+      account: '{{ secrets.trakt.username }}'
       list: $movefrom
       type: movies
     no_entries_ok: yes  
     accept_all: yes
     movie_queue: add  
     trakt_remove:
-      account: $traktAcct
+      account: '{{ secrets.trakt.username }}'
       list: $movefrom
     trakt_add:
-      account: $traktAcct
+      account: '{{ secrets.trakt.username }}'
       list: $moveto
 
 # essentially i want each task to run every 2 hours.

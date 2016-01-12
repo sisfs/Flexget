@@ -187,3 +187,7 @@ Torrent Added:  [MP4] The Big Bang Theory S08E20 (720p) Fortification Implementa
 Torrent Added:  S08E20- The Fortification Implementation.mkv /mnt/media/check 257d9eb27123fa7bf627c99e95c157405f5d194e
 Torrent Complete:  Girl.Meets.World-S02E03-Girl.Meets.the.Secret.of.Life-480p.hdtv.h264.mp4 /mnt/media/shows/Girl.Meets.World/Season.02 88f2adbbdac2f8b3ba7131be2b5ce3a4c9c9b99b
 Torrent Complete:  [MP4] The Big Bang Theory S08E20 (720p) Fortification Implementation HDTV Season 8.08.20 [KoTuWa] /mnt/media/shows/The.Big.Bang.Theory.S08e20.720p.Fortification.Implementation.Hdtv.Season 4ebf7be9662a07e05574660eba623443b66c6701
+Torrent Complete:  Property.Brothers.at.Home.on.the.Ranch.-S01E02-Log.Home.Main.Floor-sdtv.h264.mp4 /mnt/media/shows/Property.Brothers.at.Home.on.the.Ranch/Season.01 47045630c7ad1f9833bb1d6bf085f3406db848de
+Torrent Complete:  The.Big.Bang.Theory.Season.8-S08E20-720p.webdl.h264.mkv /mnt/media/shows/The.Big.Bang.Theory.Season.8/Season.08 257d9eb27123fa7bf627c99e95c157405f5d194e
+Torrent Complete:  Beauty.and.the.Beast-1991-720p.bluray.h264.aac.mp4 /mnt/media/movies/Beauty.and.the.Beast.1991 a667cfbe8d8ad908925a36b16802b8b798dd5618
+Torrent Complete:  It's.a.Wonderful.Life-1946-720p.bluray.h264.aac.mp4 /mnt/media/movies/It's.a.Wonderful.Life.1946 133ea79452308cf51389d1bbdd53d74f0df062c2
