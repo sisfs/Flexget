@@ -202,8 +202,8 @@ templates:
     # Check for already downloaded or currently downloading movies
     exists_movie: 
       - '{{ secrets.directories.movies_dir }}'
-      - '{{ secrets.directories.stagingmovies_dir }}'
-      - '{{ secrets.directories.checkdir }}'
+      #- '{{ secrets.directories.stagingmovies_dir }}'
+      #- '{{ secrets.directories.checkdir }}'
     # Download propers, since they will have the same content_filename,
     # lower/non-propers will be overwritten
     proper_movies: yes
