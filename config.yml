@@ -147,8 +147,8 @@ templates:
       label: tv
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method,
     # it changes 'movedone' based on the regexp in the key
-    content_sort:
-      '*.rar': '{{ secrets.directories.stagingtv_dir }}' ##
+    #content_sort:  Not using rars
+    #  '*.rar': '{{ secrets.directories.stagingtv_dir }}' ##
 
 
   tv-shows-find:
@@ -220,8 +220,8 @@ templates:
       url: "{% if imdb_url %}{{ imdb_url }}{% endif %}"
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method, it changes
     # 'movedone' based on the regexp in the key
-    content_sort:
-      '*.rar': '{{ secrets.directories.movies_dir }}'
+    #content_sort:
+    #  '*.rar': '{{ secrets.directories.movies_dir }}'
       
 
   # Keep all the discover settings in one place
@@ -434,8 +434,8 @@ tasks:
       label: tv-premiere
     # This is a custom plugin, it is part of my rar-unpacking method, it changes
     # 'movedone' based on the regexp in the key
-    content_sort: ##
-      '*.rar': '{{ secrets.trakt.checkdir }'
+    #content_sort: ##
+    #  '*.rar': '{{ secrets.trakt.checkdir }'
 
   
   # If a premier was grabbed, keep on tracking it until the directory is (re)moved
@@ -459,8 +459,8 @@ tasks:
         {{ secrets.trakt.premieres_dir }}{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
       queuetotop: no
       label: tv-premiere-track
-    content_sort: ##
-      '*.rar': '{{ secrets.trakt.checkdir }}'
+    #content_sort: ##
+    #  '*.rar': '{{ secrets.trakt.checkdir }}'
 
 
   # Cleans movies from the movie queue (and Trakt) that we already have
