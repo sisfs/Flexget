@@ -2,7 +2,7 @@ trakt:
   acct1: sisfs
   acct2: someOtherGuy
   acct3: anotherGuy
-  acct: yetAnother
+  acct4: yetAnother
 deluge:
   username: *******
   password: ******
