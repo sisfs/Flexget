@@ -1,0 +1,24 @@
+#!/bin/bash
+success=1
+file="traktacc"
+[[ -f "$file" ]] && rm -f "$file"
+flexget trakt show >> ~/traktacc
+traktaccount=$(grep -w -R 'account' /var/lib/deluge/.flexget/secretfile.yml | cut -c 12-)
+search=$( grep -m 1 $traktaccount traktacc | cut --characters=1-${#traktaccount} ) #cut  to only see charcter 1- how ever long traktaccount name is
+    if [[ $search == $traktaccount ]] ; then
+        echo "Trakt Account $traktaccount is autorized"
+
+    else
+      while [[ $search != $traktaccount  ]] ;
+      do
+        echo "Diag remove when done, $?"
+        echo "Please input you pin for user $traktaccount"
+        read input </dev/tty
+        flexget trakt auth $traktaccount $input
+      done
+    fi
+
+rm -f traktacc
+file="traktacc"
+[[ -f "$file" ]] && rm -f "$file"
+exit
