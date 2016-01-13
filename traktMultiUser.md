@@ -1,8 +1,9 @@
-### I will be adding multiple users to my config in the future... that way i dont have to share my password with everyone in my family...
+### Enable interacting with multiple Trakt.tv Lists
 
-register each trakt user's code in flexget
+1. Have each person create a [Trakt](https://Trakt.tv) account.
+2. While each is signed in to their account, have them visit [Trakt Auth](https://trakt.tv/pin/346)
+3. Click authorize.
+4. copy the code from the folllowing page to your flexget command line:
+  $ flexget trakt auth \<username\> \<copied code\>
+5. Make sure to add corresponding lines to your [config.yml](https://github.com/sisfs/dotfiles/blob/adding-my-changes/config.yml) and [secretfile.yml](https://github.com/sisfs/dotfiles/blob/adding-my-changes/template-secfile.yml).
 
-###### plans:
-add a template for family members trakt accounts
-add config instance for each family member to config.yml
-consolidate trakt lists to family account then search/download based on that one account?
