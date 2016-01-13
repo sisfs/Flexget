@@ -258,3 +258,36 @@ Torrent Complete:  Crimson.Peak-2015-720p.webrip.h264.aac.mp4 /mnt/media/movies/
 Torrent Complete:  Apocalypto-2006-720p.bluray.h264.aac.mp4 /mnt/media/check/staging/movies 58c7fbf90fa2ecdec04090e9beae7881abd6c30d
 Torrent Complete:  The Cable Guy 1996 BRRip 720p x264 AAC - KiNGDOM /mnt/media/movies/The.Cable.Guy.1996 6f7ead2c93a15a241cf8fd39dccd17f03fd81be8
 Torrent Complete:  WarGames-1983-720p.bluray.h264.aac.mkv /mnt/media/movies/WarGames.1983 401b765c77a7258075fbd04bedd0a1203aa14978
+Torrent Complete:  Mad.Max.3.Beyond.Thunderdome.1985.720p.BrRip.x264.AAC.5.1.{The Hated}.【ThumperDC】 /mnt/media/movies/Mad.Max.Beyond.Thunderdome.1985 a494e52551430ef6f2a569473365e951d2d418b0
+Torrent Complete:  Apocalypto-2006-720p.bluray.h264.aac.mp4 /mnt/media/movies 58c7fbf90fa2ecdec04090e9beae7881abd6c30d
+Torrent Complete:  West.Side.Story-1961-720p.bluray.h264.aac.mp4 /mnt/media/check/staging/movies 524f511530bd166b72c4c076e6d90284a44a2693
+Torrent Added:  making.a.murderer.s01e01.720p.webrip.hevc.x265.rmteam.mkv /mnt/media/check a6c6fd2a4d3eeda0c18b9f36764cc67741cdb3ad
+Torrent Added:  Fixer.Upper.S03E06.Family.of.5.Seeks.Open.Home.HDTVx264-J4UWS.mp4 /mnt/media/check 5f92e2a042422f83b24bbc161fbae2b586f55d89
+Torrent Added:  Austin.and.Ally.S04E19.Musicals.and.Moving.On.1080p.DSNY.WEBRip.AAC2.0.x264-TVSmash.mkv /mnt/media/check 6f96917b9969c997e0d89404f0ad07a2916d4ae2
+Torrent Added:  law.and.order.svu.s17e11.720p.hdtv.hevc.x265.rmteam.mkv /mnt/media/check 197276f4673e942140680d993abc31098a780a35
+Torrent Added:  Blue.Bloods.S05E21.HDTV.x264-LOL[ettv] /mnt/media/check 55b2859aa03ac75e2e3083202683fce1dfdbdd3d
+Torrent Added:  Band.Of.Brothers.S01E03.HDTV.Subtitulado.Esp.SC.avi /mnt/media/check 0512f070fbf82520208097ab36ee1680b9cea24f
+Torrent Added:  The.Big.Bang.Theory.S08E22.The.Graduation.Transmission.720p.WEB-DL.x264.AAC /mnt/media/check 933281972fcf3d6c0ae210ba4686cba86397f553
+Torrent Added:  Gold.Rush.Alaska.S01E01.No.Guts.No.Glory.HDTV.XviD-MOMENTUM [NO-RAR] - [ www.torrentday.com ] /mnt/media/check caa46915e54f2c2d6b2a74803c6db7709dff1243
+Torrent Complete:  Blue.Bloods.S05E21.HDTV.x264-LOL[ettv] /mnt/media/shows/Blue.Bloods/Season.05 55b2859aa03ac75e2e3083202683fce1dfdbdd3d
+Torrent Complete:  Law.&.Order-Special.Victims.Unit-S17E11-Townhouse.Incident-720p.hdtv.h265.mkv /mnt/media/shows/Law.&.Order-Special.Victims.Unit/Season.17 197276f4673e942140680d993abc31098a780a35
+Torrent Complete:  Band.of.Brothers-S01E03-Carentan-hdtv.avi /mnt/media/shows/Band.of.Brothers/Season.01 0512f070fbf82520208097ab36ee1680b9cea24f
+Torrent Complete:  The.Big.Bang.Theory-S08E22-The.Graduation.Transmission-720p.webdl.h264.aac.mp4 /mnt/media/shows/The.Big.Bang.Theory/Season.08 933281972fcf3d6c0ae210ba4686cba86397f553
+Torrent Complete:  Making.a.Murderer-S01E01-Eighteen.Years.Lost-720p.webrip.h265.mkv /mnt/media/shows/Making.a.Murderer/Season.01 a6c6fd2a4d3eeda0c18b9f36764cc67741cdb3ad
+Torrent Complete:  Fixer.Upper-S03E06-Family.of.Five.Seeks.Open.Home-hdtv.h264.mp4 /mnt/media/shows/Fixer.Upper/Season.03 5f92e2a042422f83b24bbc161fbae2b586f55d89
+Torrent Complete:  Gold.Rush-S01E01-No.Guts.No.Glory-hdtv.xvid.avi /mnt/media/shows/Gold.Rush/Season.01 caa46915e54f2c2d6b2a74803c6db7709dff1243
+Torrent Complete:  Austin.&.Ally-S04E19-Musicals.&.Moving.On-1080p.webrip.h264.aac.mkv /mnt/media/shows/Austin.&.Ally/Season.04 6f96917b9969c997e0d89404f0ad07a2916d4ae2
+Torrent Complete:  Get.the.Gringo-2012-720p.bluray.h264.aac.mp4 /mnt/media/movies/Get.the.Gringo.2012 53bc9a691db24a2980a0c2a86e47e2f194f09a85
+Torrent Complete:  Coming.to.America-1988-720p.bluray.h264.aac.mp4 /mnt/media/movies/Coming.to.America.1988 c14f72688daf0a1b635180be5c0c854a8eb6fcc1
+Torrent Complete:  Silver Linings Playbook 2012 720p BRRip x264 AC3-JYK /mnt/media/movies/Silver.Linings.Playbook.2012 7be8b3300ee622806607813bbb2a0e13aa897f8c
+Torrent Complete:  Leverage /mnt/media/shows b98a0363e1746dac718d347ab398963922b386ef
+Torrent Complete:  Rain.Man-1988-720p.bluray.h264.aac.mp4 /mnt/media/movies/Rain.Man.1988 22a693d236e7ec17aafef2622d0891fb54e716b6
+Torrent Complete:  Ferris.Bueller's.Day.Off-1986-720p.bluray.h264.aac.mp4 /mnt/media/movies/Ferris.Bueller's.Day.Off.1986 6d96648f5528823a351e4177ff5b57b6d9ed2304
+Torrent Complete:  The Maltese Falcon 1941 720p BRRip H.264 AAC 5.1-MukE(HDScene-Release) /mnt/media/movies/The.Maltese.Falcon.1941 71ff684f74809cbe2a7d87d1523468b0bb6436d3
+Torrent Complete:  In The Heat Of The Night 1967 720p BRRip x264 aac vice /mnt/media/movies/In.the.Heat.of.the.Night.1967 bb11f3c8cac6b5e6c8e63a39fda0fb0368308fce
+Torrent Complete:  Sicario-2015-720p.bluray.h264.ac3.mkv /mnt/media/movies/Sicario.2015 4cdbd8800aed71f32b9892ad5d9f71c356664772
+Torrent Complete:  Serendipity-2001-720p.bluray.h264.aac.mkv /mnt/media/movies/Serendipity.2001 bff40dc5f026287a8a95e29aeed9cf9c67cc181e
+Torrent Complete:  Mrs..Doubtfire-1993-720p.bluray.h264.ac3.mkv /mnt/media/movies/Mrs..Doubtfire.1993 0961fca1688c2b23bccc28b6f3cb51220758ec5d
+Torrent Complete:  Memento-2000-720p.bluray.h264.aac.mp4 /mnt/media/movies/Memento.2000 d1b5d80f3a8b8bbd4a64e14d160e885cd801c8fe
+Torrent Complete:  A.Fistful.of.Dollars-1964-720p.bluray.h264.aac.mp4 /mnt/media/movies/A.Fistful.of.Dollars.1964 a29645facfa63f66012b4bfa87106613cfd19f1d
+Torrent Complete:  The.Boxtrolls-2014-720p.bluray.h264.aac.mp4 /mnt/media/movies/The.Boxtrolls.2014 12e448336a6cc43f74e978286df7305434ef944d
