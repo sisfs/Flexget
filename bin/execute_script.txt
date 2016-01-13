@@ -254,3 +254,7 @@ Torrent Added:  The Boxtrolls (2014) 720p 5.1ch BRRip AAC x264 - [GeekRG] /mnt/m
 Torrent Added:  Memento.2000.REMASTERED.720p.BluRay.H264.AAC-RARBG /mnt/media/check d1b5d80f3a8b8bbd4a64e14d160e885cd801c8fe
 Torrent Added:  A Fistful of Dollars 1964 720p BluRay x264 AAC - Ozlem /mnt/media/check a29645facfa63f66012b4bfa87106613cfd19f1d
 Torrent Added:  Sicario.2015.720p.BRRip.X264.AC3-EVO /mnt/media/check 4cdbd8800aed71f32b9892ad5d9f71c356664772
+Torrent Complete:  Crimson.Peak-2015-720p.webrip.h264.aac.mp4 /mnt/media/movies/Crimson.Peak.2015 55740ea7189191df409f77f361426c86c36844d0
+Torrent Complete:  Apocalypto-2006-720p.bluray.h264.aac.mp4 /mnt/media/check/staging/movies 58c7fbf90fa2ecdec04090e9beae7881abd6c30d
+Torrent Complete:  The Cable Guy 1996 BRRip 720p x264 AAC - KiNGDOM /mnt/media/movies/The.Cable.Guy.1996 6f7ead2c93a15a241cf8fd39dccd17f03fd81be8
+Torrent Complete:  WarGames-1983-720p.bluray.h264.aac.mkv /mnt/media/movies/WarGames.1983 401b765c77a7258075fbd04bedd0a1203aa14978
