@@ -22,7 +22,7 @@ I am really only interested in the FlexGet config portion of this dotfiles fork 
 
 ### DDNS Setup ###
     
-    [DuckDNS](https://www.duckdns.org/install.jsp?tab=linux-cron&domain=small)
+      [DuckDNS](https://www.duckdns.org/install.jsp?tab=linux-cron&domain=small)
     
 ## Secrets Plugin ##
 
