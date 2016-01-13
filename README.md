@@ -11,7 +11,6 @@ This Fork is available at: (https://github.com/sarethan/Flexget)
 
 I am really only interested in the FlexGet config portion of this dotfiles fork and have removed a lot of the other files...
 
-
 ### Installation Instructions ###
 
     git clone https://github.com/sarethan/Flexget.git ~/.flexget
@@ -21,17 +20,16 @@ I am really only interested in the FlexGet config portion of this dotfiles fork 
     mv ~/.flexget/config.yml ~/.flexget/old-config.yml
     ln ~/.flexfiles/config.yml ~/.flexget/config.yml 
 
-
+### DDNS Setup ###
+    
+    [DuckDNS](https://www.duckdns.org/install.jsp?tab=linux-cron&domain=small)
+    
 ## Secrets Plugin ##
 
 I'm using the [secrets](http://flexget.com/wiki/Plugins/secrets) plugin to hide my private credentials for various plugins. If you want to do this as well, you will need to create a ``secretfile.yml`` file in the same directory as your ``config.yml``.
 
 
-## Rar-unpacking
-
-I am still working out some issues with this portion of the config. you may want to return to [Jeff's Fork](https://github.com/jawilson/dotfiles/tree/master/flexget) for this part =)
-
-This entire setup should result in a single video file (``.mkv``, ``.mp4``, etc) in the final destination with a nice name regardless if it's packed in a rar or not.
+This entire setup should result in a single video file (``.mkv``, ``.mp4``, etc) in the final destination with a nice name
 
 Here's the gist of how it works:
   1. Flexget accepts the torrent
