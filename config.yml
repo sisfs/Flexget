@@ -318,7 +318,9 @@ tasks:
               - 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
             timeframe: 1 days
             tracking: backfill
-            identified_by: ep
+            #identified_by: ep
+            upgrade: yes
+            
           from:
             trakt_list:
               account: '{{ secrets.trakt.account }}'
@@ -346,6 +348,7 @@ tasks:
         - 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing
       timeframe: 1 days
       tracking: backfill
+      upgrade: yes
 
 
   My-TV-Shows-Find-Missing:
@@ -363,13 +366,13 @@ tasks:
           settings:
             timeframe: 1 days
             qualities: 
-              - 480p h264 
+              #- 480p h264 
               - 720p h264 
-              - 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing 
+              #- 1080p h264 # ac3|aac|mp3 ## testing to see why all my shows are failing 
             tracking: backfill
             propers: no
-            upgrade: no
-            identified_by: ep
+            upgrade: yes
+            #identified_by: ep
           from:
             trakt_list:
               account: '{{ secrets.trakt.account }}'
@@ -450,7 +453,7 @@ tasks:
           - 480p h264
           - 1080p h264 #ac3|aac|mp3
         timeframe: 1 days
-        identified_by: ep
+        #identified_by: ep
       from:
         filesystem:
           - '{{ secrets.directories.premieres_dir }}'
