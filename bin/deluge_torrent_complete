@@ -5,7 +5,7 @@ import logging, logging.handlers
 import subprocess
 
 LOG_FILE='/home/deluge/.flexget/torrent_complete.log'
-DOWNLOAD_PATH='/media/Entertainment/Transit/Torrents/check'
+DOWNLOAD_PATH='/media/Entertainment/Transit/Torrents/RenameQue'
 STAGING_PATH='/mnt/media/staging'
 XBMC_HOST='Carina.singularity.net'
 PLEX_HOST='192.168.1.6'
@@ -14,7 +14,7 @@ X_PLEX_TOKEN='xxxxxxxxxxxxxxxxxxxx'
 # Otherwise use the one in your system
 FLEXGET_COMMAND='/usr/local/bin/flexget --logfile '\
         '/home/deluge/.flexget/flexget-sorting.log'
-FLEXGET_SORTING_CONFIG='/home/deluge/.flexget/sorting.yml'
+FLEXGET_SORTING_CONFIG='/var/lib/deluge/.flexget/sorting.yml'
 FLEXGET_TASK_PREFIX='Sort_Unpacked_'
 
 # Staging subdirectory for each task in sorting.yml
