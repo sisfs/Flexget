@@ -1,14 +1,13 @@
 trakt:
-  username: *******
-  password: *******
+  acct1: sisfs
+  acct2: someOtherGuy
+  acct3: anotherGuy
+  acct4: yetAnother
 deluge:
   username: *******
   password: ******
 pushbullet:
   apikey: *******
-# utorrent:
-  # usr: ********
-  # pwd: *****
 torrentleech:
   username: ****
   password: *****
