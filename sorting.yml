@@ -50,7 +50,7 @@ tasks:
             tracking: no
           from:
             trakt_list:
-              account: '{{ secrets.trakt.account }}'
+              account: '{{ secrets.trakt.acc1 }}'
               list: Following TV
               type: shows
               strip_dates: yes
@@ -62,7 +62,7 @@ tasks:
     move:
       # Folder to move to
       to: >
-        /media/Entertainemnt/TV\ Shows/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '.')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
+        {{ secrets.dirs.shows }}/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '.')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
       # Filename (inside of folder) to move to
       filename: >
         {{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}-{{ series_id }}{% if tvdb_ep_name|default(False) %}-{{ tvdb_ep_name|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}{% endif %}-{{ quality }}.{{ location[-3:] }}
@@ -94,7 +94,7 @@ tasks:
     move:
       # Folder to move to
       to: >
-        /media/Entertainment/premieres/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
+        {{ secrets.dirs.prems }}/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
       # Filename (inside of folder) to move to
       filename: >
         {{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}-{{ series_id }}{% if tvdb_ep_name|default(False) %}-{{ tvdb_ep_name|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}{% endif %}-{{ quality }}.{{ location[-3:] }}
@@ -111,7 +111,7 @@ tasks:
     require_field: [movie_name, movie_year]
     move:
       to: >
-        /media/Entertainment/Movies/{{ movie_name|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ movie_year }}/
+        {{ secrets.dirs.movies }}/{{ movie_name|replace('/', '_')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ movie_year }}/
       filename: >
         {{ movie_name|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}-{{ movie_year }}-{{ quality }}.{{ location[-3:] }}
       clean_source: 1000
