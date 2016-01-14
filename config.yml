@@ -142,7 +142,7 @@ templates:
     set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
       queuetotop: yes
       movedone: >
-        {{ secrets.dirs.shows }}/{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
+        {{ secrets.dirs.shows }}{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}/{% if series_id_type == 'ep' %}Season.{{ series_season|pad(2) }}/{% endif %}
       # Rename the "content file" to something nice, use leading slash to force file to top level
       content_filename: >
         /{{ tvdb_series_name|default(series_name)|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}-{{ series_id }}{% if tvdb_ep_name|default(False) %}-{{ tvdb_ep_name|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}{% endif %}-{{ quality|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}
@@ -212,7 +212,7 @@ templates:
     proper_movies: yes
     set: 
       # Give folders/files nice names ##
-      movedone: "{{ secrets.dirs.movies }}/{{ imdb_name|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ imdb_year }}"
+      movedone: "{{ secrets.dirs.movies }}{{ imdb_name|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ imdb_year }}"
       # Rename the "content file" to something nice, use leading slash to force file to top level ##
       content_filename: |
         /{{ imdb_name|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}-{{ imdb_year }}-{{ quality|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}
