@@ -3,4 +3,4 @@ torrentid=$1
 torrentname=$2
 torrentpath=$3
 echo "Torrent Complete: " $torrentname $torrentpath $torrentid  >> /var/lib/deluge/.flexget/bin/execute_script.txt
-/usr/local/bin/python2.7 /var/lib/deluge/.flexget/bin/deluge_torrent_complete $1 $2 $3
+/usr/bin/python2.7 /var/lib/deluge/.flexget/bin/deluge_torrent_complete $1 $2 $3
