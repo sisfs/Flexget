@@ -739,7 +739,7 @@ tasks:
     movie_queue: add  
     trakt_remove:
       account: '{{ secrets.trakt.acc1 }}'
-      account: $traktAcct
+      #account: $traktAcct
       list: $movefrom
     trakt_add:
       account: '{{ secrets.trakt.acc1 }}'
