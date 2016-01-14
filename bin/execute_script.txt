@@ -291,3 +291,13 @@ Torrent Complete:  Mrs..Doubtfire-1993-720p.bluray.h264.ac3.mkv /mnt/media/movie
 Torrent Complete:  Memento-2000-720p.bluray.h264.aac.mp4 /mnt/media/movies/Memento.2000 d1b5d80f3a8b8bbd4a64e14d160e885cd801c8fe
 Torrent Complete:  A.Fistful.of.Dollars-1964-720p.bluray.h264.aac.mp4 /mnt/media/movies/A.Fistful.of.Dollars.1964 a29645facfa63f66012b4bfa87106613cfd19f1d
 Torrent Complete:  The.Boxtrolls-2014-720p.bluray.h264.aac.mp4 /mnt/media/movies/The.Boxtrolls.2014 12e448336a6cc43f74e978286df7305434ef944d
+Torrent Added:  The.Expanse.S01E06.720p.HDTV.x264.AAC-SS -={SPARROW}=- /mnt/media/check 5ea2de3e6e6757390205f9d9945871467f081a55
+Torrent Added:  The Big Bang Theory S08E23 720p HDTV x264 AAC - Ozlem /mnt/media/check 80f0ade79df0aa723e1bce7fa976a7c7e5065728
+Torrent Complete:  The.Expanse.S01E06.720p.HDTV.x264.AAC-SS -={SPARROW}=- /mnt/media/shows/The.Expanse/Season.01 5ea2de3e6e6757390205f9d9945871467f081a55
+Torrent Complete:  The.Big.Bang.Theory-S08E23-The.Maternal.Combustion-720p.hdtv.h264.aac.mp4 /mnt/media/shows/The.Big.Bang.Theory/Season.08 80f0ade79df0aa723e1bce7fa976a7c7e5065728
+Torrent Added:  Elysium.2013.720p.BluRay.H264.AAC-RARBG /mnt/media/check 4108420d3b0ffa39d8ff901ff9fce1cb13b5351d
+Torrent Added:  Ghostbusters.1984.REMASTERED.720p.BluRay.H264.AAC-RARBG /mnt/media/check d88afc97dcded8cc16363ef9d7cb284a011616a0
+Torrent Added:  www.TamiLRockers.net - IP Man (2008) - [BR-Rip - 720p - x264 - Dual Audio (Tam + Hin) - Mp3 - 850MB].mkv /mnt/media/check fe5855ff10462e8bc459da3b9f6e08bdba7db4d9
+Torrent Added:  Legend.2015.720p.HDRiP.AC3.x264-LEGi0N /mnt/media/check 1146ed51ccbf2ecc97b9ae4ef792968f67d3efaa
+Torrent Added:  primer thriller sci fi 2004 eng subs 720p h264 mp4 /mnt/media/check 6020cc74c0627fd9c8e321dc39fad33ded8e49c8
+Torrent Complete:  Primer - Thriller Sci-Fi 2004 Eng Subs 720p [H264-mp4] /mnt/media/movies 6020cc74c0627fd9c8e321dc39fad33ded8e49c8
