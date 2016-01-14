@@ -15,7 +15,7 @@ PLEX_HOST='192.168.1.6'
 # X_PLEX_TOKEN='xxxxxxxxxxxxxxxxxxxx'
 # If you're using a local checkout of Flexget, use flexget_vanilla.
 # Otherwise use the one in your system
-FLEXGET_COMMAND='/usr/local/bin/flexget --logfile '\ #/usr/local/bin?
+FLEXGET_COMMAND='/usr/local/bin/flexget --logfile '\
         '/var/lib/deluge/.flexget/flexget-sorting.log'
 FLEXGET_SORTING_CONFIG='/var/lib/deluge/.flexget/sorting.yml'
 FLEXGET_TASK_PREFIX='Sort_Unpacked_'
