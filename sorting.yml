@@ -50,7 +50,7 @@ tasks:
             tracking: no
           from:
             trakt_list:
-              account: '{{ secrets.trakt.acc1 }}'
+              account: '{{ secrets.trakt.acct1 }}'
               list: Following TV
               type: shows
               strip_dates: yes
