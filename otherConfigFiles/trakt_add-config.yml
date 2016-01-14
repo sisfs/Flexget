@@ -16,10 +16,10 @@ tasks:
     trakt_remove:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       list: collection
     trakt_add:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       list: Movie Queue
