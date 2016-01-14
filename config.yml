@@ -167,6 +167,7 @@ templates:
         - kat:
             category: tv
             verified: yes
+            verify_ssl_certificates: no
 
   # Jeff: This template is a "global" template for all movie-related tasks.
   # We keep all of the RSS feeds that list movie-related torrents here
@@ -243,6 +244,7 @@ templates:
         - kat:
             category: movies
             verified: yes
+            verify_ssl_certificates: no
       what: [ filler: yes ] # Always produce entries
 
 
