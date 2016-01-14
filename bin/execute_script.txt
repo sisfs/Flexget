@@ -301,3 +301,6 @@ Torrent Added:  www.TamiLRockers.net - IP Man (2008) - [BR-Rip - 720p - x264 - D
 Torrent Added:  Legend.2015.720p.HDRiP.AC3.x264-LEGi0N /mnt/media/check 1146ed51ccbf2ecc97b9ae4ef792968f67d3efaa
 Torrent Added:  primer thriller sci fi 2004 eng subs 720p h264 mp4 /mnt/media/check 6020cc74c0627fd9c8e321dc39fad33ded8e49c8
 Torrent Complete:  Primer - Thriller Sci-Fi 2004 Eng Subs 720p [H264-mp4] /mnt/media/movies 6020cc74c0627fd9c8e321dc39fad33ded8e49c8
+Torrent Added:  Castle.2009.S07E08.HDTV.x264-LOL.mp4 /mnt/media/check 2639616f1ebc56eabd69f1c390c50dd1c4d3c7e5
+Torrent Added:  The Big Bang Theory S08E24 720p HDTV x264 AAC - Ozlem /mnt/media/check 465c933a464a6915aa7ac667bdc2084b3d3a4b0a
+Torrent Complete:  Castle.(2009)-S07E08-Kill.Switch-hdtv.h264.mp4 /mnt/media/shows/Castle.(2009)/Season.07 2639616f1ebc56eabd69f1c390c50dd1c4d3c7e5

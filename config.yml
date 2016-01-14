@@ -149,7 +149,7 @@ templates:
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method,
     # it changes 'movedone' based on the regexp in the key
     content_sort:
-      '*.rar': '{{ secrets.dirs.stagshows }}/' ##
+      '*.rar': '{{ secrets.dirs.stagshows }}' ##
 
 
   tv-shows-find:
@@ -496,7 +496,7 @@ tasks:
     # This is a custom plugin, it is part of my rar-unpacking method, it changes
     # 'movedone' based on the regexp in the key
     content_sort: ##
-      '*.rar': '{{ secrets.dirs.down }}/'
+      '*.rar': '{{ secrets.dirs.down }}'
 
   
   # If a premiere was grabbed, keep on tracking it until the directory is (re)moved
@@ -523,7 +523,7 @@ tasks:
       queuetotop: no
       label: tv-premiere-track
     content_sort: ##
-      '*.rar': '{{ secrets.dirs.down }}/'
+      '*.rar': '{{ secrets.dirs.down }}'
 
 
   # Cleans movies from the movie queue (and each Trakt acct) that we already have
