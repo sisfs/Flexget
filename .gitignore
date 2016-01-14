@@ -5,6 +5,7 @@
 *.swp
 *.bak
 secretfile.yml
+secret*
 received/
 temp/
 userstatic/
