@@ -1,4 +1,4 @@
-#!/usr/local/bin/python2.7 -O
+#!/usr/bin/python2.7 -O
 
 import sys
 import os
@@ -6,8 +6,8 @@ import logging, logging.handlers
 import subprocess
 
 LOG_FILE='/var/lib/deluge/.flexget/torrent_complete.log'
-DOWNLOAD_PATH='/tmp'
-STAGING_PATH='/staging' #do i make this or does it?
+DOWNLOAD_PATH='/media/Entertainment/check/'
+STAGING_PATH='/media/Entertainment/check/staging/' #do i make this or does it?
 # i'm not running XBMC
 # XBMC_HOST='Carina.singularity.net'
 PLEX_HOST='192.168.1.6'
@@ -63,7 +63,7 @@ log.debug("%s called with torrent_id='%s', torrent_name='%s', torrent_path='%s'.
 
 def chain():
     log.debug("Updating Plex Library")
-    cmd = 'ssh -i ~/.ssh/id_rsa plex@'+PLEX_HOST+' "/usr/local/bin/bash /usr/local/bin/pms.script2 '+pmsupdate_path+'"' #that /usr/bin agin
+    cmd = 'ssh -i ~/.ssh/id_rsa plex@'+PLEX_HOST+' "/usr/bin/bash /usr/local/bin/pms.script2 '+pmsupdate_path+'"' #that /usr/bin agin
     ret = subprocess.call(cmd, shell=True)
     if ret != 0:
         log.warning('Update Plex command returned non-zero value %d.' % ret)
