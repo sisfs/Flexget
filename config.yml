@@ -710,18 +710,18 @@ tasks:
     manual: yes 
     template: no_global # None of the global templates make sense here
     trakt_list:
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       list: $movefrom
       type: shows
     no_entries_ok: yes  
     accept_all: yes
     movie_queue: add  
     trakt_remove:
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       #account: $traktAcct
       list: $movefrom
     trakt_add:
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       #account: $traktAcct
       list: $moveto
 
@@ -731,7 +731,7 @@ tasks:
     manual: yes 
     template: no_global # None of the global templates make sense here
     trakt_list:
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       #account: $traktAcct
       list: $movefrom
       type: movies
@@ -739,11 +739,11 @@ tasks:
     accept_all: yes
     movie_queue: add  
     trakt_remove:
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       #account: $traktAcct
       list: $movefrom
     trakt_add:
-      account: '{{ secrets.trakt.acc1 }}'
+      account: '{{ secrets.trakt.acct1 }}'
       #account: $traktAcct
       list: $moveto
 
