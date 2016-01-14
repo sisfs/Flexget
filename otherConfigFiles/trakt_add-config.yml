@@ -7,7 +7,7 @@ tasks:
     trakt_list:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
-      account: '{{ secrets.trakt.username }}'
+      account: '{{ secrets.trakt.acct1 }}'
       list: collection
       type: movies
     no_entries_ok: yes
@@ -16,10 +16,10 @@ tasks:
     trakt_remove:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
-      account: '{{ secrets.trakt.username }}'
+      account: '{{ secrets.trakt.acc1 }}'
       list: collection
     trakt_add:
       # username: '{{ secrets.trakt.username }}'
       # password: '{{ secrets.trakt.password }}'
-      account: '{{ secrets.trakt.username }}'
+      account: '{{ secrets.trakt.acc1 }}'
       list: Movie Queue
