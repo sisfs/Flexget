@@ -304,3 +304,14 @@ Torrent Complete:  Primer - Thriller Sci-Fi 2004 Eng Subs 720p [H264-mp4] /mnt/m
 Torrent Added:  Castle.2009.S07E08.HDTV.x264-LOL.mp4 /mnt/media/check 2639616f1ebc56eabd69f1c390c50dd1c4d3c7e5
 Torrent Added:  The Big Bang Theory S08E24 720p HDTV x264 AAC - Ozlem /mnt/media/check 465c933a464a6915aa7ac667bdc2084b3d3a4b0a
 Torrent Complete:  Castle.(2009)-S07E08-Kill.Switch-hdtv.h264.mp4 /mnt/media/shows/Castle.(2009)/Season.07 2639616f1ebc56eabd69f1c390c50dd1c4d3c7e5
+Torrent Complete:  The.Big.Bang.Theory-S08E24-The.Commitment.Determination-720p.hdtv.h264.aac.mp4 /mnt/media/shows/The.Big.Bang.Theory/Season.08 465c933a464a6915aa7ac667bdc2084b3d3a4b0a
+Torrent Complete:  Leverage /mnt/media/check d264007888282c452a7ea833cf1a8e2c06e5b7bb
+Torrent Complete:  Leverage /mnt/media/check 79bd84be90f04adfc68e5a8c16a44f130df51f39
+Torrent Complete:  Elysium-2013-720p.bluray.h264.aac.mp4 /mnt/media/movies/Elysium.2013 4108420d3b0ffa39d8ff901ff9fce1cb13b5351d
+Torrent Complete:  Leverage /mnt/media/check 4aeb8a9249269fd224b26b59149aef40cffa58e2
+Torrent Complete:  Ghostbusters-1984-720p.bluray.h264.aac.mp4 /mnt/media/movies/Ghostbusters.1984 d88afc97dcded8cc16363ef9d7cb284a011616a0
+Torrent Complete:  Primer.2004 /mnt/media/movies 6020cc74c0627fd9c8e321dc39fad33ded8e49c8
+Torrent Complete:  Ip.Man-2008-720p.bluray.h264.mp3.mkv /mnt/media/movies/Ip.Man.2008 fe5855ff10462e8bc459da3b9f6e08bdba7db4d9
+Torrent Complete:  Legend-1985-720p.hdrip.h264.ac3.mkv /mnt/media/movies/Legend.1985 1146ed51ccbf2ecc97b9ae4ef792968f67d3efaa
+Torrent Complete:  Leverage /mnt/media/check d90a30a119470c76f6e28a0f159eda40cb2a7205
+Torrent Complete:  The.Help-2011-720p.bluray.h264.aac.mkv /mnt/media/movies/The.Help.2011 6d1a3706a01ac45eb754ebe7fa7c94ace89926db
