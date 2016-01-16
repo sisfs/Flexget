@@ -172,8 +172,6 @@ templates:
   # We keep all of the RSS feeds that list movie-related torrents here
   # as well as some other configurations.
   movies-global:
-    # test to see if movies can be removed automatically from the movie-queue
-    movie-queue: remove
     inputs:
     #  - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: 'http://www.torlock.com/movies/rss.xml', silent: yes }     # TorLock (Movies)
@@ -276,51 +274,7 @@ templates:
 
 # This is where we pull everything together
 tasks:
-  Sync-TV-Shows:
-    manual: yes
-    template: no_global # None of the global templates make sense here
-    filesystem:
-      path: 
-        - '{{ secrets.dirs.shows }}'
-      regexp: '.*\.(avi|mkv|mp4|mpg|m4v)$'
-      recursive: yes
-    regexp:
-      reject:
-        - \bsample\b: {from: title}
-    disable: builtins
-    # thexem:
-      # source: tvdb
-      # destination: scene
-    sequence:
-      - configure_series:
-          settings:
-            tracking: no
-            identified_by: ep
-          from:
-            inputs:
-            - trakt_list:
-                account: '{{ secrets.trakt.acct1 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-            - trakt_list:
-                account: '{{ secrets.trakt.acct2 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-            - trakt_list:
-                account: '{{ secrets.trakt.acct3 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-            - trakt_list:
-                account: '{{ secrets.trakt.acct4 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-    exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
-
-
+  
   # All of the TV-related tasks pull in the tv-global template, this gives
   # all of the necessary rss sources and a few extra configs
   # There are 3 My-TV Shows tasks, the first, tries to get the most wanted qualities
@@ -674,8 +628,55 @@ tasks:
       min_seeds: 5
     delay: 14 days # Wait 14 days before trying to download 1080p
 
+  #   
+  # The following are manual tasks kept here for safe keeping   
+  #   
+  Sync-TV-Shows:
+    manual: yes
+    template: no_global # None of the global templates make sense here
+    filesystem:
+      path: 
+        - '{{ secrets.dirs.shows }}'
+      regexp: '.*\.(avi|mkv|mp4|mpg|m4v)$'
+      recursive: yes
+    regexp:
+      reject:
+        - \bsample\b: {from: title}
+    disable: builtins
+    # thexem:
+      # source: tvdb
+      # destination: scene
+    sequence:
+      - configure_series:
+          settings:
+            tracking: no
+            identified_by: ep
+          from:
+            inputs:
+            - trakt_list:
+                account: '{{ secrets.trakt.acct1 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct2 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct3 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct4 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+    exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
+
   
-  # manual task to freshen up the series begin dates for download run with:
+    # manual task to freshen up the series begin dates for download run with:
   my-tv-shows-set-begin:          
     # flexget execute --tasks my-tv-shows-set-begin
     manual: yes
@@ -704,7 +705,8 @@ tasks:
     accept_all: yes
     set_series_begin: yes
 
-  # manual task to move shows from one trakt list to another.
+
+    # manual task to move shows from one trakt list to another.
   Trakt_Move_Shows:
     # flexget execute --tasks trakt_move_shows --cli-config "traktAcct=[your account name], movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
     manual: yes 
@@ -723,7 +725,8 @@ tasks:
       account: $traktAcct
       list: $moveto
 
-  # manual task to move shows from one trakt list to another.
+
+    # manual task to move shows from one trakt list to another.
   Trakt_Move_Movies:
     # flexget execute --tasks trakt_move_movies --cli-config "traktAcct=[your account name], movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
     manual: yes 
@@ -742,8 +745,11 @@ tasks:
       account: $traktAcct
       list: $moveto
 
-# essentially i want each task to run every 2 hours.
-# and a new task to start every 30 min on the 15s and 45s
+  #
+  # These Schedules need a relook... Some of them are entirely too long to have something else start 30 min later
+  #
+  # essentially i want each task to run every 2 hours.
+  # and a new task to start every 30 min on the 15s and 45s
 schedules:
   #
   # Series
