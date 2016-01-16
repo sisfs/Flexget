@@ -172,6 +172,8 @@ templates:
   # We keep all of the RSS feeds that list movie-related torrents here
   # as well as some other configurations.
   movies-global:
+    # test to see if movies can be removed automatically from the movie-queue
+    movie-queue: remove
     inputs:
     #  - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: 'http://www.torlock.com/movies/rss.xml', silent: yes }     # TorLock (Movies)
