@@ -318,6 +318,7 @@ tasks:
             
             
   My-TV-Shows-Find-Next-Following:
+    manual: yes
     template: [tv-global, tv-shows-find]
     disable: inputs
     discover:
