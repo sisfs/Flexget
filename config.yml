@@ -756,12 +756,12 @@ schedules:
   # Series
   #
   - tasks: [ 'My-TV-Shows-Find-Next-*' ]
-    # required time to run: 
+    # required time to run: < 1min
     schedule:
       minute: 15
       hour: 0-22/2
   - tasks: [ 'My-TV-Shows', 'Series-Premieres-Track' ]
-    # required time to run: 
+    # required time to run: < 1min
     schedule:
       minute: 15
       hour: 1-23/2
@@ -780,7 +780,7 @@ schedules:
   # Movies
   #
   - tasks: [ 'Movie-Queue', 'My-Movies-*' ]
-    # required time to run: 
+    # required time to run: guessing it will be around 1.5hrs
     schedule:
       minute: 45
       hour: 1-23/2
