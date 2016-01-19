@@ -778,11 +778,11 @@ schedules:
   #
   # Movies
   #
-  - tasks: [ 'Movie-Queue', 'My-Movies-*' ]
+  # - tasks: [ 'Movie-Queue', 'My-Movies-*' ]
     # required time to run: guessing it will be around 1.5hrs
-    schedule:
-      minute: 45
-      hour: 1-23/2
+    # schedule:
+      # minute: 45
+      # hour: 1-23/2
   - tasks: [ 'Clean-Movie-Queue-acct*' ]
     # required time to run: 
     schedule:
