@@ -595,6 +595,41 @@ tasks:
 
 # essentially i want each task to run every 2 hours.
 # and a new task to start every 30 min on the 15s and 45s
+# schedules:
+  #
+  # Series
+  #
+  # - tasks: [ 'My-TV-Shows-Find-Next-*' ]
+    # schedule:
+      # minute: 15
+      # hour: 0-22/2
+  # - tasks: [ 'My-TV-Shows', 'Series-Premieres-Track' ]
+    # schedule:
+      # minute: 15
+      # hour: 1-23/2
+  # - tasks: [ 'My-TV-Shows-Find-Missing' ]
+    # schedule:
+      # hour: 8
+      # day_of_week: sun
+  # - tasks: [ 'Series-Premieres' ]
+    # schedule:
+      # minute: 45
+      # hour: 0-22/2 
+
+  #
+  # Movies
+  #
+  # - tasks: [ 'Movie-Queue', 'My-Movies-*' ]
+    # schedule:
+      # minute: 45
+      # hour: 1-23/2
+  # - tasks: [ 'Clean-Movie-Queue' ]
+    # schedule:
+      # hour: 17
+      # day_of_week: sun
+
+      
+      
 schedules:
   #
   # Series
