@@ -98,7 +98,7 @@ templates:
     # verify_ssl_certificates: no
     # Size and seed restrictions require real torrents
     magnets: no
-
+  
   # Jeff: This template is a "global" template for all TV-related tasks.
   # We keep all of the RSS feeds that list tv-related torrents here
   # as well as where to check existing shows.
@@ -106,7 +106,7 @@ templates:
     inputs:
       # - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: 'http://www.torlock.com/television/rss.xml', silent: yes }                    # TorLock (TV)
-      - rss: { url: 'http://torrentz.eu/feed_verified?q=tv', silent: yes }                        # Torrentz (Verified only, TV)
+      # - rss: { url: 'http://torrentz.eu/feed_verified?q=tv', silent: yes }                        # Torrentz (Verified only, TV)
       - rss: { url: 'https://kat.cr/usearch/verified%3A1%20category%3Atv/?rss=1', silent: yes }   # Kickass (TV)
     if:
       - "has_field('category')":
@@ -164,11 +164,11 @@ templates:
         #    password: '{{ secrets.torrentleech.password }}'
         #    category: ['Episodes HD', 'Episodes']
         - flexget_archive: [tv]
-        - torrentz: verified
+        # - torrentz: verified
         - kat:
             category: tv
             verified: yes
-
+  
   # Jeff: This template is a "global" template for all movie-related tasks.
   # We keep all of the RSS feeds that list movie-related torrents here
   # as well as some other configurations.
@@ -176,7 +176,7 @@ templates:
     inputs:
     #  - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: 'http://www.torlock.com/movies/rss.xml', silent: yes }     # TorLock (Movies)
-      - rss: { url: 'http://torrentz.eu/feed_verified?q=movies', silent: yes } # Torrentz (Verified Movies)
+      # - rss: { url: 'http://torrentz.eu/feed_verified?q=movies', silent: yes } # Torrentz (Verified Movies)
       - rss: 'https://kat.cr/usearch/verified%3A1%20category%3Amovies/?rss=1' # Kickass (Movies)
     # Some feeds might include TV Shows, ignore them
     if:
@@ -236,9 +236,9 @@ templates:
         #    password: '{{ secrets.torrentleech.password }}'
         #    category: ['HD', 'BDRip', 'DVDRip', 'DVDR', 'Documentaries']
         - flexget_archive: [movies]
-        - torrentz:
-            reputation: verified
-            extra_terms: "movie* hd"
+        # - torrentz:
+            # reputation: verified
+            # extra_terms: "movie* hd"
         - kat:
             category: movies
             verified: yes
@@ -590,7 +590,7 @@ schedules:
   # Series
   #
   - tasks: [ 'My-TV-Shows-Find-Next', 'Series-Premieres-Track' ]
-    # approximate time required to run: 0301-
+    # approximate time required to run:
     schedule:
       minute: 30
       # hour: 0-23
@@ -603,7 +603,7 @@ schedules:
     # approximate time required to run: 
     schedule:
       minute: 50
-      # day_of_week: sun
+      day_of_week: sun
   # - tasks: [  'Series-Premieres' ]
     # approximate time required to run: 
     # schedule:
