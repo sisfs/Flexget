@@ -28,21 +28,22 @@ webui: yes
 templates:
   # eventually all this torrentleech talk will come in handy.
   global:
-    if:
-      - "'torrentleech' in url":
-          deluge:
-            username: '{{ secrets.deluge.username }}'
-            password: '{{ secrets.deluge.password }}'
-            main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
-            keep_subs: no
-            port: 58846 # changed from 58845 as things broke otherwise
-      - "'torrentleech' not in url":
-          deluge:
-            username: '{{ secrets.deluge.username }}'
-            password: '{{ secrets.deluge.password }}'
-            main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
-            keep_subs: no
-            port: 58846
+    ## when i figure out how to run 2 deluge daemons in one jail, or decide to create a TL jail i will reinstate this part.
+    # if:
+      # - "'torrentleech' in url":
+          # deluge:
+            # username: '{{ secrets.deluge.username }}'
+            # password: '{{ secrets.deluge.password }}'
+            # main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
+            # keep_subs: no
+            # port: 58845
+      # - "'torrentleech' not in url":
+    deluge:
+      username: '{{ secrets.deluge.username }}'
+      password: '{{ secrets.deluge.password }}'
+      main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
+      keep_subs: no
+      port: 58846
     # Make sure there's 50GB free before adding more downloads
     free_space: 
       path: '{{ secrets.dirs.rootmedia }}'
@@ -120,7 +121,7 @@ templates:
       min: 128
     # Prevent from downloading shows that were aquired manually
     # or are currently downloading
-    exists_series: # change from UNC paths when i move deluge and flexget to the server. ##
+    exists_series: 
       - '{{ secrets.dirs.down }}' 
       - '{{ secrets.dirs.dmc }}' 
       - '{{ secrets.dirs.shows }}' 
@@ -132,12 +133,14 @@ templates:
       destination: tvdb
     # Look up info on TheTVDB.com to fill in extra info
     thetvdb_lookup: yes
+    trakt_lookup: yes
     require_field: [series_name, series_id]
-    pushbullet: # I absolutely love the idea of using Pushbullet to notify; this definitely came from Jeff.
+    pushbullet:
       apikey: '{{ secrets.pushbullet.apikey }}'
       title: "[Flexget] {{task}}"
       body: "{{ tvdb_series_name|default(series_name) }} - {{ series_id }}{% if tvdb_ep_name|default(False) %} - {{ tvdb_ep_name }}{% endif %}\n{{ quality }}"
       url: "{% if trakt_series_url is defined and trakt_season is defined and trakt_episode is defined %}{{ trakt_series_url }}/season/{{ trakt_season }}/episode/{{ trakt_episode }}{% endif %}"
+      url: "{% if imdb_url %}{{ imdb_url }}{% endif %}"
     # Add accepted entries to Deluge and make sure they end up in the correct
     # folder with a nice name
     set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
@@ -177,7 +180,7 @@ templates:
     #  - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: 'http://www.torlock.com/movies/rss.xml', silent: yes }     # TorLock (Movies)
       # - rss: { url: 'http://torrentz.eu/feed_verified?q=movies', silent: yes } # Torrentz (Verified Movies)
-      - rss: 'https://kat.cr/usearch/verified%3A1%20category%3Amovies/?rss=1' # Kickass (Movies)
+      - rss: { url: 'https://kat.cr/usearch/verified%3A1%20category%3Amovies/?rss=1', silent: yes } # Kickass (Movies)
     # Some feeds might include TV Shows, ignore them
     if:
       - "has_field('category')":
@@ -275,35 +278,7 @@ templates:
 
 # This is where we pull everything together
 tasks:
-  Sync-TV-Shows:
-    manual: yes
-    template: no_global # None of the global templates make sense here
-    filesystem:
-      path: 
-        - '{{ secrets.dirs.shows }}'
-      regexp: '.*\.(avi|mkv|mp4|mpg|m4v)$'
-      recursive: yes
-    regexp:
-      reject:
-        - \bsample\b: {from: title}
-    disable: builtins
-    thexem:
-      source: tvdb
-      destination: scene
-    sequence:
-      - configure_series:
-          settings:
-            tracking: no
-            identified_by: ep
-          from:
-            trakt_list:
-              account: '{{ secrets.trakt.acct1 }}'
-              list: Following TV
-              type: shows
-              strip_dates: yes 
-    exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
-
-
+  
   # All of the TV-related tasks pull in the tv-global template, this gives
   # all of the necessary rss sources and a few extra configs
   # There are 3 My-TV Shows tasks, the first, tries to get the most wanted qualities
@@ -320,7 +295,7 @@ tasks:
               - 480p h264 ac3
             timeframe: 14 hours
             tracking: backfill
-            # identified_by: ep
+            identified_by: ep
             upgrade: yes
           from:
             trakt_list:
@@ -351,7 +326,7 @@ tasks:
       timeframe: 14 hours
       tracking: backfill
       upgrade: yes
-      # identified_by: ep
+      identified_by: ep
 
       
   My-TV-Shows-Find-Missing:
@@ -376,7 +351,7 @@ tasks:
             tracking: backfill
             propers: no
             upgrade: yes
-            # identified_by: ep
+            identified_by: ep
           from:
             trakt_list:
               account: '{{ secrets.trakt.acct1 }}'
@@ -483,7 +458,7 @@ tasks:
     trakt_remove:
       account: '{{ secrets.trakt.acct1 }}'
       list: Movie Queue
-
+    
 
   # This task queues all of the movies in my Trakt "Movie Queue" playlist
   Movie-Queue:
@@ -533,6 +508,34 @@ tasks:
 
   
   # manual task to freshen up the series begin dates for download run with:
+  Sync-TV-Shows:
+    manual: yes
+    template: no_global # None of the global templates make sense here
+    filesystem:
+      path: 
+        - '{{ secrets.dirs.shows }}'
+      regexp: '.*\.(avi|mkv|mp4|mpg|m4v)$'
+      recursive: yes
+    regexp:
+      reject:
+        - \bsample\b: {from: title}
+    disable: builtins
+    thexem:
+      source: tvdb
+      destination: scene
+    sequence:
+      - configure_series:
+          settings:
+            tracking: no
+            identified_by: ep
+          from:
+            trakt_list:
+              account: '{{ secrets.trakt.acct1 }}'
+              list: Following TV
+              type: shows
+              strip_dates: yes 
+    exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
+
   my-tv-shows-set-begin:          
     # flexget execute --tasks my-tv-shows-set-begin
     manual: yes
