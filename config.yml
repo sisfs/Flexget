@@ -105,8 +105,8 @@ templates:
       # - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: '{{ secrets.RssFeeds.TVshows.torlock }}', silent: yes }   # TorLock (TV)
       - rss: { url: '{{ secrets.RssFeeds.TVshows.torrentz }}', silent: yes }  # Torrentz (Verified only, TV)
-      - rss: { url: '{{ secrets.RssFeeds.TVshows.kat1 }}', silent: yes }   # Kickass (TV)
-      - rss: { url: '{{ secrets.RssFeeds.TVshows.kat2 }}', silent: yes }   # Kickass (TV)
+      - rss: '{{ secrets.RssFeeds.TVshows.kat1 }}'   # Kickass (TV)
+      - rss: '{{ secrets.RssFeeds.TVshows.kat2 }}'   # Kickass (TV)
     if:
       - "has_field('category')":
           regexp:
@@ -176,8 +176,8 @@ templates:
     #  - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       - rss: { url: '{{ secrets.RssFeeds.Movies.torlock }}', silent: yes } # TorLock (Movies)
       - rss: { url: '{{ secrets.RssFeeds.Movies.toorentz }}', silent: yes } # Torrentz (Verified Movies)
-      - rss: { url: '{{ secrets.RssFeeds.Movies.kat1 }}', silent: yes } # Kickass (Movies)
-      - rss: { url: '{{ secrets.RssFeeds.Movies.kat2 }}', silent: yes } # Kickass (Movies)
+      - rss: '{{ secrets.RssFeeds.Movies.kat1 }}' # Kickass (Movies)
+      - rss: '{{ secrets.RssFeeds.Movies.kat2 }}' # Kickass (Movies)
       - rss: { url: '{{ secrets.RssFeeds.TVshows.mininova }}', silent: yes }   # MiniNova (TV)
     # Some feeds might include TV Shows, ignore them
     if:
