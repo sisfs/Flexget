@@ -100,6 +100,7 @@ templates:
     # Size and seed restrictions require real torrents
     magnets: no
   
+  
   # Jeff: This template is a "global" template for all TV-related tasks.
   # We keep all of the RSS feeds that list tv-related torrents here
   # as well as where to check existing shows.
@@ -139,8 +140,8 @@ templates:
       apikey: '{{ secrets.pushbullet.apikey }}'
       title: "[Flexget] {{task}}"
       body: "{{ tvdb_series_name|default(series_name) }} - {{ series_id }}{% if tvdb_ep_name|default(False) %} - {{ tvdb_ep_name }}{% endif %}\n{{ quality }}"
-      url: "{% if trakt_series_url is defined and trakt_season is defined and trakt_episode is defined %}{{ trakt_series_url }}/season/{{ trakt_season }}/episode/{{ trakt_episode }}{% endif %}"
-      url: "{% if imdb_url %}{{ imdb_url }}{% endif %}"
+      url: "{% if trakt_series_name is defined and trakt_season is defined and trakt_episode is defined %}http://trakt.tv/shows/{{ trakt_series_name }}/seasons/{{ trakt_season }}/episode/{{ trakt_episode }}{% endif %}"
+      # url: "{% if imdb_url %}{{ imdb_url }}{% endif %}"
     # Add accepted entries to Deluge and make sure they end up in the correct
     # folder with a nice name
     set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
@@ -171,6 +172,8 @@ templates:
         - kat:
             category: tv
             verified: yes
+      limit: 495
+  
   
   # Jeff: This template is a "global" template for all movie-related tasks.
   # We keep all of the RSS feeds that list movie-related torrents here
@@ -246,8 +249,9 @@ templates:
             category: movies
             verified: yes
       what: [ filler: yes ] # Always produce entries
+      limit: 495
 
-
+      
   # Jeff: This template runs feeds through my very specific custom filter
   movies-auto: # not sure if this is even available on my system.
     my_movie_filter: yes
@@ -278,7 +282,6 @@ templates:
 
 # This is where we pull everything together
 tasks:
-  
   # All of the TV-related tasks pull in the tv-global template, this gives
   # all of the necessary rss sources and a few extra configs
   # There are 3 My-TV Shows tasks, the first, tries to get the most wanted qualities
@@ -360,7 +363,7 @@ tasks:
               strip_dates: yes
 
               
-  # Jeff: I'm always up for new shows, but some I genres I just can't stand. This
+  # Jeff: I'm always up for new shows, but some genres I just can't stand. This
   # task grabs all of the premieres except for some genres
   Series-Premieres:
     priority: 40
@@ -398,7 +401,7 @@ tasks:
         - 480p h264 aac
         - 480p h264 ac3
       timeframe: 14 hours
-      # identified_by: ep
+      identified_by: ep
       upgrade: yes
     # Add to deluge, but don't queue to top (My_TV_Shows are more important)
     # and put in a different location
@@ -426,7 +429,7 @@ tasks:
           - 480p h264 aac
           - 480p h264 ac3
         timeframe: 14 hours
-        # identified_by: ep
+        identified_by: ep
         upgrade: yes
       from:
         filesystem: 
@@ -509,6 +512,7 @@ tasks:
   
   # manual task to freshen up the series begin dates for download run with:
   Sync-TV-Shows:
+    # flexget execute --tasks Sync-TV-Shows
     manual: yes
     template: no_global # None of the global templates make sense here
     filesystem:
@@ -550,44 +554,43 @@ tasks:
 
   # manual task to move shows from one trakt list to another.
   Trakt_Move_Shows:
-    # flexget execute --tasks trakt_move_shows --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
+    # flexget execute --tasks trakt_move_shows --cli-config "traktAcct=[sysfs|athyna|shipmaster|spartan117mark6], movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
     manual: yes 
     template: no_global # None of the global templates make sense here
     trakt_list:
-      account: '{{ secrets.trakt.acct1 }}'
+      account: $traktAcct
       list: $movefrom
       type: shows
     no_entries_ok: yes  
     accept_all: yes
     movie_queue: add  
     trakt_remove:
-      account: '{{ secrets.trakt.acct1 }}'
+      account: $traktAcct
       list: $movefrom
     trakt_add:
-      account: '{{ secrets.trakt.acct1 }}'
+      account: $traktAcct
       list: $moveto
 
   # manual task to move shows from one trakt list to another.
   Trakt_Move_Movies:
-    # flexget execute --tasks trakt_move_movies --cli-config "movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
+    # flexget execute --tasks trakt_move_movies --cli-config "traktAcct=[sysfs|athyna|shipmaster|spartan117mark6], movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
     manual: yes 
     template: no_global # None of the global templates make sense here
     trakt_list:
-      account: '{{ secrets.trakt.acct1 }}'
+      account: $traktAcct
       list: $movefrom
       type: movies
     no_entries_ok: yes  
     accept_all: yes
     movie_queue: add  
     trakt_remove:
-      account: '{{ secrets.trakt.acct1 }}'
+      account: $trackAcct
       list: $movefrom
     trakt_add:
-      account: '{{ secrets.trakt.acct1 }}'
+      account: $traktAcct
       list: $moveto
 
-# essentially i want each task to run every hour for tv and every 3rd hour for movies.
-# and a new task to start every 30 min on the 15s and 45s
+# essentially i want each task to run every 2 hours for tv and every 6th hour for movies.
 schedules:
   #
   # Series
@@ -595,18 +598,19 @@ schedules:
   - tasks: [ 'My-TV-Shows-Find-Next', 'Series-Premieres-Track' ]
     # approximate time required to run:
     schedule:
-      minute: 30
-      # hour: 0-23
+      # minute: 30
+      hour: 0-23/2
   - tasks: [ 'My-TV-Shows', 'Series-Premieres' ]
     # approximate time required to run: 
     schedule:
-      minute: 40
-      # hour: 1-23/2
+      minute: 20
+      hour: 0-23/2
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
     # approximate time required to run: 
     schedule:
-      minute: 50
-      day_of_week: sun
+      minute: 40
+      # day_of_week: sun
+      hour: 0-23/2
   # - tasks: [  'Series-Premieres' ]
     # approximate time required to run: 
     # schedule:
@@ -617,24 +621,23 @@ schedules:
   # Movies
   #
   - tasks: [ 'Movie-Queue', 'My-Movies-720p' ]
-    # approximate time required to run: 
+    # approximate time required to run:
     schedule:
       # minute: 0
-      hour: 0-21/3
+      hour: 1-19/6
   - tasks: [ 'My-Movies-480p' ]
     # approximate time required to run: 
     schedule:
       # minute: 0
-      hour: 1-22/3
+      hour: 3-21/6
   - tasks: [ 'My-Movies-1080p' ]
     # approximate time required to run: 
     schedule:
       # minute: 0
-      hour: 2-23/3
+      hour: 5-23/6
       day_of_week: 0-5
   - tasks: [ 'Clean-Movie-Queue' ]
     # approximate time required to run: 
     schedule:
       hour: 17
       day_of_week: 6
-      
