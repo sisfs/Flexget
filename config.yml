@@ -636,8 +636,14 @@ schedules:
       # minute: 0
       hour: 5-23/6
       day_of_week: 0-5
+  - tasks: [ 'My-Movies-1080p' ]
+    # approximate time required to run: 
+    schedule:
+      # minute: 0
+      hour: 5-17/6
+      day_of_week: 6
   - tasks: [ 'Clean-Movie-Queue' ]
     # approximate time required to run: 
     schedule:
-      hour: 17
+      hour: 23
       day_of_week: 6
