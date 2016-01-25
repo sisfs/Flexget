@@ -131,12 +131,13 @@ templates:
       destination: tvdb
     # Look up info on TheTVDB.com to fill in extra info
     thetvdb_lookup: yes
+    trakt_lookup: yes
     require_field: [series_name, series_id]
     pushbullet: # I absolutely love the idea of using Pushbullet to notify; this definitely came from Jeff.
       apikey: '{{ secrets.pushbullet.apikey }}'
       title: "[Flexget] {{task}}"
       body: "{{ tvdb_series_name|default(series_name) }} - {{ series_id }}{% if tvdb_ep_name|default(False) %} - {{ tvdb_ep_name }}{% endif %}\n{{ quality }}"
-      url: "{% if trakt_series_url is defined and trakt_season is defined and trakt_episode is defined %}{{ trakt_series_url }}/season/{{ trakt_season }}/episode/{{ trakt_episode }}{% endif %}"
+      url: "{% if trakt_series_slug is defined and trakt_season is defined and trakt_episode is defined %}https://trakt.tv/shows/{{ trakt_series_slug }}/seasons/{{ trakt_season }}/episodes/{{ trakt_episode }}{% endif %}"
     # Add accepted entries to Deluge and make sure they end up in the correct
     # folder with a nice name
     set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
