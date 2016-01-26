@@ -1,0 +1,12 @@
+remove-old-shows:
+	trakt_list:
+		trakt_account: {{ secrets.trakt.acct1 }}
+		list: Following TV
+	tvdb_lookup: yes
+	if: tvdb_status is Ended
+		trakt_remove:
+			trakt_account: {{ secrets.trakt.acct1 }}
+			list: Following TV
+		trakt_add:
+			trakt_account: {{ secrets.trakt.acct1 }}
+			list: Favorite TV
