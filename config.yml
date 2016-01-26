@@ -599,18 +599,18 @@ schedules:
     # approximate time required to run:
     schedule:
       # minute: 30
-      hour: 0-23/2
+      hour: 0-22/2
   - tasks: [ 'My-TV-Shows', 'Series-Premieres' ]
     # approximate time required to run: 
     schedule:
       minute: 20
-      hour: 0-23/2
+      hour: 0-22/2
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
     # approximate time required to run: 
     schedule:
       minute: 40
       # day_of_week: sun
-      hour: 0-23/2
+      hour: 0-22/2
   # - tasks: [  'Series-Premieres' ]
     # approximate time required to run: 
     # schedule:
