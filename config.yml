@@ -93,7 +93,7 @@ templates:
       bt-chat.com: 5 seconds
       torrentz.eu: 10 seconds
     # The Pirate Bay ssl certs always fail
-    verify_ssl_certificates: no
+    #verify_ssl_certificates: no
     # Size and seed restrictions require real torrents
     magnets: no
 
