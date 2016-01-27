@@ -333,6 +333,7 @@ tasks:
 
       
   My-TV-Shows-Find-Missing:
+    # manual: yes
     template:
       - tv-global
       - tv-shows-find
@@ -607,10 +608,12 @@ schedules:
       hour: 0-22/2
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
     # approximate time required to run: 
-    schedule:
-      minute: 40
-      # day_of_week: sun
-      hour: 0-22/2
+    interval:
+      days: 3
+    # schedule:
+      # minute: 40
+      ## day_of_week: sun
+      # hour: 0-22/2
   # - tasks: [  'Series-Premieres' ]
     # approximate time required to run: 
     # schedule:
