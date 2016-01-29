@@ -11,7 +11,6 @@
 # All of my media is stored on a NAS4Free server with Plex Media Server and Deluge/Flexget running in separate Jails. 
 # User plex and user deluge both share the same uid which fixes a ton of permission problems that I originally had.
 
-
 # Use the secrets plugin to separately store credentials and directories (poor man's variable)
 
 # I need to figure out whether or not you can daisy chain secrets files... if so one config can service many users without shared passwords =)
