@@ -773,11 +773,7 @@ schedules:
       minute: 20
       hour: 0-22/2
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
-<<<<<<< HEAD
     # approximate time required to run: 
-=======
-    # approximate time required to run: 
->>>>>>> 943cfc2535dd1b52f2671b4817c51112879bcbd3
     interval:
       days: 3
     # schedule:
