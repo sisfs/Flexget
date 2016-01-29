@@ -113,10 +113,10 @@ templates:
       - rss: '{{ secrets.RssFeeds.TVshows.kat2 }}'   # Kickass (TV)
       - rss: '{{ secrets.RssFeeds.TVshows.MiniNova }}'   # Kickass (TV)
   if:
-      - "has_field('category')":
-          regexp:
-            reject_excluding:
-              - '^Episodes( HD)?$': {from: category}
+    - "has_field('category')":
+        regexp:
+          reject_excluding:
+            - '^Episodes( HD)?$': {from: category}
     archive: [tv]
     # Impose reasonable size constraints
     content_size:
