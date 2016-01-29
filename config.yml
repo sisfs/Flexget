@@ -106,11 +106,13 @@ templates:
   # as well as where to check existing shows.
   tv-global:
     inputs:
-      # - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
-      - rss: { url: 'http://www.torlock.com/television/rss.xml', silent: yes }                    # TorLock (TV)
-      # - rss: { url: 'http://torrentz.eu/feed_verified?q=tv', silent: yes }                        # Torrentz (Verified only, TV)
-      - rss: { url: 'https://kat.cr/usearch/verified%3A1%20category%3Atv/?rss=1', silent: yes }   # Kickass (TV)
-    if:
+      # - rss: { url: '{{ secrets.RssFeeds.TL }}{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
+      - rss: { url: '{{ secrets.RssFeeds.TVshows.torlock }}', silent: yes }   # TorLock (TV)
+      # - rss: { url: '{{ secrets.RssFeeds.TVshows.torrentz }}', silent: yes }  # Torrentz (Verified only, TV)
+      - rss: '{{ secrets.RssFeeds.TVshows.kat1 }}'   # Kickass (TV)
+      - rss: '{{ secrets.RssFeeds.TVshows.kat2 }}'   # Kickass (TV)
+      - rss: '{{ secrets.RssFeeds.TVshows.MiniNova }}'   # Kickass (TV)
+  if:
       - "has_field('category')":
           regexp:
             reject_excluding:
@@ -141,7 +143,6 @@ templates:
       title: "[Flexget] {{task}}"
       body: "{{ tvdb_series_name|default(series_name) }} - {{ series_id }}{% if tvdb_ep_name|default(False) %} - {{ tvdb_ep_name }}{% endif %}\n{{ quality }}"
       url: "{% if trakt_series_slug is defined and trakt_season is defined and trakt_episode is defined %}https://trakt.tv/shows/{{ trakt_series_slug }}/seasons/{{ trakt_season }}/episodes/{{ trakt_episode }}{% endif %}"
-      # url: "{% if imdb_url %}{{ imdb_url }}{% endif %}"
     # Add accepted entries to Deluge and make sure they end up in the correct
     # folder with a nice name
     set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
@@ -180,10 +181,12 @@ templates:
   # as well as some other configurations.
   movies-global:
     inputs:
-    #  - rss: { url: 'http://rss.torrentleech.org/{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
-      - rss: { url: 'http://www.torlock.com/movies/rss.xml', silent: yes }     # TorLock (Movies)
-      # - rss: { url: 'http://torrentz.eu/feed_verified?q=movies', silent: yes } # Torrentz (Verified Movies)
-      - rss: { url: 'https://kat.cr/usearch/verified%3A1%20category%3Amovies/?rss=1', silent: yes } # Kickass (Movies)
+      # - rss: { url: '{{ secrets.RssFeeds.TL }}{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
+      - rss: { url: '{{ secrets.RssFeeds.Movies.torlock }}', silent: yes } # TorLock (Movies)
+      # - rss: { url: '{{ secrets.RssFeeds.Movies.torrentz }}', silent: yes } # Torrentz (Verified Movies)
+      - rss: '{{ secrets.RssFeeds.Movies.kat1 }}' # Kickass (Movies)
+      - rss: '{{ secrets.RssFeeds.Movies.kat2 }}' # Kickass (Movies)
+      - rss: { url: '{{ secrets.RssFeeds.Movies.mininova }}', silent: yes }   # MiniNova (TV)
     # Some feeds might include TV Shows, ignore them
     if:
       - "has_field('category')":
@@ -251,7 +254,7 @@ templates:
       what: [ filler: yes ] # Always produce entries
       limit: 495
 
-      
+
   # Jeff: This template runs feeds through my very specific custom filter
   movies-auto: # not sure if this is even available on my system.
     my_movie_filter: yes
@@ -301,11 +304,27 @@ tasks:
             identified_by: ep
             upgrade: yes
           from:
-            trakt_list:
-              account: '{{ secrets.trakt.acct1 }}'
-              list: Following TV
-              type: shows
-              strip_dates: yes
+            inputs:
+            - trakt_list:
+                account: '{{ secrets.trakt.acct1 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct2 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct3 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct4 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes
 
 
   My-TV-Shows-Find-Next:
@@ -319,6 +338,21 @@ tasks:
             list: Following TV
             context: collected
             position: next
+        #- trakt_emit:
+            #account: '{{ secrets.trakt.acct2 }}'
+            #list: Following TV
+            #context: collected
+            #position: next
+        #- trakt_emit:
+            #account: '{{ secrets.trakt.acct3 }}'
+            #list: Following TV
+            #context: collected
+            #position: next
+        #- trakt_emit:
+            #account: '{{ secrets.trakt.acct4 }}'
+            #list: Following TV
+            #context: collected
+            #position: next
       from: [filler: yes]
     all_series:
       qualities:
@@ -333,6 +367,7 @@ tasks:
 
       
   My-TV-Shows-Find-Missing:
+    # manual: yes
     template:
       - tv-global
       - tv-shows-find
@@ -356,12 +391,28 @@ tasks:
             upgrade: yes
             identified_by: ep
           from:
-            trakt_list:
-              account: '{{ secrets.trakt.acct1 }}'
-              list: Following TV
-              type: shows
-              strip_dates: yes
-
+            inputs:
+            - trakt_list:
+                account: '{{ secrets.trakt.acct1 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct2 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct3 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct4 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes
+            
               
   # Jeff: I'm always up for new shows, but some genres I just can't stand. This
   # task grabs all of the premieres except for some genres
@@ -443,9 +494,9 @@ tasks:
       '*.rar': '{{ secrets.dirs.down }}'
 
 
-  # Cleans movies from the movie queue (and Trakt) that we already have
-  Clean-Movie-Queue:
-    priority: 90
+  # Cleans movies from the movie queue (and each Trakt acct) that we already have
+  Clean-Movie-Queue-acct1:
+    priority: 91
     template: no_global # None of the global templates make sense here
     disable:
       - seen
@@ -454,6 +505,9 @@ tasks:
     accept_all: yes
     filesystem: 
       - '{{ secrets.dirs.movies }}'
+      - '{{ secrets.dirs.stagmovies }}'
+      - '{{ secrets.dirs.down }}'
+      - '{{ secrets.dirs.dmc }}'
     imdb_lookup: yes
     tmdb_lookup: yes
     require_field: [movie_name, movie_year]
@@ -461,16 +515,95 @@ tasks:
     trakt_remove:
       account: '{{ secrets.trakt.acct1 }}'
       list: Movie Queue
-    
+
+  Clean-Movie-Queue-acct2:
+    manual: yes
+    priority: 92
+    template: no_global # None of the global templates make sense here
+    disable:
+      - seen
+      - seen_info_hash
+      - seen_movies
+    accept_all: yes
+    filesystem: 
+      - '{{ secrets.dirs.movies }}'
+      - '{{ secrets.dirs.stagmovies }}'
+      - '{{ secrets.dirs.down }}'
+      - '{{ secrets.dirs.dmc }}'
+    imdb_lookup: yes
+    tmdb_lookup: yes
+    require_field: [movie_name, movie_year]
+    movie_queue: accept
+    trakt_remove:
+      account: '{{ secrets.trakt.acct2 }}'
+      list: Movie Queue
+
+  Clean-Movie-Queue-acct3:
+    manual: yes
+    priority: 93
+    template: no_global # None of the global templates make sense here
+    disable:
+      - seen
+      - seen_info_hash
+      - seen_movies
+    accept_all: yes
+    filesystem: 
+      - '{{ secrets.dirs.movies }}'
+      - '{{ secrets.dirs.stagmovies }}'
+      - '{{ secrets.dirs.down }}'
+      - '{{ secrets.dirs.dmc }}'
+    imdb_lookup: yes
+    tmdb_lookup: yes
+    require_field: [movie_name, movie_year]
+    movie_queue: accept
+    trakt_remove:
+      account: '{{ secrets.trakt.acct3 }}'
+      list: Movie Queue
+
+  Clean-Movie-Queue-acct4:
+    manual: yes
+    priority: 94
+    template: no_global # None of the global templates make sense here
+    disable:
+      - seen
+      - seen_info_hash
+      - seen_movies
+    accept_all: yes
+    filesystem: 
+      - '{{ secrets.dirs.movies }}'
+      - '{{ secrets.dirs.stagmovies }}'
+      - '{{ secrets.dirs.down }}'
+      - '{{ secrets.dirs.dmc }}'
+    imdb_lookup: yes
+    tmdb_lookup: yes
+    require_field: [movie_name, movie_year]
+    movie_queue: accept
+    trakt_remove:
+      account: '{{ secrets.trakt.acct4 }}'
+      list: Movie Queue
+
 
   # This task queues all of the movies in my Trakt "Movie Queue" playlist
   Movie-Queue:
     priority: 100 # Always run before My-Movies task
     template: no_global # None of the global templates make sense here
-    trakt_list:
-      account: '{{ secrets.trakt.acct1 }}'
-      list: Movie Queue
-      type: movies
+    inputs:
+    - trakt_list:
+        account: '{{ secrets.trakt.acct1 }}'
+        list: Movie Queue
+        type: movies
+    #- trakt_list:
+        #account: '{{ secrets.trakt.acct2 }}'
+        #list: Movie Queue
+        #type: movies
+    #- trakt_list:
+        #account: '{{ secrets.trakt.acct3 }}'
+        #list: Movie Queue
+        #type: movies
+    #- trakt_list:
+        #account: '{{ secrets.trakt.acct4 }}'
+        #list: Movie Queue
+        #type: movies
     no_entries_ok: yes
     accept_all: yes
     movie_queue: add
@@ -509,8 +642,9 @@ tasks:
       min_seeds: 5
     delay: 14 days # Wait 14 days before trying to download 1080p
 
-  
+  #
   # manual task to freshen up the series begin dates for download run with:
+  #
   Sync-TV-Shows:
     # flexget execute --tasks Sync-TV-Shows
     manual: yes
@@ -533,22 +667,55 @@ tasks:
             tracking: no
             identified_by: ep
           from:
-            trakt_list:
-              account: '{{ secrets.trakt.acct1 }}'
-              list: Following TV
-              type: shows
-              strip_dates: yes 
+            inputs:
+            - trakt_list:
+                account: '{{ secrets.trakt.acct1 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct2 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes 
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct3 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes 
+            #- trakt_list:
+                #account: '{{ secrets.trakt.acct4 }}'
+                #list: Following TV
+                #type: shows
+                #strip_dates: yes 
     exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
+
 
   my-tv-shows-set-begin:          
     # flexget execute --tasks my-tv-shows-set-begin
     manual: yes
     template: no_global
-    trakt_emit:
-      account: '{{ secrets.trakt.acct1 }}'
-      list: Following TV
-      context: collected  # You can set this to 'watched' depending on the state of your trakt info
-      position: next
+    inputs:
+    - trakt_emit:
+        account: '{{ secrets.trakt.acct1 }}'
+        list: Following TV
+        context: collected
+        position: next
+    #- trakt_emit:
+        #account: '{{ secrets.trakt.acct2 }}'
+        #list: Following TV
+        #context: collected
+        #position: next
+    #- trakt_emit:
+        #account: '{{ secrets.trakt.acct3 }}'
+        #list: Following TV
+        #context: collected
+        #position: next
+    #- trakt_emit:
+        #account: '{{ secrets.trakt.acct4 }}'
+        #list: Following TV
+        #context: collected
+        #position: next
     accept_all: yes
     set_series_begin: yes
 
@@ -599,18 +766,20 @@ schedules:
     # approximate time required to run:
     schedule:
       # minute: 30
-      hour: 0-23/2
+      hour: 0-22/2
   - tasks: [ 'My-TV-Shows', 'Series-Premieres' ]
     # approximate time required to run: 
     schedule:
       minute: 20
-      hour: 0-23/2
+      hour: 0-22/2
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
     # approximate time required to run: 
-    schedule:
-      minute: 40
-      # day_of_week: sun
-      hour: 0-23/2
+    interval:
+      days: 3
+    # schedule:
+      # minute: 40
+      ## day_of_week: sun
+      # hour: 0-22/2
   # - tasks: [  'Series-Premieres' ]
     # approximate time required to run: 
     # schedule:
@@ -642,7 +811,7 @@ schedules:
       # minute: 0
       hour: 5-17/6
       day_of_week: 6
-  - tasks: [ 'Clean-Movie-Queue' ]
+  - tasks: [ 'Clean-Movie-Queue-acct*' ]
     # approximate time required to run: 
     schedule:
       hour: 23
