@@ -111,7 +111,7 @@ templates:
       # - rss: { url: '{{ secrets.RssFeeds.TVshows.torrentz }}', silent: yes }  # Torrentz (Verified only, TV)
       - rss: '{{ secrets.RssFeeds.TVshows.kat1 }}'   # Kickass (TV)
       - rss: '{{ secrets.RssFeeds.TVshows.kat2 }}'   # Kickass (TV)
-      - rss: '{{ secrets.RssFeeds.TVshows.MiniNova }}'   # Kickass (TV)
+      - rss: '{{ secrets.RssFeeds.TVshows.mininova }}'   # Kickass (TV)
     if:
       - "has_field('category')":
           regexp:
