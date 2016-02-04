@@ -595,14 +595,14 @@ tasks:
         account: '{{ secrets.trakt.acct2 }}'
         list: Movie Queue
         type: movies
-    #- trakt_list:
-        #account: '{{ secrets.trakt.acct3 }}'
-        #list: Movie Queue
-        #type: movies
-    #- trakt_list:
-        #account: '{{ secrets.trakt.acct4 }}'
-        #list: Movie Queue
-        #type: movies
+    - trakt_list:
+        account: '{{ secrets.trakt.acct3 }}'
+        list: Movie Queue
+        type: movies
+    - trakt_list:
+        account: '{{ secrets.trakt.acct4 }}'
+        list: Movie Queue
+        type: movies
     no_entries_ok: yes
     accept_all: yes
     movie_queue: add
