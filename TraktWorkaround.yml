@@ -1,0 +1,105 @@
+##  I had the same issue as you.  I remembered coming across creating my own local RSS file for something.  I didn't get this working then, and didn't care.  But now I do.
+##  Found the solution was to save the accepted entries to the rss file, then have separate tasks for each trakt account you want to modify.  Just load it from the RSS file you create.
+## Here is my example.
+
+
+
+
+  move-movies:
+    # Moves Movies - I originally tried making ALL trakt mods here.  To THREE accounts.  It was failing.  I figured that there was an issue opening multiple connections to trakt from one task.  So took it out.
+    priority: 210
+    template:
+      - no_global
+      - movies-info
+    disable: 
+      - seen
+    accept_all: yes
+    no_entries_ok: yes
+    filesystem:
+      path: /home/torrent/torrents/Staging/movies/
+      regexp: '.*\.(avi|mkv|mp4)$'
+      recursive: yes 
+    move:
+      to: /mnt/plex/movies/
+      along:
+        - sub
+        - srt
+      #clean_source: 40  #Disabled.  Using exec - on_exit now.
+    make_rss: ~/.config/flexget/rss/added.rss                    ###################  Here I create my RSS file.  You will have to read the wiki for the defaults.##########
+    digest: 
+      list: daily movies
+      state: accepted
+    exec:       # It is possible that a torrent will finish and move here after the entries are accepted and are being moved.  But very rare.
+      on_exit:
+        for_accepted:
+          - rm -frd /home/torrent/torrents/Staging/movies/*
+          - rm -rf ~/.local/share/Trash/*
+###  I tested this delete, works fine.  Runs at the end of the task, so it did not delete anything that was required beforehand.
+
+
+
+### Here are my three separate tasks.  One for each trakt account.  This was successful.  I set a priority on each one of them.  What I will do, is just delete the rss file after the last task at the end of it.  Using the code I tested above  (Exec ... on_exit)
+  test-trakt:
+    priority: 130
+    template:
+      - no_global
+      - movies-info
+    disable:
+      - builtins
+    rss: 
+      url: file:///home/torrent/.config/flexget/rss/added.rss
+    accept_all: yes
+    trakt_add:        # J
+      account: '{{ secrets.trakt.account }}'
+      username: '{{ secrets.trakt.username }}'
+      list: Movies Collected
+      type: movies
+    trakt_remove:     # J
+      account: '{{ secrets.trakt.account }}'
+      username: '{{ secrets.trakt.username }}'
+      list: Movies Queue
+      type: movies        
+
+
+  test-trakt-1:
+    priority: 131
+    template:
+      - no_global
+      - movies-info
+    disable:
+      - builtins
+    rss: 
+      url: file:///home/torrent/.config/flexget/rss/added.rss
+    accept_all: yes
+    trakt_add:        # J
+      account: '{{ secrets.trakt.account2 }}'
+      username: '{{ secrets.trakt.username2 }}'
+      list: Movies Collected
+      type: movies 
+    trakt_remove:     # J
+      account: '{{ secrets.trakt.account2 }}'
+      username: '{{ secrets.trakt.username2 }}'
+      list: Movies Queue
+      type: movies        
+     
+
+  test-trakt-2:
+    priority: 132
+    template:
+      - no_global
+      - movies-info
+    disable:
+      - builtins
+    rss: 
+      url: file:///home/torrent/.config/flexget/rss/added.rss
+    accept_all: yes
+    trakt_add:        # J
+      account: '{{ secrets.trakt.account1 }}'
+      username: '{{ secrets.trakt.username1 }}'
+      list: Movies Collected
+      type: movies 
+    trakt_remove:     # J
+      account: '{{ secrets.trakt.account1 }}'
+      username: '{{ secrets.trakt.username1 }}'
+      list: Movies Queue
+      type: movies 
