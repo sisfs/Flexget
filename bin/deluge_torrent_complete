@@ -63,7 +63,8 @@ log.debug("%s called with torrent_id='%s', torrent_name='%s', torrent_path='%s'.
 
 def chain():
     log.debug("Updating Plex Library")
-    cmd = 'ssh -i ~/.ssh/id_rsa plex@'+PLEX_HOST+' "/usr/local/bin/bash /usr/local/bin/pms.script2 '+pmsupdate_path+'"'
+    # cmd = 'ssh -i ~/.ssh/id_rsa plex@'+PLEX_HOST+' "/usr/local/bin/bash /usr/local/bin/pms.script2 '+pmsupdate_path+'"'
+    cmd = 'ssh -i ~/.ssh/id_rsa plex@'+PLEX_HOST+' \'/usr/local/bin/bash /usr/local/bin/pms.script2 "'+pmsupdate_path+'"\''
     ret = subprocess.call(cmd, shell=True)
     if ret != 0:
         log.warning('Update Plex command returned non-zero value %d.' % ret)
