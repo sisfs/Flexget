@@ -309,21 +309,21 @@ tasks:
                 list: Following TV
                 type: shows
                 strip_dates: yes
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct2 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct3 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct4 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes
+            - trakt_list:
+                account: '{{ secrets.trakt.acct2 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
+            - trakt_list:
+                account: '{{ secrets.trakt.acct3 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
+            - trakt_list:
+                account: '{{ secrets.trakt.acct4 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
 
 
   My-TV-Shows-Find-Next:
@@ -337,21 +337,21 @@ tasks:
             list: Following TV
             context: collected
             position: next
-        #- trakt_emit:
-            #account: '{{ secrets.trakt.acct2 }}'
-            #list: Following TV
-            #context: collected
-            #position: next
-        #- trakt_emit:
-            #account: '{{ secrets.trakt.acct3 }}'
-            #list: Following TV
-            #context: collected
-            #position: next
-        #- trakt_emit:
-            #account: '{{ secrets.trakt.acct4 }}'
-            #list: Following TV
-            #context: collected
-            #position: next
+        - trakt_emit:
+            account: '{{ secrets.trakt.acct2 }}'
+            list: Following TV
+            context: collected
+            position: next
+        - trakt_emit:
+            account: '{{ secrets.trakt.acct3 }}'
+            list: Following TV
+            context: collected
+            position: next
+        - trakt_emit:
+            account: '{{ secrets.trakt.acct4 }}'
+            list: Following TV
+            context: collected
+            position: next
       from: [filler: yes]
     all_series:
       qualities:
@@ -396,21 +396,21 @@ tasks:
                 list: Following TV
                 type: shows
                 strip_dates: yes
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct2 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct3 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct4 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes
+            - trakt_list:
+                account: '{{ secrets.trakt.acct2 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
+            - trakt_list:
+                account: '{{ secrets.trakt.acct3 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
+            - trakt_list:
+                account: '{{ secrets.trakt.acct4 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes
             
               
   # Jeff: I'm always up for new shows, but some genres I just can't stand. This
@@ -672,21 +672,21 @@ tasks:
                 list: Following TV
                 type: shows
                 strip_dates: yes 
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct2 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes 
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct3 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes 
-            #- trakt_list:
-                #account: '{{ secrets.trakt.acct4 }}'
-                #list: Following TV
-                #type: shows
-                #strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct2 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct3 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct4 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
     exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
 
 
@@ -700,21 +700,21 @@ tasks:
         list: Following TV
         context: collected
         position: next
-    #- trakt_emit:
-        #account: '{{ secrets.trakt.acct2 }}'
-        #list: Following TV
-        #context: collected
-        #position: next
-    #- trakt_emit:
-        #account: '{{ secrets.trakt.acct3 }}'
-        #list: Following TV
-        #context: collected
-        #position: next
-    #- trakt_emit:
-        #account: '{{ secrets.trakt.acct4 }}'
-        #list: Following TV
-        #context: collected
-        #position: next
+    - trakt_emit:
+        account: '{{ secrets.trakt.acct2 }}'
+        list: Following TV
+        context: collected
+        position: next
+    - trakt_emit:
+        account: '{{ secrets.trakt.acct3 }}'
+        list: Following TV
+        context: collected
+        position: next
+    - trakt_emit:
+        account: '{{ secrets.trakt.acct4 }}'
+        list: Following TV
+        context: collected
+        position: next
     accept_all: yes
     set_series_begin: yes
 
