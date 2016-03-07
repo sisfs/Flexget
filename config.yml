@@ -771,7 +771,7 @@ tasks:
     accept_all: yes
     movie_queue: add  
     trakt_remove:
-      account: $trackAcct
+      account: $traktAcct
       list: $movefrom
     trakt_add:
       account: $traktAcct
