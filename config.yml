@@ -722,21 +722,21 @@ tasks:
         list: Following TV
         context: collected
         position: next
-    - trakt_emit:
-        account: '{{ secrets.trakt.acct2 }}'
-        list: Following TV
-        context: collected
-        position: next
-    - trakt_emit:
-        account: '{{ secrets.trakt.acct3 }}'
-        list: Following TV
-        context: collected
-        position: next
-    - trakt_emit:
-        account: '{{ secrets.trakt.acct4 }}'
-        list: Following TV
-        context: collected
-        position: next
+   #  - trakt_emit:
+     #   account: '{{ secrets.trakt.acct2 }}'
+     #   list: Following TV
+     #   context: collected
+     #   position: next
+   #  - trakt_emit:
+     #   account: '{{ secrets.trakt.acct3 }}'
+     #   list: Following TV
+     #   context: collected
+     #   position: next
+   #  - trakt_emit:
+     #   account: '{{ secrets.trakt.acct4 }}'
+     #   list: Following TV
+     #   context: collected
+     #   position: next
     accept_all: yes
     set_series_begin: yes
 
