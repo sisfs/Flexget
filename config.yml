@@ -278,9 +278,27 @@ templates:
       - trakt_list: # Remove from Trakt list when we accept an item
           account: '{{ secrets.trakt.acct1 }}'
           list: Movie Queue
+      - trakt_list: # Remove from Trakt list when we accept an item
+          account: '{{ secrets.trakt.acct2 }}'
+          list: Movie Queue
+      - trakt_list: # Remove from Trakt list when we accept an item
+          account: '{{ secrets.trakt.acct3 }}'
+          list: Movie Queue
+      - trakt_list: # Remove from Trakt list when we accept an item
+          account: '{{ secrets.trakt.acct4 }}'
+          list: Movie Queue
     list_add:
       - trakt_list: # Add accepted item to my Trakt watchlist
           account: '{{ secrets.trakt.acct1 }}'
+          list: watchlist
+      - trakt_list: # Add accepted item to my Trakt watchlist
+          account: '{{ secrets.trakt.acct2 }}'
+          list: watchlist
+      - trakt_list: # Add accepted item to my Trakt watchlist
+          account: '{{ secrets.trakt.acct3 }}'
+          list: watchlist
+      - trakt_list: # Add accepted item to my Trakt watchlist
+          account: '{{ secrets.trakt.acct4 }}'
           list: watchlist
     set:
       label: my-movies
