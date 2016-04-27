@@ -218,6 +218,8 @@ templates:
     # Download propers, since they will have the same content_filename,
     # lower/non-propers will be overwritten
     proper_movies: yes
+    list_queue: 
+      - movie_list: movie-queue
     set: 
       # Give folders/files nice names ##
       movedone: "{{ secrets.dirs.movies }}{{ imdb_name|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ imdb_year }}"
