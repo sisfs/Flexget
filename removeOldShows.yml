@@ -15,7 +15,9 @@ remove-old-shows:
       trakt_account: {{ secrets.trakt.acct4 }}
       list: Following TV
   tvdb_lookup: yes
-  if: tvdb_status is Ended
+  if: 
+    - "'Ended' in tvdb_status": accept
+    # tvdb_status is Ended
     list_remove:
       - trakt_list:
           trakt_account: {{ secrets.trakt.acct1 }}
