@@ -1,12 +1,45 @@
 remove-old-shows:
-  trakt_list:
-    trakt_account: {{ secrets.trakt.acct1 }}
-    list: Following TV
-  tvdb_lookup: yes
-  if: tvdb_status is Ended
-    trakt_remove:
+  # flexget execute --tasks remove-old-shows
+  manual: yes
+  inputs:
+  - trakt_list:
       trakt_account: {{ secrets.trakt.acct1 }}
       list: Following TV
-    trakt_add:
-      trakt_account: {{ secrets.trakt.acct1 }}
-      list: Favorite TV
+  - trakt_list:
+      trakt_account: {{ secrets.trakt.acct2 }}
+      list: Following TV
+  - trakt_list:
+      trakt_account: {{ secrets.trakt.acct3 }}
+      list: Following TV
+  - trakt_list:
+      trakt_account: {{ secrets.trakt.acct4 }}
+      list: Following TV
+  tvdb_lookup: yes
+  if: tvdb_status is Ended
+    list_remove:
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct1 }}
+          list: Following TV
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct2 }}
+          list: Following TV
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct3 }}
+          list: Following TV
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct4 }}
+          list: Following TV
+    list_add:
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct1 }}
+          list: Favorite TV
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct2 }}
+          list: Favorite TV
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct3 }}
+          list: Favorite TV
+      - trakt_list:
+          trakt_account: {{ secrets.trakt.acct4 }}
+          list: Favorite TV
+      
