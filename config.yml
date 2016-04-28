@@ -517,8 +517,130 @@ tasks:
       '*.rar': '{{ secrets.dirs.down }}'
 
 
+  # This task queues all of the movies in my Trakt "Movie Queue" playlist
+  Movie-Queue:
+    priority: 100 # Always run before My-Movies task
+    template: no_global # None of the global templates make sense here
+    inputs:
+    - trakt_list:
+        account: '{{ secrets.trakt.acct1 }}'
+        list: Movie Queue
+        type: movies
+    - trakt_list:
+        account: '{{ secrets.trakt.acct2 }}'
+        list: Movie Queue
+        type: movies
+    - trakt_list:
+        account: '{{ secrets.trakt.acct3 }}'
+        list: Movie Queue
+        type: movies
+    - trakt_list:
+        account: '{{ secrets.trakt.acct4 }}'
+        list: Movie Queue
+        type: movies
+    no_entries_ok: yes
+    accept_all: yes
+    list_add:
+      - movie_list: movie-queue
+
+
+  # The next three tasks download the queue from the previous task effectively implementing
+  # a 1 week timeframe for 720p movies, 1 week for 480p, then falls back to 1080p.
+  # My TV is only 720p capable so the 1080p movies are awfully large for no reason.
+  # Quality settings are based on ensuring that my media is playable by both my Chromecast and Sony Bluray Player.
+  My-Movies-720p:
+    priority: 110
+    template:
+      - movies-global
+      - movies-queued
+    quality: 720p h264 ac3|aac|mp3
+    torrent_alive:
+      min_seeds: 5
+    
+  My-Movies-480p:
+    priority: 115
+    template:
+      - movies-global
+      - movies-queued
+    quality: 480p h264 ac3|aac|mp3 
+    torrent_alive:
+      min_seeds: 5
+    delay: 7 days # Wait 7 days before trying to download 480p
+    
+  My-Movies-1080p:
+    priority: 120
+    template:
+      - movies-global
+      - movies-queued
+    quality: 1080p h264 ac3|aac|mp3
+    torrent_alive:
+      min_seeds: 5
+    delay: 14 days # Wait 14 days before trying to download 1080p
+
+    
+  #
+  # begin manual task section
+  #
+  
+  # to freshen up the series begin dates for download run with:
+  Sync-TV-Shows:
+    # flexget execute --tasks Sync-TV-Shows
+    manual: yes
+    template: no_global # None of the global templates make sense here
+    filesystem:
+      path: 
+        - '{{ secrets.dirs.shows }}'
+      regexp: '.*\.(avi|mkv|mp4|mpg|m4v)$'
+      recursive: yes
+    regexp:
+      reject:
+        - \bsample\b: {from: title}
+    disable: builtins
+    sequence:
+      - configure_series:
+          settings:
+            tracking: no
+            identified_by: ep
+          from:
+            inputs:
+            - trakt_list:
+                account: '{{ secrets.trakt.acct1 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct2 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct3 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+            - trakt_list:
+                account: '{{ secrets.trakt.acct4 }}'
+                list: Following TV
+                type: shows
+                strip_dates: yes 
+    exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
+
+  my-tv-shows-set-begin:          
+    # flexget execute --tasks my-tv-shows-set-begin
+    manual: yes
+    template: no_global
+    inputs:
+    - trakt_emit:
+        account: '{{ secrets.trakt.acct1 }}'
+        list: Following TV
+        context: collected
+        position: next
+    accept_all: yes
+    set_series_begin: yes
+
   # Cleans movies from the movie queue (and each Trakt acct) that we already have
   Clean-Movie-Queue-acct1:
+    manual: yes
     priority: 91
     template: no_global # None of the global templates make sense here
     disable:
@@ -638,143 +760,6 @@ tasks:
           list: watchlist
 
       
-  # This task queues all of the movies in my Trakt "Movie Queue" playlist
-  Movie-Queue:
-    priority: 100 # Always run before My-Movies task
-    template: no_global # None of the global templates make sense here
-    inputs:
-    - trakt_list:
-        account: '{{ secrets.trakt.acct1 }}'
-        list: Movie Queue
-        type: movies
-    - trakt_list:
-        account: '{{ secrets.trakt.acct2 }}'
-        list: Movie Queue
-        type: movies
-    - trakt_list:
-        account: '{{ secrets.trakt.acct3 }}'
-        list: Movie Queue
-        type: movies
-    - trakt_list:
-        account: '{{ secrets.trakt.acct4 }}'
-        list: Movie Queue
-        type: movies
-    no_entries_ok: yes
-    accept_all: yes
-    list_add:
-      - movie_list: movie-queue
-
-
-  # The next three tasks download the queue from the previous task effectively implementing
-  # a 1 week timeframe for 720p movies, 1 week for 480p, then falls back to 1080p.
-  # My TV is only 720p capable so the 1080p movies are awfully large for no reason.
-  # Quality settings are based on ensuring that my media is playable by both my Chromecast and Sony Bluray Player.
-  My-Movies-720p:
-    priority: 110
-    template:
-      - movies-global
-      - movies-queued
-    quality: 720p h264 ac3|aac|mp3
-    torrent_alive:
-      min_seeds: 5
-    
-  My-Movies-480p:
-    priority: 115
-    template:
-      - movies-global
-      - movies-queued
-    quality: 480p h264 ac3|aac|mp3 
-    torrent_alive:
-      min_seeds: 5
-    delay: 7 days # Wait 7 days before trying to download 480p
-    
-  My-Movies-1080p:
-    priority: 120
-    template:
-      - movies-global
-      - movies-queued
-    quality: 1080p h264 ac3|aac|mp3
-    torrent_alive:
-      min_seeds: 5
-    delay: 14 days # Wait 14 days before trying to download 1080p
-
-  #
-  # manual task to freshen up the series begin dates for download run with:
-  #
-  Sync-TV-Shows:
-    # flexget execute --tasks Sync-TV-Shows
-    manual: yes
-    template: no_global # None of the global templates make sense here
-    filesystem:
-      path: 
-        - '{{ secrets.dirs.shows }}'
-      regexp: '.*\.(avi|mkv|mp4|mpg|m4v)$'
-      recursive: yes
-    regexp:
-      reject:
-        - \bsample\b: {from: title}
-    disable: builtins
-    # thexem:
-      # source: tvdb
-      # destination: scene
-    sequence:
-      - configure_series:
-          settings:
-            tracking: no
-            identified_by: ep
-          from:
-            inputs:
-            - trakt_list:
-                account: '{{ secrets.trakt.acct1 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-            - trakt_list:
-                account: '{{ secrets.trakt.acct2 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-            - trakt_list:
-                account: '{{ secrets.trakt.acct3 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-            - trakt_list:
-                account: '{{ secrets.trakt.acct4 }}'
-                list: Following TV
-                type: shows
-                strip_dates: yes 
-    exec: echo "Found {{ series_name }} - {{ series_id }} ({{ location }})" >> /dev/null
-
-
-  my-tv-shows-set-begin:          
-    # flexget execute --tasks my-tv-shows-set-begin
-    manual: yes
-    template: no_global
-    inputs:
-    - trakt_emit:
-        account: '{{ secrets.trakt.acct1 }}'
-        list: Following TV
-        context: collected
-        position: next
-   #  - trakt_emit:
-     #   account: '{{ secrets.trakt.acct2 }}'
-     #   list: Following TV
-     #   context: collected
-     #   position: next
-   #  - trakt_emit:
-     #   account: '{{ secrets.trakt.acct3 }}'
-     #   list: Following TV
-     #   context: collected
-     #   position: next
-   #  - trakt_emit:
-     #   account: '{{ secrets.trakt.acct4 }}'
-     #   list: Following TV
-     #   context: collected
-     #   position: next
-    accept_all: yes
-    set_series_begin: yes
-
   # manual task to move shows from one trakt list to another.
   Trakt_Move_Shows:
     # flexget execute --tasks trakt_move_shows --cli-config "traktAcct=[sysfs|athyna|shipmaster|spartan117mark6], movefrom=[Movie Queue|Following TV|Collection], moveto=[Movie Queue|Following TV|Collection]"
@@ -815,62 +800,36 @@ tasks:
           account: $traktAcct
           list: $moveto
     
+
 # essentially i want each task to run every 2 hours for tv and every 6th hour for movies.
 schedules:
+  
   #
   # Series
   #
   - tasks: [ 'My-TV-Shows-Find-Next', 'Series-Premieres-Track' ]
-    # approximate time required to run:
     schedule:
-      # minute: 30
       hour: 0-22/2
   - tasks: [ 'My-TV-Shows', 'Series-Premieres' ]
-    # approximate time required to run: 
     schedule:
       minute: 20
       hour: 0-22/2
   - tasks: [ 'My-TV-Shows-Find-Missing' ]
-    # approximate time required to run: 
     interval:
       days: 3
-    # schedule:
-      # minute: 40
-      ## day_of_week: sun
-      # hour: 0-22/2
-  # - tasks: [  'Series-Premieres' ]
-    # approximate time required to run: 
-    # schedule:
-      # minute: 45
-      # hour: 0-22/2 
+    
 
   #
   # Movies
   #
   - tasks: [ 'Movie-Queue', 'My-Movies-720p' ]
-    # approximate time required to run:
     schedule:
-      # minute: 0
       hour: 1-19/6
   - tasks: [ 'My-Movies-480p' ]
-    # approximate time required to run: 
     schedule:
-      # minute: 0
       hour: 3-21/6
   - tasks: [ 'My-Movies-1080p' ]
-    # approximate time required to run: 
     schedule:
-      # minute: 0
       hour: 5-23/6
-      day_of_week: 0-5
-  - tasks: [ 'My-Movies-1080p' ]
-    # approximate time required to run: 
-    schedule:
-      # minute: 0
-      hour: 5-17/6
-      day_of_week: 6
-  - tasks: [ 'Clean-Movie-Queue-acct*' ]
-    # approximate time required to run: 
-    schedule:
-      hour: 23
-      day_of_week: 6
+      
+      
