@@ -25,14 +25,14 @@ dirs:
 RssFeeds:
   TL: http://rss.torrentleech.org/
   TVshows:
-    kat1: http://kat.cr/usearch/category%3Atv%20seeds%3A5%20verified%3A1/?rss=1
-    kat2: http://kat.cr/usearch/category%3Atv%20seeds%3A5%20verified%3A1/?rss=2
+    kat1: https://kat.cr/usearch/category%3Atv%20seeds%3A5%20verified%3A1/?rss=1
+    kat2: https://kat.cr/usearch/category%3Atv%20seeds%3A5%20verified%3A1/?rss=2
     mininova: http://www.mininova.org/rss.xml?cat=8
     torrentz: https://torrentz.eu/feed_verified?q=tv
     torlock: http://www.torlock.com/television/rss.xml
   Movies:
-    kat1: http://kat.cr/usearch/category%3Amovies%20seeds%3A5%20verified%3A1/?rss=1
-    kat2: http://kat.cr/usearch/category%3Amovies%20seeds%3A5%20verified%3A1/?rss=2
+    kat1: https://kat.cr/usearch/category%3Amovies%20seeds%3A5%20verified%3A1/?rss=1
+    kat2: https://kat.cr/usearch/category%3Amovies%20seeds%3A5%20verified%3A1/?rss=2
     mininova: http://www.mininova.org/rss.xml?cat=4
     toorentz: https://torrentz.eu/feed_verified?q=movie
     torlock: http://www.torlock.com/movies/rss.xml
