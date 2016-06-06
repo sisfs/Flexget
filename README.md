@@ -2,7 +2,7 @@
 
 
 
-# [Flexget](http://www.flexget.com) Configuration Files
+# [Flexget](http://www.flexget.com) Configuration Files (Current as of Flexget version 1.2.519)
 
 Created by: [Jeff Wilson](mailto:jeff@jeffalwilson.com)  
 Original Available from: (https://github.com/jawilson/dotfiles)
