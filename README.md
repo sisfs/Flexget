@@ -1,3 +1,7 @@
+# This repository is no longer maintained, the current version is available at [GitLab](https://gitlab.com/sisfs/dotfiles)
+
+
+
 # [Flexget](http://www.flexget.com) Configuration Files
 
 Created by: [Jeff Wilson](mailto:jeff@jeffalwilson.com)  
