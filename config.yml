@@ -4,9 +4,11 @@
 # His work is available from: https://github.com/jawilson/dotfiles/tree/master/flexget
 #
 # This fork was created by: Matt Tallant <m.tallant+github@gmail.com>
-# Available at: https://github.com/sisfs/dotfiles/tree/adding-my-changes
+# Available at: https://gitlab.com/sisfs/dotfiles/tree/master
 #
-# Many Changes have been made from Jeff's work. Still, if it werent for his vision I would have had no idea where to start.
+# Considerable contributions have been made by @rusking
+#
+# Many Changes have been made from Jeff's work. Still, if it weren't for his vision I would have had no idea where to start.
 #
 # All of my media is stored on a NAS4Free server with Plex Media Server and Deluge/Flexget running in separate Jails. 
 # User plex and user deluge both share the same uid which fixes a ton of permission problems that I originally had.
@@ -25,24 +27,24 @@ webui: yes
 
 
 templates:
-  # eventually all this torrentleech talk will come in handy.
+  # eventually all this torrentleech talk will come in handy. !!! That day has finally come !!!
   global:
     ## when i figure out how to run 2 deluge daemons in one jail, or decide to create a TL jail i will reinstate this part.
-    # if:
-      # - "'torrentleech' in url":
-          # deluge:
-            # username: '{{ secrets.deluge.username }}'
-            # password: '{{ secrets.deluge.password }}'
-            # main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
-            # keep_subs: no
-            # port: 58845
-      # - "'torrentleech' not in url":
-    deluge:
-      username: '{{ secrets.deluge.username }}'
-      password: '{{ secrets.deluge.password }}'
-      main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
-      keep_subs: no
-      port: 58846
+    if:
+      - "'torrentleech' in url":
+          deluge:
+            username: '{{ secrets.deluge.username }}'
+            password: '{{ secrets.deluge.password }}'
+            main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
+            keep_subs: yes
+            port: 58846
+      - "'torrentleech' not in url":
+          deluge:
+            username: '{{ secrets.deluge.username }}'
+            password: '{{ secrets.deluge.password }}'
+            main_file_only: yes # Ignore all but the file that is >90% of the torrent if it exists
+            keep_subs: yes
+            port: 58846
     # Make sure there's 50GB free before adding more downloads
     free_space: 
       path: '{{ secrets.dirs.rootmedia }}'
@@ -56,6 +58,7 @@ templates:
         - (s|d)ub(s|bed)?\b: {from: title}                    # Block any subbed/dubbed/etc videos
         - \bspanish\b: {from: title}                          # Spanish releases kept cropping up
         - \bitalian\b: {from: title}                          # Italian releases too.
+        - \bfrench\b: {from: title}                           # French releases too.
         - \b(duo|tri|quadri|tetra|penta)logy\b: {from: title} # Block series, only accept one at a time
         - \b3-?D\b: {from: title}                             # I don't have any 3D displays
         - \btrailer\b: {from: title}                          # I've gotten a few trailers that matched as movies. VERY annoying
@@ -67,6 +70,7 @@ templates:
         - '{C_P}': {from: title}                              # The following are groups with poor quality releases
         - TrTd TeaM: {from: title}
         - \[TNTVillage\]: {from: title}
+        - \[kat\]: {from: title}                              # It seemed that all the stuck downloads I had were from this release group
         - \[facepalm\]: {from: title}
         - \bASAP\b: {from: title}
         - the.day.of.the.doctor                               # The following are titles that caused me issues from plugins
@@ -98,18 +102,40 @@ templates:
     # verify_ssl_certificates: no
     # Size and seed restrictions require real torrents
     magnets: no
-  
+    slack:
+      webhook-url: '{{ secrets.slack.webhook_url }}'
+      text: >
+        {{task}} - Download started:
+        {%- if series_name is defined %}
+        {% set info_string = tvdb_series_name|d(series_name) ~ ' - ' ~ series_id ~ (' - ' ~ tvdb_ep_name if tvdb_ep_name|default(False) else '') %}
+        {%- if trakt_series_slug is defined and trakt_season is defined and trakt_episode is defined -%}
+        <https://trakt.tv/shows/{{ trakt_series_slug }}/seasons/{{ trakt_season }}/episodes/{{ trakt_episode }}|{{ info_string }}>
+        {%- else %}
+        {{ info_string }}
+        {%- endif %}
+        - {{quality}}
+        {%- elif imdb_name is defined %}
+        {%- if imdb_url is defined %}
+        <{{imdb_url}}|{{imdb_name}} {{imdb_year}}>
+        {%- else %}
+        {{imdb_name}} {{imdb_year}}
+        {%- endif %}
+        - {{quality}}
+        {%- else -%}
+        {{title}}
+        {%- endif %}
+
   
   # Jeff: This template is a "global" template for all TV-related tasks.
   # We keep all of the RSS feeds that list tv-related torrents here
   # as well as where to check existing shows.
   tv-global:
     inputs:
-      # - rss: { url: '{{ secrets.RssFeeds.TL }}{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
+      - rss: { url: '{{ secrets.RssFeeds.TL }}{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       # - rss: { url: '{{ secrets.RssFeeds.TVshows.torlock }}', silent: yes }   # TorLock (TV)
       # - rss: { url: '{{ secrets.RssFeeds.TVshows.torrentz }}', silent: yes }  # Torrentz (Verified only, TV)
-      - rss: { url: '{{ secrets.RssFeeds.TVshows.kat1 }}', silent: yes }   # Kickass (TV)
-      - rss: { url: '{{ secrets.RssFeeds.TVshows.kat2 }}', silent: yes }   # Kickass (TV)
+      # - rss: { url: '{{ secrets.RssFeeds.TVshows.kat1 }}', silent: yes }   # Kickass (TV)
+      # - rss: { url: '{{ secrets.RssFeeds.TVshows.kat2 }}', silent: yes }   # Kickass (TV)
       # - rss: { url: '{{ secrets.RssFeeds.TVshows.mininova }}', silent: yes }   # Kickass (TV)
     if:
       - "has_field('category')":
@@ -137,11 +163,11 @@ templates:
     thetvdb_lookup: yes
     trakt_lookup: yes
     require_field: [series_name, series_id]
-    pushbullet:
-      apikey: '{{ secrets.pushbullet.apikey }}'
-      title: "[Flexget] {{task}}"
-      body: "{{ tvdb_series_name|default(series_name) }} - {{ series_id }}{% if tvdb_ep_name|default(False) %} - {{ tvdb_ep_name }}{% endif %}\n{{ quality }}"
-      url: "{% if trakt_series_slug is defined and trakt_season is defined and trakt_episode is defined %}https://trakt.tv/shows/{{ trakt_series_slug }}/seasons/{{ trakt_season }}/episodes/{{ trakt_episode }}{% endif %}"
+    # pushbullet:
+    #   apikey: '{{ secrets.pushbullet.apikey }}'
+    #   title: "[Flexget] {{task}}"
+    #   body: "{{ tvdb_series_name|default(series_name) }} - {{ series_id }}{% if tvdb_ep_name|default(False) %} - {{ tvdb_ep_name }}{% endif %}\n{{ quality }}"
+    #   url: "{% if trakt_series_slug is defined and trakt_season is defined and trakt_episode is defined %}https://trakt.tv/shows/{{ trakt_series_slug }}/seasons/{{ trakt_season }}/episodes/{{ trakt_episode }}{% endif %}"
     # Add accepted entries to Deluge and make sure they end up in the correct
     # folder with a nice name
     set: # had to change a ton in this area. I wanted dots instead of spaces; wanted 2 digit season numbers on folders. I still need to figure out how to remove Apostrophes reliably.
@@ -162,16 +188,16 @@ templates:
     discover:
       what: [filler: yes]
       from:
-        #- torrentleech: # see note below
-        #    rss_key: '{{ secrets.torrentleech.rss_key }}'
-        #    username: '{{ secrets.torrentleech.username }}'
-        #    password: '{{ secrets.torrentleech.password }}'
-        #    category: ['Episodes HD', 'Episodes']
+        - torrentleech: # see note below
+            rss_key: '{{ secrets.torrentleech.rss_key }}'
+            username: '{{ secrets.torrentleech.username }}'
+            password: '{{ secrets.torrentleech.password }}'
+            category: ['Episodes HD', 'Episodes']
         - flexget_archive: [tv]
-        # - torrentz: verified
-        - kat:
-            category: tv
-            verified: yes
+        - rarbg:
+            category: [41]
+            use_tvdb: true
+            min_seeders: 5
       limit: 495
   
   
@@ -180,11 +206,11 @@ templates:
   # as well as some other configurations.
   movies-global:
     inputs:
-      # - rss: { url: '{{ secrets.RssFeeds.TL }}{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
+      - rss: { url: '{{ secrets.RssFeeds.TL }}{{ secrets.torrentleech.rss_key }}', other_fields: [category] }
       # - rss: { url: '{{ secrets.RssFeeds.Movies.torlock }}', silent: yes } # TorLock (Movies)
       # - rss: { url: '{{ secrets.RssFeeds.Movies.torrentz }}', silent: yes } # Torrentz (Verified Movies)
-      - rss: { url: '{{ secrets.RssFeeds.Movies.kat1 }}', silent: yes } # Kickass (Movies)
-      - rss: { url: '{{ secrets.RssFeeds.Movies.kat2 }}', silent: yes } # Kickass (Movies)
+      # - rss: { url: '{{ secrets.RssFeeds.Movies.kat1 }}', silent: yes } # Kickass (Movies)
+      # - rss: { url: '{{ secrets.RssFeeds.Movies.kat2 }}', silent: yes } # Kickass (Movies)
       # - rss: { url: '{{ secrets.RssFeeds.Movies.mininova }}', silent: yes }   # MiniNova (TV)
     # Some feeds might include TV Shows, ignore them
     if:
@@ -218,19 +244,24 @@ templates:
     # Download propers, since they will have the same content_filename,
     # lower/non-propers will be overwritten
     proper_movies: yes
-    list_queue: 
-      - movie_list: movie-queue
+    list_match:
+      from:
+        - movie_list: movie-queue
+      remove_on_match: no
+      single_match: no
+    #list_queue: 
+    #  - movie_list: movie-queue
     set: 
       # Give folders/files nice names ##
       movedone: "{{ secrets.dirs.movies }}{{ imdb_name|replace('/', '_')|replace(': ', '-')|replace(':', '-')|replace(',', '')|replace(' ', '.') }}.{{ imdb_year }}"
       # Rename the "content file" to something nice, use leading slash to force file to top level ##
       content_filename: |
         /{{ imdb_name|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}-{{ imdb_year }}-{{ quality|replace('/', '_')|replace(':', ' -')|replace(',', '')|replace(' ', '.') }}
-    pushbullet:
-      apikey: '{{ secrets.pushbullet.apikey }}'
-      title: "[Flexget] {{task}}"
-      body: "{{ imdb_name }} ({{ imdb_year }})\n{{ quality }}"
-      url: "{% if imdb_url %}{{ imdb_url }}{% endif %}"
+    # pushbullet:
+    #   apikey: '{{ secrets.pushbullet.apikey }}'
+    #   title: "[Flexget] {{task}}"
+    #   body: "{{ imdb_name }} ({{ imdb_year }})\n{{ quality }}"
+    #   url: "{% if imdb_url %}{{ imdb_url }}{% endif %}"
     # Jeff: This is a custom plugin, it is part of my rar-unpacking method, it changes
     # 'movedone' based on the regexp in the key
     content_sort:
@@ -240,20 +271,17 @@ templates:
   # Keep all the discover settings in one place
   movies-discover:
     discover:
-      from:
-        #- torrentleech: # I dont yet have an account but, i will test if i get an invite
-        #    rss_key: '{{ secrets.torrentleech.rss_key }}'
-        #    username: '{{ secrets.torrentleech.username }}'
-        #    password: '{{ secrets.torrentleech.password }}'
-        #    category: ['HD', 'BDRip', 'DVDRip', 'DVDR', 'Documentaries']
-        - flexget_archive: [movies]
-        # - torrentz:
-            # reputation: verified
-            # extra_terms: "movie* hd"
-        - kat:
-            category: movies
-            verified: yes
       what: [ filler: yes ] # Always produce entries
+      from:
+        - torrentleech: # I have an account now and have overcome the initial issues I had with the site.
+            rss_key: '{{ secrets.torrentleech.rss_key }}'
+            username: '{{ secrets.torrentleech.username }}'
+            password: '{{ secrets.torrentleech.password }}'
+            category: ['HD', 'BDRip', 'DVDRip', 'DVDR', 'Documentaries']
+        - flexget_archive: [movies]
+        - rarbg:
+            category: [44, 45]
+            min_seeders: 5
       limit: 495
 
 
@@ -267,8 +295,12 @@ templates:
 
   # This template uses the movie queue to find movies from various sources
   movies-queued:
-    list_accept:
-      - movie_list: movie-queue
+    list_match:
+      action: accept
+      from: 
+        - movie_list: movie-queue
+    #list_accept:
+    #  - movie_list: movie-queue
     template: movies-discover
     disable:
       - seen_movies
@@ -356,22 +388,22 @@ tasks:
     discover:
       interval: 2 hours
       what:
-        - trakt_emit:
+        - next_trakt_episodes:
             account: '{{ secrets.trakt.acct1 }}'
             list: Following TV
             context: collected
             position: next
-        - trakt_emit:
+        - next_trakt_episodes:
             account: '{{ secrets.trakt.acct2 }}'
             list: Following TV
             context: collected
             position: next
-        - trakt_emit:
+        - next_trakt_episodes:
             account: '{{ secrets.trakt.acct3 }}'
             list: Following TV
             context: collected
             position: next
-        - trakt_emit:
+        - next_trakt_episodes:
             account: '{{ secrets.trakt.acct4 }}'
             list: Following TV
             context: collected
@@ -397,7 +429,7 @@ tasks:
     disable: inputs, est_movies
     discover:
       what:
-        - emit_series:
+        - next_series_episodes:
             backfill: yes
       from: [filler: yes]
     sequence:
@@ -630,7 +662,7 @@ tasks:
     manual: yes
     template: no_global
     inputs:
-    - trakt_emit:
+    - next_trakt_episodes:
         account: '{{ secrets.trakt.acct1 }}'
         list: Following TV
         context: collected
@@ -656,8 +688,12 @@ tasks:
     imdb_lookup: yes
     tmdb_lookup: yes
     require_field: [movie_name, movie_year]
-    list_accept:
-      - movie_list: movie-queue
+    list_match:
+      action: accept
+      from: 
+        - movie_list: movie-queue
+    #list_accept:
+    #  - movie_list: movie-queue
     list_remove:
       - trakt_list:
           username: '{{ secrets.trakt.acct1 }}'
@@ -686,8 +722,12 @@ tasks:
     imdb_lookup: yes
     tmdb_lookup: yes
     require_field: [movie_name, movie_year]
-    list_accept:
-      - movie_list: movie-queue
+    list_match:
+      action: accept
+      from: 
+        - movie_list: movie-queue
+    #list_accept:
+    #  - movie_list: movie-queue
     list_remove:
       - trakt_list:
           username: '{{ secrets.trakt.acct2 }}'
@@ -716,8 +756,12 @@ tasks:
     imdb_lookup: yes
     tmdb_lookup: yes
     require_field: [movie_name, movie_year]
-    list_accept:
-      - movie_list: movie-queue
+    list_match:
+      action: accept
+      from: 
+        - movie_list: movie-queue
+    #list_accept:
+    #  - movie_list: movie-queue
     list_remove:
       - trakt_list:
           username: '{{ secrets.trakt.acct3 }}'
@@ -746,8 +790,12 @@ tasks:
     imdb_lookup: yes
     tmdb_lookup: yes
     require_field: [movie_name, movie_year]
-    list_accept:
-      - movie_list: movie-queue
+    list_match:
+      action: accept
+      from: 
+        - movie_list: movie-queue
+    #list_accept:
+    #  - movie_list: movie-queue
     list_remove:
       - trakt_list:
           username: '{{ secrets.trakt.acct4 }}'
